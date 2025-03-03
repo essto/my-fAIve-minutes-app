@@ -1,7 +1,3 @@
-Here is a polished version of your README file:
-
----
-
 # Deploy vm-az-01
 
 ## Using PowerShell
