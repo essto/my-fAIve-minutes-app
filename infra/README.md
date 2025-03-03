@@ -1,8 +1,16 @@
-Deploy vm-az-01
+Here is a polished version of your README file:
+
+---
+
+# Deploy vm-az-01
+
+## Using PowerShell
 
 ```powershell
 New-AzResourceGroupDeployment -ResourceGroupName vm-az-01_group -TemplateFile ./template.json -TemplateParameterFile ./parameters.json
 ```
+
+## Using Azure CLI
 
 ```bash
 az deployment group create \
