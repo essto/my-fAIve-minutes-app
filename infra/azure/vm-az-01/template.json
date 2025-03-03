@@ -1,0 +1,100 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_vm_az_01_name": {
+            "defaultValue": "vm-az-01",
+            "type": "String"
+        },
+        "disks_vm_az_01_disk1_c81f2127e5ce48d794a535f1068d337f_externalid": {
+            "defaultValue": "/subscriptions/16418c0d-f671-4e1f-8df8-8eb43b7eca2f/resourceGroups/VM-AZ-01_GROUP/providers/Microsoft.Compute/disks/vm-az-01_disk1_c81f2127e5ce48d794a535f1068d337f",
+            "type": "String"
+        },
+        "networkInterfaces_vm_az_01804_z3_externalid": {
+            "defaultValue": "/subscriptions/16418c0d-f671-4e1f-8df8-8eb43b7eca2f/resourceGroups/vm-az-01_group/providers/Microsoft.Network/networkInterfaces/vm-az-01804_z3",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-07-01",
+            "name": "[parameters('virtualMachines_vm_az_01_name')]",
+            "location": "northeurope",
+            "zones": [
+                "3"
+            ],
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B1s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "canonical",
+                        "offer": "ubuntu-24_04-lts",
+                        "sku": "server",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('virtualMachines_vm_az_01_name'), '_disk1_c81f2127e5ce48d794a535f1068d337f')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS",
+                            "id": "[parameters('disks_vm_az_01_disk1_c81f2127e5ce48d794a535f1068d337f_externalid')]"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 30
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_vm_az_01_name')]",
+                    "adminUsername": "sebastian",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false,
+                        "provisionVMAgent": true,
+                        "patchSettings": {
+                            "patchMode": "ImageDefault",
+                            "assessmentMode": "ImageDefault"
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "securityProfile": {
+                    "uefiSettings": {
+                        "secureBootEnabled": true,
+                        "vTpmEnabled": true
+                    },
+                    "securityType": "TrustedLaunch"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_vm_az_01804_z3_externalid')]",
+                            "properties": {
+                                "deleteOption": "Detach"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            }
+        }
+    ]
+}
