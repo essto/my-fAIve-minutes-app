@@ -15,3 +15,9 @@ az deployment group create \
   --template-file ./template.json \
   --parameters ./parameters.json
 ```
+
+# Delete resource group (and vm-az-01)
+```
+az group delete --name vm-az-01_group --yes
+```
+
