@@ -9,6 +9,7 @@ New-AzResourceGroupDeployment -ResourceGroupName vm-az-01_group -TemplateFile ./
 ## Using Azure CLI
 
 ```bash
+az group create --name vm-az-01_group --location northeurope
 az deployment group create \
   --resource-group vm-az-01_group \
   --template-file ./template.json \
