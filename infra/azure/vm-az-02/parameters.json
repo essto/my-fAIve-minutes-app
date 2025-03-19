@@ -6,7 +6,7 @@
             "value": "northeurope"
         },
         "networkInterfaceName3": {
-            "value": "vm-az-02130_z3"
+            "value": "vm-az-02121_z3"
         },
         "networkSecurityGroupName": {
             "value": "vm-az-02-nsg"
