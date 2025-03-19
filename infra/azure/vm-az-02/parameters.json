@@ -2,14 +2,112 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_vm_az_02_name": {
+        "location": {
+            "value": "northeurope"
+        },
+        "networkInterfaceName3": {
+            "value": "vm-az-02130_z3"
+        },
+        "networkSecurityGroupName": {
+            "value": "vm-az-02-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "SSH",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "22"
+                    }
+                }
+            ]
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "vm-az-02-vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.1.0.0/16"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.1.0.0/24"
+                    }
+                }
+            ]
+        },
+        "publicIpAddressName3": {
+            "value": "vm-az-02-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Detach"
+        },
+        "virtualMachineName": {
+            "value": "vm-az-02"
+        },
+        "virtualMachineName3": {
+            "value": "vm-az-02"
+        },
+        "virtualMachineComputerName3": {
+            "value": "vm-az-02"
+        },
+        "virtualMachineRG": {
+            "value": "vm-az-02_group"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B1s"
+        },
+        "nicDeleteOption": {
+            "value": "Detach"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "sebastian"
+        },
+        "adminPublicKey": {
             "value": null
         },
-        "disks_vm_az_02_disk1_ead8c7b8b53443a585f59a5a972321dd_externalid": {
-            "value": null
+        "enablePeriodicAssessment": {
+            "value": "ImageDefault"
         },
-        "networkInterfaces_vm_az_02791_z3_externalid": {
-            "value": null
+        "securityType": {
+            "value": "TrustedLaunch"
+        },
+        "secureBoot": {
+            "value": true
+        },
+        "vTPM": {
+            "value": true
+        },
+        "virtualMachine3Zone": {
+            "value": "3"
         }
     }
 }
