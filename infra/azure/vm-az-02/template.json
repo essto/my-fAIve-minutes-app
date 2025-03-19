@@ -1,105 +1,113 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_vm_az_02_name": {
-            "defaultValue": "vm-az-02",
-            "type": "String"
+        "location": {
+            "value": "northeurope"
         },
-        "disks_vm_az_02_disk1_ead8c7b8b53443a585f59a5a972321dd_externalid": {
-            "defaultValue": "/subscriptions/16418c0d-f671-4e1f-8df8-8eb43b7eca2f/resourceGroups/vm-az-02_group/providers/Microsoft.Compute/disks/vm-az-02_disk1_ead8c7b8b53443a585f59a5a972321dd",
-            "type": "String"
+        "networkInterfaceName3": {
+            "value": "vm-az-02130_z3"
         },
-        "networkInterfaces_vm_az_02791_z3_externalid": {
-            "defaultValue": "/subscriptions/16418c0d-f671-4e1f-8df8-8eb43b7eca2f/resourceGroups/vm-az-02_group/providers/Microsoft.Network/networkInterfaces/vm-az-02791_z3",
-            "type": "String"
-        }
-    },
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2024-07-01",
-            "name": "[parameters('virtualMachines_vm_az_02_name')]",
-            "location": "northeurope",
-            "zones": [
-                "3"
-            ],
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "Standard_B1s"
-                },
-                "additionalCapabilities": {
-                    "hibernationEnabled": false
-                },
-                "storageProfile": {
-                    "imageReference": {
-                        "publisher": "canonical",
-                        "offer": "ubuntu-24_04-lts",
-                        "sku": "server",
-                        "version": "latest"
-                    },
-                    "osDisk": {
-                        "osType": "Linux",
-                        "name": "[concat(parameters('virtualMachines_vm_az_02_name'), '_disk1_ead8c7b8b53443a585f59a5a972321dd')]",
-                        "createOption": "FromImage",
-                        "caching": "ReadWrite",
-                        "managedDisk": {
-                            "storageAccountType": "StandardSSD_LRS",
-                            "id": "[parameters('disks_vm_az_02_disk1_ead8c7b8b53443a585f59a5a972321dd_externalid')]"
-                        },
-                        "deleteOption": "Delete",
-                        "diskSizeGB": 30
-                    },
-                    "dataDisks": [],
-                    "diskControllerType": "SCSI"
-                },
-                "osProfile": {
-                    "computerName": "[parameters('virtualMachines_vm_az_02_name')]",
-                    "adminUsername": "sebastian",
-                    "linuxConfiguration": {
-                        "disablePasswordAuthentication": true,
-                        "ssh": {
-                            "publicKeys": [
-                                {
-                                    "path": "/home/sebastian/.ssh/authorized_keys",
-                                    "keyData": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKFyxQM8PzDrLf9W5ByKL/9k3K/AznQsS+Z4NcXYwfcl"
-                                }
-                            ]
-                        },
-                        "provisionVMAgent": true,
-                        "patchSettings": {
-                            "patchMode": "ImageDefault",
-                            "assessmentMode": "ImageDefault"
-                        }
-                    },
-                    "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
-                },
-                "securityProfile": {
-                    "uefiSettings": {
-                        "secureBootEnabled": true,
-                        "vTpmEnabled": true
-                    },
-                    "securityType": "TrustedLaunch"
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[parameters('networkInterfaces_vm_az_02791_z3_externalid')]",
-                            "properties": {
-                                "deleteOption": "Detach"
-                            }
-                        }
-                    ]
-                },
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": true
+        "networkSecurityGroupName": {
+            "value": "vm-az-02-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "SSH",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "22"
                     }
                 }
-            }
+            ]
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "vm-az-02-vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.1.0.0/16"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.1.0.0/24"
+                    }
+                }
+            ]
+        },
+        "publicIpAddressName3": {
+            "value": "vm-az-02-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Detach"
+        },
+        "virtualMachineName": {
+            "value": "vm-az-02"
+        },
+        "virtualMachineName3": {
+            "value": "vm-az-02"
+        },
+        "virtualMachineComputerName3": {
+            "value": "vm-az-02"
+        },
+        "virtualMachineRG": {
+            "value": "vm-az-02_group"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B1s"
+        },
+        "nicDeleteOption": {
+            "value": "Detach"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "sebastian"
+        },
+        "adminPublicKey": {
+            "value": null
+        },
+        "enablePeriodicAssessment": {
+            "value": "ImageDefault"
+        },
+        "securityType": {
+            "value": "TrustedLaunch"
+        },
+        "secureBoot": {
+            "value": true
+        },
+        "vTPM": {
+            "value": true
+        },
+        "virtualMachine3Zone": {
+            "value": "3"
         }
-    ]
+    }
 }
