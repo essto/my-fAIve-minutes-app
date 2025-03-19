@@ -92,7 +92,7 @@
             "value": "sebastian"
         },
         "adminPublicKey": {
-            "value": null
+            "value": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn3KrBcoPZc9lqoDbmHdZnBJs2U60lTrzWayGKpy3dN"
         },
         "enablePeriodicAssessment": {
             "value": "ImageDefault"
