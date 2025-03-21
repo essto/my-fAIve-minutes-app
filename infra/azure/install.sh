@@ -12,3 +12,8 @@ az deployment group create \
   --template-file ./vm-az-02/template.json \
   --parameters ./vm-az-02/parameters.json
 
+# peering
+az deployment group create \
+  --resource-group vm-az-02_group \
+  --template-file ./peering//template.json \
+  --parameters ./peering/parameters.json
