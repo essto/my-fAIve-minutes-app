@@ -43,3 +43,76 @@ az vm nic add --vm-name <vm-name> --resource-group <resource-grup-name> --nics <
 az vm start --name <vm-name> --resource-group <resource-grup-name>
 az network nic show --name <nic-name> --resource-group <resource-grup-name> --query "virtualMachine"
 ```
+
+## Assigning a Public IP to an Azure Virtual Machine
+
+### Step 1: Identify the Resource Group
+
+```bash
+az vm list --query "[?name=='<VM_NAME>'].[name,resourceGroup]" -o table
+```
+
+> Retrieves the resource group name associated with `<VM_NAME>`.
+
+---
+
+### Step 2: Get the Network Interface (NIC) Attached to the VM
+
+```bash
+az vm show --name <VM_NAME> --resource-group <RESOURCE_GROUP> \
+  --query "networkProfile.networkInterfaces[0].id" -o tsv
+```
+
+> Outputs the NIC ID of the virtual machine.
+
+---
+
+### Step 3: List All IP Configurations on the NIC
+
+```bash
+az network nic show --name <NIC_NAME> --resource-group <RESOURCE_GROUP> \
+  --query "ipConfigurations[].name" -o table
+```
+
+> Lists all IP configuration names for the specified NIC.
+
+---
+
+### Step 4: Assign a Public IP Address to the Primary IP Configuration
+
+```bash
+az network nic ip-config update \
+  --nic-name <NIC_NAME> \
+  --resource-group <RESOURCE_GROUP> \
+  --name <IPCONFIG_NAME> \
+  --public-ip-address <PUBLIC_IP_NAME>
+```
+
+> Attaches an existing public IP resource to the specified IP configuration of the NIC.
+
+---
+
+### Step 5: Verify the Public IP Assignment
+
+```bash
+az network nic show --name <NIC_NAME> --resource-group <RESOURCE_GROUP> \
+  --query "ipConfigurations[].publicIpAddress.id"
+```
+
+> Confirms that the public IP is assigned to the IP configuration.
+
+---
+
+### Placeholders Reference
+
+| Placeholder        | Description                        |
+| ------------------ | ---------------------------------- |
+| `<VM_NAME>`        | Name of the Virtual Machine        |
+| `<RESOURCE_GROUP>` | Azure Resource Group Name          |
+| `<NIC_NAME>`       | Name of the Network Interface Card |
+| `<IPCONFIG_NAME>`  | IP Configuration Name on the NIC   |
+| `<PUBLIC_IP_NAME>` | Name of the Public IP Resource     |
+
+---
+
+> ⚠️ Ensure that the public IP resource exists prior to assignment.
