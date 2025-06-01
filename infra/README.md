@@ -14,3 +14,10 @@ az deployment group create \
   --template-file ./template.json \
   --parameters ./parameters.json
 ```
+
+```bash
+az vm list -o table
+az group list -o table
+az vm delete --name <vm-name> --resource-group <resource-grup-name>
+```
+
