@@ -176,3 +176,33 @@ az vm show \
 - Replace `<RESOURCE_GROUP>` and `<VM_NAME>` with your actual values.
 - VM must be deallocated before resizing.
 
+
+# Creating a Managed Disk in Azure
+
+This guide demonstrates how to create a managed disk in Azure using the Azure CLI.
+
+## Requirements
+
+- **Disk Name:** `xfusion-disk`
+- **Disk Type:** `Standard_LRS` (Standard HDD)
+- **Disk Size:** `2 GiB`
+- **Resource Group:** Replace `<RESOURCE_GROUP>` with your actual resource group name.
+- **Location:** Replace `<LOCATION>` with your desired Azure region (e.g., `eastus`, `westeurope`).
+
+## Azure CLI Command
+
+```bash
+az disk create \
+  --name xfusion-disk \
+  --resource-group <RESOURCE_GROUP> \
+  --size-gb 2 \
+  --sku Standard_LRS \
+  --location <LOCATION>
+```
+
+## Notes
+
+- Ensure you are logged into your Azure account using `az login`.
+- The specified resource group must already exist.
+- You can view available locations with `az account list-locations -o table`.
+
