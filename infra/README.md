@@ -115,4 +115,64 @@ az network nic show --name <NIC_NAME> --resource-group <RESOURCE_GROUP> \
 
 ---
 
-> ⚠️ Ensure that the public IP resource exists prior to assignment.
+### 📘 Resize a Virtual Machine in Azure CLI
+
+This guide shows how to change the size of a virtual machine (VM) and ensure it is running after the change using the Azure CLI.
+
+---
+
+#### 🔹 Step 1: List All Virtual Machines
+
+```bash
+az vm list -o table
+```
+
+---
+
+#### 🔹 Step 2: Deallocate the VM (Required Before Resizing)
+
+```bash
+az vm deallocate \
+  --resource-group <RESOURCE_GROUP> \
+  --name <VM_NAME>
+```
+
+---
+
+#### 🔹 Step 3: Resize the VM
+
+```bash
+az vm resize \
+  --resource-group <RESOURCE_GROUP> \
+  --name <VM_NAME> \
+  --size Standard_B2s
+```
+
+---
+
+#### 🔹 Step 4: Start the VM
+
+```bash
+az vm start \
+  --resource-group <RESOURCE_GROUP> \
+  --name <VM_NAME>
+```
+
+---
+
+#### 🔹 Step 5: Verify the New Size and Power State
+
+```bash
+az vm show \
+  --resource-group <RESOURCE_GROUP> \
+  --name <VM_NAME> \
+  --query "{VMSize:hardwareProfile.vmSize, PowerState:instanceView.statuses[?starts_with(code, 'PowerState/')].displayStatus | [0]}" \
+  --output table
+```
+
+---
+
+### 📝 Notes:
+- Replace `<RESOURCE_GROUP>` and `<VM_NAME>` with your actual values.
+- VM must be deallocated before resizing.
+
