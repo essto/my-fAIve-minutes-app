@@ -33,3 +33,13 @@ az disk list -o table
 az vm disk attach --vm-name <vm-name> --resource-group <resource-grup-name> --name <data-disk-name>
 az vm show --name <vm-name> --resource-group <resource-grup-name> --query "storageProfile.dataDisks" -o table
 ```
+
+```bash
+az group list -o table
+az vm list -o table
+az network nic list -o table
+az vm deallocate --name <vm-name> --resource-group <resource-grup-name>
+az vm nic add --vm-name <vm-name> --resource-group <resource-grup-name> --nics <nic-name>
+az vm start --name <vm-name> --resource-group <resource-grup-name>
+az network nic show --name <nic-name> --resource-group <resource-grup-name> --query "virtualMachine"
+```
