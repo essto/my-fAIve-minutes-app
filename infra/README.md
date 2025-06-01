@@ -21,3 +21,8 @@ az group list -o table
 az vm delete --name <vm-name> --resource-group <resource-grup-name>
 ```
 
+```bash
+az vm list -o table
+az vm update --name <vm-name> --resource-group <resource-grup-name> --set tags.<key=value>
+vm show --name <vm-name> --resource-group <resource-grup-name> --query "<tag>"
+```
