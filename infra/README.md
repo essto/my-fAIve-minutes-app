@@ -206,3 +206,69 @@ az disk create \
 - The specified resource group must already exist.
 - You can view available locations with `az account list-locations -o table`.
 
+
+# Creating a Network Security Group (NSG) in Azure
+
+This guide shows how to create a Network Security Group (NSG) and add inbound security rules using the Azure CLI.
+
+## Requirements
+
+- **NSG Name:** `nautilus-nsg`
+- **Rules:**
+  - `Allow-HTTP`:
+    - Protocol: TCP
+    - Port: 80
+    - Source: `0.0.0.0/0`
+  - `Allow-SSH`:
+    - Protocol: TCP
+    - Port: 22
+    - Source: `0.0.0.0/0`
+- **Resource Group:** Replace `<RESOURCE_GROUP>` with your actual resource group.
+- **Location:** Replace `<LOCATION>` with your desired Azure region (e.g., `eastus`, `westeurope`).
+
+## Azure CLI Commands
+
+### Step 1: Create the NSG
+
+```bash
+az network nsg create \
+  --resource-group <RESOURCE_GROUP> \
+  --name nautilus-nsg \
+  --location <LOCATION>
+```
+
+### Step 2: Add Inbound Rule for HTTP
+
+```bash
+az network nsg rule create \
+  --resource-group <RESOURCE_GROUP> \
+  --nsg-name nautilus-nsg \
+  --name Allow-HTTP \
+  --priority 1001 \
+  --direction Inbound \
+  --access Allow \
+  --protocol Tcp \
+  --source-address-prefixes 0.0.0.0/0 \
+  --destination-port-ranges 80
+```
+
+### Step 3: Add Inbound Rule for SSH
+
+```bash
+az network nsg rule create \
+  --resource-group <RESOURCE_GROUP> \
+  --nsg-name nautilus-nsg \
+  --name Allow-SSH \
+  --priority 1002 \
+  --direction Inbound \
+  --access Allow \
+  --protocol Tcp \
+  --source-address-prefixes 0.0.0.0/0 \
+  --destination-port-ranges 22
+```
+
+## Notes
+
+- Rule priority values must be unique and within the range 100–4096.
+- Use descriptive names and verify rules with `az network nsg rule list`.
+
