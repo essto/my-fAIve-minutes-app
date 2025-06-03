@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# jeśli nie działa poniższy skrypt, zadziała przez GUI i private link (+firewall "all network, +v "Allow All Azure)
+# https://learn.microsoft.com/en-us/azure/azure-sql/database/database-import-export-private-link?view=azuresql#limitations
+
 # Konfiguracja
 RESOURCE_GROUP=""
 SQL_SERVER=""
