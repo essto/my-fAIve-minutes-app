@@ -1,20 +1,9 @@
-
-# Create Azure Storage Account and Public Blob Container
-
-This script performs the following actions:
-- Retrieves the first available resource group using `az group list`.
-- Creates a new Azure Storage Account.
-- Creates a public Blob container with anonymous read access enabled.
-
-## Script
-
-```bash
 #!/bin/bash
 
 # Parameters
-STORAGE_ACCOUNT_NAME="datacenterst30930"
-CONTAINER_NAME="datacenter-blob-20088"
-LOCATION="westus"
+STORAGE_ACCOUNT_NAME=""
+CONTAINER_NAME=""
+LOCATION=""
 
 # Get the first available resource group
 RESOURCE_GROUP=$(az group list --query "[0].name" -o tsv)
@@ -42,4 +31,10 @@ az storage container create \
   --public-access container
 
 echo "Storage account and public container created successfully."
-```
+
+# walidacja ("container")
+az storage container show \
+  --name $CONTAINER_NAME \
+  --account-name $STORAGE_ACCOUNT_NAME \
+  --account-key $ACCOUNT_KEY \
+  --query "properties.publicAccess"
