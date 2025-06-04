@@ -1,0 +1,17 @@
+# Parametry
+RG=""
+VM_NAME=""
+NEW_SIZE=""
+
+echo "[INFO] Deallocating VM..."
+az vm deallocate --resource-group "$RG" --name "$VM_NAME"
+
+echo "[INFO] Resizing VM to $NEW_SIZE..."
+az vm resize --resource-group "$RG" --name "$VM_NAME" --size "$NEW_SIZE"
+
+echo "[INFO] Starting VM..."
+az vm start --resource-group "$RG" --name "$VM_NAME"
+
+echo "[INFO] Verifying VM state..."
+az vm get-instance-view --resource-group "$RG" --name "$VM_NAME" \
+  --query "instanceView.statuses[?starts_with(code,'PowerState/')].displayStatus" -o tsv
