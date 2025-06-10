@@ -1,0 +1,34 @@
+#!/bin/bash
+
+RESOURCE_GROUP=""
+LOCATION=""
+VM_NAME=""
+ADMIN_USER=""
+SSH_KEY="$HOME/.ssh/id_rsa.pub"
+
+# 1. Ensure SSH key exists
+if [ ! -f "$SSH_KEY" ]; then
+  echo "SSH key not found. Generating a new one..."
+  ssh-keygen -t rsa -b 2048 -f "${SSH_KEY%.*}" -N ""
+else
+  echo "Using existing SSH key at $SSH_KEY"
+fi
+
+# 2. Create the VM
+az vm create \
+  --resource-group $RESOURCE_GROUP \
+  --name $VM_NAME \
+  --image Ubuntu2204 \
+  --size Standard_B1s \
+  --admin-username $ADMIN_USER \
+  --ssh-key-values $SSH_KEY \
+  --storage-sku Standard_LRS \
+  --location $LOCATION \
+  --output json
+
+# 3. Output public IP for connection
+echo "Fetching public IP for $VM_NAME..."
+az vm list-ip-addresses \
+  --name $VM_NAME \
+  --resource-group $RESOURCE_GROUP \
+  --output table
