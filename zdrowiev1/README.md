@@ -43,3 +43,5 @@ Kompleksowa aplikacja monitorowania zdrowia — waga, tętno, sen, dieta, diagno
 ## 📜 Licencja
 
 Projekt prywatny.
+localStorage.setItem('token', 'demo-token')
+location.href = '/dashboard'
