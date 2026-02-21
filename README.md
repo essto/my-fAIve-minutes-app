@@ -21,6 +21,7 @@ Kompleksowa aplikacja monitorowania zdrowia — waga, tętno, sen, dieta, diagno
 |----------|------|
 | [architecture_analysis.md](docs/architecture_analysis.md) | Analiza architektur, stack, auth, bezpieczeństwo, schemat DB |
 | [detailed_plan.md](docs/detailed_plan.md) | 13-etapowy plan implementacji (krok po kroku dla AI) |
+| [coding_standards.md](docs/coding_standards.md) | Standardy kodowania, TDD, Hex Arch, Clean Code |
 | [notes.md](docs/notes.md) | Research konkurencji, wymagania, lista features |
 | [app_history.md](docs/app_history.md) | Historia sesji planowania |
 

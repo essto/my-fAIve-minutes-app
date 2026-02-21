@@ -671,22 +671,12 @@ jobs:
 
 ---
 
-## Reguły Dla AI Agenta
+## 14. Polityka Jakości i Standardy Kodu
 
-> Poniższe reguły MUSZĄ być przestrzegane przy każdym etapie.
+> Pełna specyfikacja standardów kodowania znajduje się w oddzielnym dokumencie: **[coding_standards.md](./coding_standards.md)**.
 
-### 🔴 Zasady bezwzględne:
-1. **TDD:** Napisz test PRZED kodem. Kolejność: RED → GREEN → REFACTOR
-2. **Zod:** Waliduj KAŻDE wejście/wyjście. Nigdy nie ufaj surowym danym
-3. **RLS:** KAŻDA tabela z danymi użytkownika MUSI mieć Row-Level Security
-4. **≤1500 LOC:** Jeśli moduł przekracza limit — podziel na sub-module
-5. **Audit:** KAŻDY dostęp do danych medycznych jest logowany
-6. **No secrets in code:** Wszystkie sekrety w `.env`, nigdy w kodzie
-
-### 🟡 Best practices:
-1. **Hex Arch:** Core nie importuje frameworków (NestJS, Express, Drizzle)
-2. **Ports:** Każda zewnętrzna zależność za interfejsem
-3. **Naming:** `*.use-case.ts`, `*.port.ts`, `*.adapter.ts`, `*.entity.ts`
-4. **Errors:** Custom error classes inheriting from `AppError`
-5. **Logs:** Structured JSON logs (winston/pino)
-6. **Comments:** Komentuj DLACZEGO, nie CO
+### 14.1 Podsumowanie Zasad
+- **Standardy:** Wszystkie etapy MUSZĄ być zgodne z zasadami opisanymi w `coding_standards.md`.
+- **Kto pilnuje jakości?** Deweloper AI (wykonawca) + Zautomatyzowany CI/CD Pipeline (strażnik).
+- **Strażnicy:** Husky + lint-staged (blokady commitów), ESLint (styl), Vitest (testy).
+- **Optymalizacja:** AI Agent przed każdym commitem weryfikuje kod pod kątem "śmieci" (dead code, unused imports) i optymalizacji.
