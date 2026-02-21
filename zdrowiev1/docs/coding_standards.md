@@ -128,10 +128,25 @@ Po uruchomieniu serwerów, AI Agent musi sprawdzić ich status:
 ---
 
 ## 7. Praca z AI Agentem
-
-Jeśli jesteś AI Agentem pracującym nad tym projektem:
-1. **Pamięć:** Przeczytaj `detailed_plan.md` przed rozpoczęciem pracy.
-2. **Linter:** Uruchom `npm run lint` przed commitem.
-3. **Review:** Jeśli kod przekracza 50 linii w jednej funkcji, podziel go.
-4. **Docs:** Każdy nowy Port musi być udokumentowany w sekcji `ports/README.md` modułu.
-5. **Verify Servers:** Zawsze sprawdzaj health-checki po restarcie środowiska.
+ 
+ Jeśli jesteś AI Agentem pracującym nad tym projektem:
+ 1. **Pamięć:** Przeczytaj `detailed_plan.md` przed rozpoczęciem pracy.
+ 2. **Linter:** Uruchom `npm run lint` przed commitem.
+ 3. **Review:** Jeśli kod przekracza 50 linii w jednej funkcji, podziel go.
+ 4. **Docs:** Każdy nowy Port musi być udokumentowany w sekcji `ports/README.md` modułu.
+ 5. **Verify Servers:** Zawsze sprawdzaj health-checki po restarcie środowiska.
+ 
+ ---
+ 
+ ## 8. Zasady współpracy z GitHub (GitHub Collaboration)
+ 
+ > **KRYTYCZNE SZEFIE:** Poniższe zasady są nienegocjowalne dla AI Agenta.
+ 
+ ### 8.1 Autoryzacja Push
+ - **Zasada "Consent-First":** Przed wykonaniem KAŻDEJ komendy `git push`, AI Agent MUSI uzyskać wyraźną zgodę użytkownika w czacie.
+ - **Uzgodnienie Brancha:** AI Agent MUSI każdorazowo potwierdzić z użytkownikiem, na który branch (np. `zdrowiev1`, `master`, `feature/...`) ma trafić kod.
+ - **Zero niespodzianek:** Zakaz używania flag `-f` (force) bez szczegółowego omówienia ryzyka i zgody użytkownika.
+ 
+ ### 8.2 Atomic Commits
+ - Każdy commit powinien dotyczyć jednej logicznej zmiany.
+ - Wiadomości commitów muszą być zgodne z **Conventional Commits** (np. `feat:`, `fix:`, `docs:`, `chore:`).

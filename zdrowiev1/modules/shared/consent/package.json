@@ -1,0 +1,10 @@
+{
+    "name": "@monorepo/consent",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./src/index.ts",
+    "dependencies": {
+        "@monorepo/database": "*",
+        "@monorepo/zod-schemas": "*"
+    }
+}

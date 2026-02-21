@@ -1,0 +1,12 @@
+{
+    "name": "@monorepo/auth",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./src/index.ts",
+    "dependencies": {
+        "@monorepo/database": "*",
+        "@monorepo/zod-schemas": "*",
+        "bcryptjs": "^2.4.3",
+        "jsonwebtoken": "^9.0.2"
+    }
+}

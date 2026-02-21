@@ -717,27 +717,15 @@ erDiagram
 
 ---
 
-## 14. Proponowany Stack Technologiczny
-
 | Warstwa | Technologia | Powód |
 |---------|-------------|-------|
 | **Backend** | Node.js + TypeScript | Ekosystem MCP, typing, async, TDD-friendly |
 | **Framework** | NestJS | Modularny, dependency injection, idealny dla Hex Arch |
-| **Walidacja** | Zod | Runtime validation + type inference, lżejszy od class-validator |
-| **Baza danych** | PostgreSQL + TimescaleDB | Dane relacyjne + time-series (tętno, kroki) + RLS |
+| **Baza danych** | PostgreSQL + TimescaleDB | Dane relacyjne + time-series + RLS |
 | **ORM** | Drizzle ORM | Type-safe, Zod integration, SQL-first |
-| **Cache** | Redis | Sesje, rate limiting, real-time |
-| **Auth** | JWT (jose) + bcrypt + OAuth2 | Standardowy, MCP-compatible |
-| **Web Frontend** | Next.js 15 (React) | SSR, SEO, App Router |
-| **Mobile** | React Native (Expo) | Shared hooks/logika z web, natywne BLE |
-| **API** | REST + GraphQL (opcja) | Stabilne + elastyczne zapytania |
-| **Wykresy (Web)** | Recharts | React-native, responsive, animacje |
-| **Wykresy (Mobile)** | Victory Native | React Native kompatybilny |
-| **OCR** | Tesseract.js + OpenRouter LLM | Lokalne OCR + AI interpretacja |
-| **MCP** | Custom MCP Servers (TS) | AI maintenance, error logging |
-| **Testy** | Vitest + Playwright + Testcontainers | Unit/Integration/Contract + E2E |
-| **CI/CD** | GitHub Actions | Automatyzacja, łatwa konfiguracja |
-| **Deploy** | Docker + Railway/Fly.io | Szybki start, skalowalne |
+
+> [!IMPORTANT]
+> **Wersje oprogramowania:** Wszystkie wersje są "zamrożone" i opisane w dokumencie [stack_versions.md](./stack_versions.md). Jakakolwiek aktualizacja wymaga zmiany w tym dokumencie.
 
 ---
 
