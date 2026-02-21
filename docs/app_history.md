@@ -110,15 +110,55 @@
 
 ---
 
-## Sesja 4: Przygotowanie do GitHub
+## Sesja 5: Standardy Jakości i Polityka Kodu
 
-### Prompt 9: Historia + push na GitHub
-> *"Zapisz historię w app_history.md, przygotuj wszystko do wysłania na GitHub."*
+### Prompt 10: Dobre praktyki i automatyzacja
+> *"czy mamy jekies dobre praktyki robienia takiego wew api... czy mamy husky i inliner... kto bedize pilnował czy kod jest zoptymalizwany?"*
 
 **Co zrobiono:**
-- Utworzono `app_history.md` (ten plik)
-- Skopiowano wszystkie dokumenty do projektu `Zdrowie_v1/docs/`
-- Przygotowano do git push
+- Utworzono **`coding_standards.md`** — nadrzędny dokument zasad (konstytucja projektu).
+- Zdefiniowano komunikację wewnętrzną przez Porty/DI (opóźnienie 0ms).
+- Zaplanowano setup **Husky + lint-staged** dla blokowania złego kodu.
+- Wprowadzono limity: max 50 linii na funkcję, max 1500 na moduł.
+- Ustalono rolę AI Agenta jako "Boy Scout" (zawsze czyściej po pracy).
+
+---
+
+## Sesja 6: Testy, Serwery i Smoke Tests
+
+### Prompt 11: Standardy testowania i procedury serwerowe
+> *"dodaj standardy testownia oraz procedury uruchamiania serverów... mamy teswt unit, integracyjne e2e itd... mamy smoke tsty?"*
+
+**Co zrobiono:**
+- Rozbudowano hierarchię testów: Unit, Integration, Contract, E2E.
+- Dodano **Smoke Tests** (§3.2) dla błyskawicznej weryfikacji po deployu.
+- Ustalono standardową Mapę Portów (5432, 6379, 3000, 4000, 8080).
+- Zdefiniowano kolejność startu: Infra → API → Web.
+
+---
+
+## Sesja 7: AI Readiness (pgvector)
+
+### Prompt 12: Bazy wektorowe
+> *"czy nasza architektura jest gotowa na baze danych ai... rpzechowuje wyrazy jako liczby?"*
+
+**Co zrobiono:**
+- Analiza gotowości na AI: wybór **`pgvector`** dla PostgreSQL.
+- Zdefiniowano RAG (Retrieval-Augmented Generation) dla asystenta zdrowia.
+- Zapewniono bezpieczeństwo wektorów przez Row-Level Security (RLS).
+- Dodano §13 do `architecture_analysis.md`.
+
+---
+
+## Sesja 8: Warstwa MCP (AI-Native API)
+
+### Prompt 13: Szczegóły MCP
+> *"warstaa mcp na czym polega i jak bedzie działała i na jakim etapie ja dodamy?"*
+
+**Co zrobiono:**
+- Wyjaśniono MCP jako interfejs dla maszyn/agentów.
+- Potwierdzono wdrożenie w **Etapie 9** (po zbudowaniu Core).
+- Zdefiniowano zastosowania: profilaktyka, asystent, autonomous maintenance.
 
 ---
 
@@ -126,20 +166,21 @@
 
 | Plik | Opis | Rozmiar |
 |------|------|---------|
-| `architecture_analysis.md` | Analiza 3 architektur, stack, auth, RLS, Zod, testy, DB schema | ~730 linii |
-| `detailed_plan.md` | 13 etapów implementacji z krokami dla AI | ~500 linii |
+| `architecture_analysis.md` | Analiza 3 architektur, stack, auth, RLS, Zod, testy, DB schema, **AI/Vector**, **MCP** | ~750 linii |
+| `detailed_plan.md` | 13 etapów implementacji z krokami dla AI, moduły ≤1500 LOC | ~680 linii |
+| `coding_standards.md` | **NOWY:** Standardy kodowania, TDD, Hex Arch, Clean Code | ~120 linii |
 | `notes.md` | Research konkurencji, wymagania, lista features | ~140 linii |
-| `app_history.md` | Historia sesji (ten plik) | ~130 linii |
+| `app_history.md` | Historia sesji (ten plik) | ~200 linii |
 
 ## Kluczowe Decyzje
 
-1. **Architektura:** Hexagonal Modular Monolith (nie mikroserwisy — za wcześnie)
-2. **Frontend:** Next.js 15 (web) + React Native Expo (mobile)
-3. **Backend:** NestJS + TypeScript + Drizzle ORM
-4. **Baza:** PostgreSQL + TimescaleDB + Row-Level Security
-5. **AI Integration:** MCP Servers wrapping REST API
-6. **Walidacja:** Zod (single source of truth for types)
-7. **Testy:** TDD obowiązkowe, 5 typów testów, pokrycie core ≥90%
-8. **OCR:** Tesseract.js + LLM z anonimizacją danych
-9. **Wizualizacje:** Recharts (web) + Victory Native (mobile), 10 typów wykresów
-10. **Bezpieczeństwo:** 4-warstwowa izolacja, HIPAA/GDPR, Consent Management
+1. **Architektura:** Hexagonal Modular Monolith.
+2. **Frontend:** Next.js 15 (web) + React Native Expo (mobile).
+3. **Backend:** NestJS + TypeScript + Drizzle ORM.
+4. **Baza:** PostgreSQL + TimescaleDB + **pgvector** (dla AI) + Row-Level Security.
+5. **AI Integration:** Hybryda REST API + **MCP Servers** (Etap 9).
+6. **Walidacja:** Zod (single source of truth).
+7. **Testowanie:** TDD, 5 typów testów (**w tym Smoke Tests**).
+8. **Automatyzacja:** Husky, ESLint (limit 50 linii/funkcja), CI/CD coverage 90%.
+9. **OCR:** Tesseract.js (local) + LLM (OpenRouter) z anonimizacją.
+10. **Wizualizacje:** Recharts + Victory Native, 10 typów wykresów.
