@@ -215,11 +215,23 @@ graph TB
     style MCP_C fill:#bbf,stroke:#333
 ```
 
-**Strategia:**
-1. **REST API** jest głównym interfejsem (stabilne, przewidywalne)
-2. **MCP Servers** opakowują REST API, dając AI elastyczny dostęp
-3. AI agent zarządza modułami, logami i deploymentem via MCP
-4. **Nie rezygnujemy z API** — MCP je wzbogaca, nie zastępuje
+### 4.1 Czym jest warstwa MCP?
+MCP (Model Context Protocol) to **"API stworzone dla Maszyn"**. Podczas gdy ludzie klikają w UI (które rozmawia z REST), AI Agenty (jak ja) rozmawiają przez MCP.
+
+**Jak to działa w praktyce?**
+1. **AI-Native Interface:** MCP Server udostępnia "Toolbox" (zestaw narzędzi). Każde narzędzie ma opis (np. *"Pobierz trendy tętna dla usera X z ostatniego miesiąca"*).
+2. **Standard Komunikacji:** Dzięki MCP nie muszę "zgadywać" jak wywołać Twoje API. Protokół sam dostarcza mi dokumentację i strukturę danych.
+3. **Bezpieczeństwo:** Nawet przez MCP AI musi przejść przez `ConsentGuard` i `RLS`.
+
+### 4.2 Dlaczego Etap 9 (A nie na początku)?
+1. **Stabilność fundamentów:** Aby AI mogło pomagać, musimy najpierw zbudować "mięśnie" aplikacji (Core logic, DB). MCP to warstwa "nad" nimi.
+2. **Kontrakty:** Implementacja MCP polega na "opakowaniu" Portów (interfejsów), które powstają w Etapach 1-6.
+3. **Cel:** Etapy 1-8 budują produkt dla człowieka. Etap 9 buduje infrastrukturę dla AI, aby mogło ono samodzielnie naprawiać błędy i analizować dane pacjentów.
+
+### 4.3 Kluczowe zastosowania MCP:
+- **Autonomous Maintenance:** AI wykrywa błąd w logach i samo proponuje poprawkę.
+- **Smart Health Assistant:** Zaawansowana analiza trendów, której nie da się łatwo "wyklikać" w zwykłym dashboardzie.
+- **Data Support:** Pomoc w imporcie i czyszczeniu dużych zbiorów danych (np. 10 lat historii z CSV).
 
 ---
 
@@ -726,3 +738,23 @@ erDiagram
 | **Testy** | Vitest + Playwright + Testcontainers | Unit/Integration/Contract + E2E |
 | **CI/CD** | GitHub Actions | Automatyzacja, łatwa konfiguracja |
 | **Deploy** | Docker + Railway/Fly.io | Szybki start, skalowalne |
+
+---
+
+## §13. Gotowość na AI i Vector Search (pgvector)
+
+Aplikacja jest w pełni gotowa na obsługę **baz wektorowych** (storing "words as numbers"), co jest kluczowe dla zaawansowanych funkcji AI.
+
+### 13.1 Wybór: pgvector
+Zamiast wdrażać osobną bazę (jak Pinecone), używamy rozszerzenia **`pgvector`** do naszego PostgreSQL.
+- **Zaleta:** Wektory (embeddingi) są przechowywane w tej samej bazie co dane pacjenta.
+- **Bezpieczeństwo:** Polisy **RLS** działają automatycznie na wynikach wyszukiwania wektorowego — AI nigdy nie "zobaczy" danych innego użytkownika.
+
+### 13.2 Zastosowania (RAG - Retrieval-Augmented Generation)
+1. **Semantyczne przeszukiwanie historii:** "Kiedy ostatnio czułem się tak jak dzisiaj?" (AI szuka podobnych wpisów w dzienniku objawów).
+2. **Inteligentny Asystent:** Odpowiadanie na pytania dotyczące wyników badań w oparciu o bazę wiedzy medycznej (skalibrowaną pod konkretnego pacjenta).
+3. **Wykrywanie anomalii:** Porównywanie wektorów tętna/snu z "normalnymi" wzorcami w celu wykrycia trendów chorobowych.
+
+### 13.3 Architektura Hexagonalna
+Dzięki Portom i Adapterom, dodanie obsługi wektorów to tylko nowy **SearchAdapter**. Core Domain pozostaje czysta, wywołując jedynie interfejs `ISearchIndex`.
+
