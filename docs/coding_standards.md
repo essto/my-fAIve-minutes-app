@@ -41,19 +41,31 @@
 
 ---
 
-## 3. Strategia Testów (TDD)
+## 3. Strategia Testów (Testing Standards)
 
-### 3.1 Cykl Czerwony-Zielony-Refaktor
-1. **RED:** Napisz unit test dla nowej funkcjonalności i zobacz, jak failuje.
-2. **GREEN:** Napisz minimum kodu, aby test przeszedł.
-3. **REFACTOR:** Uprość kod, zachowując zielone testy.
+> Każda nowa funkcjonalność MUSI rozpoczynać się od testu. Kod bez testu nie przejdzie przez bramkę CI/CD.
 
-### 3.2 Zasady Testowania
-- **Zasada AAA:** Arrange (Przygotuj), Act (Wykonaj), Assert (Sprawdź).
-- **Izolacja:** Unit testy nie mogą dotykać bazy danych ani sieci. Używamy mocków dla Portów Wyjściowych.
-- **Granularność:** 
-  - `domain/**/__tests__/*.unit.test.ts`
-  - `adapters/**/__tests__/*.integration.test.ts`
+### 3.1 Hierarchia i Rodzaje Testów
+| Typ Testu | Cel | Lokalizacja | Narzędzie |
+|-----------|-----|-------------|-----------|
+| **Unit** | Testuje czystą logikę w `domain/`. Żadnych baz, sieci, frameworków. | `domain/**/__tests__/*.unit.test.ts` | Vitest |
+| **Integration** | Testuje adaptery (np. czy Repository poprawnie zapisuje w DB). | `adapters/**/__tests__/*.integration.test.ts` | Vitest + Testcontainers |
+| **Contract** | Sprawdza czy Adapter poprawnie implementuje interfejs Portu. | `adapters/**/__tests__/*.contract.test.ts` | Vitest |
+| **E2E (Web)** | Pełny scenariusz użytkownika w przeglądarce. | `apps/web/__e2e__/*.spec.ts` | Playwright |
+| **E2E (Mobile)** | Scenariusze mobilne. | `apps/mobile/__e2e__/*.spec.ts` | Detox / Expo Test |
+
+### 3.2 Procedura TDD (Test-Driven Development)
+1. **Zdefiniuj Wymagania:** Zrozum co funkcja ma robić.
+2. **Napisz Test Unitowy (RED):** Zakoduj oczekiwany rezultat. Test musi zawieść.
+3. **Zaimplementuj Minimum Kodu (GREEN):** Napisz tylko tyle, by test przeszedł.
+4. **Refaktor (REFACTOR):** Dopracuj kod, usuń duplikaty, zadbaj o czystość.
+5. **Dopisz Test Integracyjny:** Jeśli funkcja dotyka bazy danych lub zewnętrznego API.
+
+### 3.3 Definition of Done (Testing)
+- Pokrycie kodu (Coverage) dla warstwy `domain` wynosi **≥90%**.
+- Pokrycie kodu dla warstwy `adapters` wynosi **≥80%**.
+- Wszystkie ścieżki krytyczne mają testy E2E.
+- Linter i testy przechodzą lokalnie przed `git push`.
 
 ---
 
@@ -69,22 +81,49 @@
 
 ---
 
-## 5. Bezpieczeństwo (Security by Design)
+## 5. Procedury Serwerowe (Infrastructure Standards)
 
-### 5.1 Dane Medyczne
+> Serwery muszą startować w przewidywalny sposób. Używamy Docker Compose do zarządzania infrastrukturą.
+
+### 5.1 Mapa Portów (Standard Port Mapping)
+| Usługa | Port | Opis |
+|--------|------|------|
+| **PostgreSQL** | 5432 | Główna baza danych |
+| **Redis** | 6379 | Cache / Sesje |
+| **API (Backend)** | 3000 | NestJS API |
+| **Web (Frontend)** | 4000 | Next.js Dev Server |
+| **MCP Server** | 8080 | AI Maintenance Interface |
+
+### 5.2 Kolejność Uruchamiania
+1. **Infrastruktura:** `docker compose up -d db redis`
+2. **Backend:** `cd apps/api && npm run dev`
+3. **Frontend:** `cd apps/web && npm run dev`
+
+### 5.3 Weryfikacja Startu (Health Checks)
+Po uruchomieniu serwerów, AI Agent musi sprawdzić ich status:
+- **DB:** `pg_isready -h localhost -p 5432`
+- **API:** `curl -f http://localhost:3000/health` (Oczekiwany status: 200 OK)
+- **Web:** Sprawdzenie dostępności strony głównej na porcie 4000.
+
+---
+
+## 6. Bezpieczeństwo (Security by Design)
+
+### 6.1 Dane Medyczne
 - **Zero PII in logs:** Nigdy nie logujemy nazwisk, e-maili ani surowych pomiarów w logach systemowych.
 - **Encryption:** Dane wrażliwe są szyfrowane (AES-256) przed zapisem do bazy.
 
-### 5.2 Row-Level Security (RLS)
+### 6.2 Row-Level Security (RLS)
 - Nigdy nie polegamy tylko na `WHERE user_id = ...`. 
 - Każde zapytanie do bazy musi być poprzedzone ustawieniem kontekstu usera: `SET LOCAL app.current_user_id = ...`.
 
 ---
 
-## 6. Praca z AI Agentem
+## 7. Praca z AI Agentem
 
 Jeśli jesteś AI Agentem pracującym nad tym projektem:
 1. **Pamięć:** Przeczytaj `detailed_plan.md` przed rozpoczęciem pracy.
 2. **Linter:** Uruchom `npm run lint` przed commitem.
 3. **Review:** Jeśli kod przekracza 50 linii w jednej funkcji, podziel go.
 4. **Docs:** Każdy nowy Port musi być udokumentowany w sekcji `ports/README.md` modułu.
+5. **Verify Servers:** Zawsze sprawdzaj health-checki po restarcie środowiska.
