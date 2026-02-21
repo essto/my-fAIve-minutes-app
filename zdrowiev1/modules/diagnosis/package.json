@@ -1,0 +1,13 @@
+{
+    "name": "@monorepo/diagnosis",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./diagnosis.module.ts",
+    "dependencies": {
+        "@monorepo/database": "*",
+        "@monorepo/shared-types": "*",
+        "@monorepo/zod-schemas": "*",
+        "@nestjs/common": "^10.0.0",
+        "drizzle-orm": "^0.29.0"
+    }
+}

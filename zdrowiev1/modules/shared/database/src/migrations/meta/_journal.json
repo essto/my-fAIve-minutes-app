@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771681877989,
+      "tag": "0000_confused_mauler",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771682134393,
+      "tag": "0001_illegal_boomer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771682256218,
+      "tag": "0002_mature_rage",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1771682373645,
+      "tag": "0003_dark_red_wolf",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1771682510068,
+      "tag": "0004_tearful_northstar",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "../../dist/modules/diet",
+        "rootDir": "../../"
+    },
+    "include": [
+        "**/*",
+        "../shared/**/*",
+        "../../packages/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "test"
+    ]
+}
