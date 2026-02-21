@@ -51,10 +51,18 @@
 | **Unit** | Testuje czystą logikę w `domain/`. Żadnych baz, sieci, frameworków. | `domain/**/__tests__/*.unit.test.ts` | Vitest |
 | **Integration** | Testuje adaptery (np. czy Repository poprawnie zapisuje w DB). | `adapters/**/__tests__/*.integration.test.ts` | Vitest + Testcontainers |
 | **Contract** | Sprawdza czy Adapter poprawnie implementuje interfejs Portu. | `adapters/**/__tests__/*.contract.test.ts` | Vitest |
+| **Smoke** | Błyskawiczna weryfikacja czy "system żyje" po deployu/restarcie. | `infrastructure/smoke-tests/` | Curl / Playwright |
 | **E2E (Web)** | Pełny scenariusz użytkownika w przeglądarce. | `apps/web/__e2e__/*.spec.ts` | Playwright |
 | **E2E (Mobile)** | Scenariusze mobilne. | `apps/mobile/__e2e__/*.spec.ts` | Detox / Expo Test |
 
-### 3.2 Procedura TDD (Test-Driven Development)
+### 3.2 Procedura Smoke Test (Post-Deployment)
+Zautomatyzowany skrypt uruchamiany natychmiast po `docker compose up` lub deployu na staging/prod:
+1. **Connectivity:** Czy baza i Redis odpowiadają?
+2. **Health Endpoints:** Czy `/health` zwraca 200 OK?
+3. **Pivotal Flow:** Czy strona logowania się ładuje? (Test trwający < 5 sekund).
+4. **Auth Check:** Czy można wygenerować token testowy?
+
+### 3.3 Procedura TDD (Test-Driven Development)
 1. **Zdefiniuj Wymagania:** Zrozum co funkcja ma robić.
 2. **Napisz Test Unitowy (RED):** Zakoduj oczekiwany rezultat. Test musi zawieść.
 3. **Zaimplementuj Minimum Kodu (GREEN):** Napisz tylko tyle, by test przeszedł.
