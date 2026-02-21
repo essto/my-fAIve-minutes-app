@@ -8,19 +8,21 @@
         "build": "nest build"
     },
     "dependencies": {
+        "@monorepo/auth": "*",
+        "@monorepo/consent": "*",
+        "@monorepo/database": "*",
+        "@monorepo/user": "*",
         "@nestjs/common": "^10.0.0",
         "@nestjs/core": "^10.0.0",
         "@nestjs/platform-express": "^10.0.0",
-        "@monorepo/auth": "*",
-        "@monorepo/user": "*",
-        "@monorepo/consent": "*",
-        "@monorepo/database": "*",
         "reflect-metadata": "^0.1.13",
-        "rxjs": "^7.8.1"
+        "rxjs": "^7.8.1",
+        "tsconfig-paths": "^4.2.0"
     },
     "devDependencies": {
         "@nestjs/cli": "^10.0.0",
         "@nestjs/schematics": "^10.0.0",
+        "@types/express": "^5.0.6",
         "@types/node": "^20.0.0"
     }
 }

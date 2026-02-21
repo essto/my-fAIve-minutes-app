@@ -3,7 +3,7 @@ import { VisualizationController } from './application/controllers/visualization
 import { VisualizationOrchestrator } from './domain/services/visualization-orchestrator.service';
 import { ChartConfigService } from './domain/services/chart-config.service';
 import { DashboardService } from './domain/services/dashboard.service';
-import { ExportService } from './export.service';
+import { ExportService } from './domain/services/export.service';
 
 @Module({
   controllers: [VisualizationController],

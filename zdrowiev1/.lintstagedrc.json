@@ -1,5 +1,5 @@
 {
-    "*.{js,ts,tsx}": [
+    "!(apps/web/**/*)*.{js,ts,tsx}": [
         "eslint --fix",
         "prettier --write"
     ]
