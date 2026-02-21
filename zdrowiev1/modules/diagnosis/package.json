@@ -8,6 +8,12 @@
         "@monorepo/shared-types": "*",
         "@monorepo/zod-schemas": "*",
         "@nestjs/common": "^10.0.0",
-        "drizzle-orm": "^0.29.0"
-    }
+        "@types/pdfkit": "^0.17.5",
+        "drizzle-orm": "^0.29.0",
+        "pdfkit": "^0.17.2"
+    },
+    "bundleDependencies": [
+        "@types/pdfkit",
+        "pdfkit"
+    ]
 }

@@ -682,7 +682,6 @@ jobs:
 4. **≤1500 LOC:** Jeśli moduł przekracza limit — podziel na sub-module
 5. **Audit:** KAŻDY dostęp do danych medycznych jest logowany
 6. **No secrets in code:** Wszystkie sekrety w `.env`, nigdy w kodzie
-7. **GitHub Consent:** KAŻDY `push` wymaga uprzedniej zgody użytkownika i uzgodnienia brancha
 
 ### 🟡 Best practices:
 1. **Hex Arch:** Core nie importuje frameworków (NestJS, Express, Drizzle)
