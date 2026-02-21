@@ -1,0 +1,16 @@
+site_name: Have fun! 
+site_author: essto
+site_url: https://github.com/essto/my-fAIve-minutes-app
+site_description: >-
+    essto/my-fAIve-minutes-app
+
+repo_name: essto/my-fAIve-minutes-app
+repo_url: https://github.com/essto/my-fAIve-minutes-app
+
+theme:
+  name: readthedocs
+  palette:
+    primary: yellow
+
+nav:
+- Home: index.md

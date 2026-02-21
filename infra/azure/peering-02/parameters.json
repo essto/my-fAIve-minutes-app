@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_vm_az_02_vnet_name": {
+            "value": null
+        },
+        "virtualNetworks_vm_az_01_vnet_externalid": {
+            "value": null
+        }
+    }
+}
