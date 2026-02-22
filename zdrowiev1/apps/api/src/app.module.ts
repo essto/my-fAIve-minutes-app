@@ -7,12 +7,14 @@ import { DiagnosisModule } from '@monorepo/diagnosis';
 import { AuthModule } from '@monorepo/auth';
 import { UserModule } from '@monorepo/user';
 import { SeedModule } from '@monorepo/database';
+import { NotificationsModule } from '../../../modules/notifications/notifications.module';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
     SeedModule,
+    NotificationsModule,
     WeightModule,
     HeartRateModule,
     SleepModule,

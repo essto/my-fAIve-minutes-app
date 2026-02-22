@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [react()],
     test: {
         environment: 'jsdom',
-        setupFiles: './src/setupTests.ts',
+        setupFiles: ['./src/setupTests.ts', './tests/contract/pact.setup.ts'],
         globals: true,
         coverage: {
             provider: 'istanbul',

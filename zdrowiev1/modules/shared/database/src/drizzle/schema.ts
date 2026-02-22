@@ -37,3 +37,34 @@ export const auditLogs = pgTable('audit_logs', {
   metadata: text('metadata'),
   timestamp: timestamp('timestamp').defaultNow().notNull(),
 });
+
+export const notifications = pgTable('notifications', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  type: varchar('type', { length: 20 }).notNull(), // 'SYSTEM', 'HEALTH_ALERT', 'REMINDER'
+  title: varchar('title', { length: 100 }).notNull(),
+  message: text('message').notNull(),
+  channel: varchar('channel', { length: 20 }).notNull(), // 'IN_APP', 'EMAIL', 'PUSH'
+  isRead: boolean('is_read').notNull().default(false),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  readAt: timestamp('read_at'),
+});
+
+export const notificationPreferences = pgTable(
+  'notification_preferences',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    type: varchar('type', { length: 20 }).notNull(),
+    channel: varchar('channel', { length: 20 }).notNull(),
+    enabled: boolean('enabled').notNull().default(true),
+  },
+  (table) => {
+    return {
+      pk: [table.userId, table.type, table.channel],
+    };
+  },
+);

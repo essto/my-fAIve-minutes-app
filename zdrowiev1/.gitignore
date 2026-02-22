@@ -11,3 +11,10 @@ coverage/
 .next/
 .expo/
 *.tsbuildinfo
+
+# Local AI skills (nie wysyłamy do repo)
+.antigravity/
+
+# Playwright output
+test-results/
+playwright-report/

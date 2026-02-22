@@ -1,11 +1,13 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleInit, Inject } from '@nestjs/common';
 import { UserService } from '@monorepo/user';
 import { AuthService } from '@monorepo/auth';
 
 @Injectable()
 export class SeedDemoService implements OnModuleInit {
   constructor(
+    @Inject(UserService)
     private readonly userService: UserService,
+    @Inject(AuthService)
     private readonly authService: AuthService,
   ) {}
 
