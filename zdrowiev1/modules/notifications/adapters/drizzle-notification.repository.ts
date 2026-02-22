@@ -2,7 +2,7 @@ import { eq, and } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { Notification, NotificationType, NotificationChannel } from '../domain/notification.entity';
 import { NotificationRepository } from '../ports/notification.repository.port';
-import * as schema from '@monorepo/shared-database/drizzle/schema';
+import * as schema from '../../shared/database/src/drizzle/schema';
 
 export class DrizzleNotificationRepository implements NotificationRepository {
   constructor(private readonly db: NodePgDatabase<typeof schema>) {}

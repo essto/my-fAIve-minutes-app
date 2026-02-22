@@ -17,4 +17,12 @@ export default defineConfig({
     globals: true,
     include: ['**/*.spec.ts'],
   },
+  esbuild: {
+    target: 'es2022',
+    tsconfigRaw: {
+      compilerOptions: {
+        experimentalDecorators: true,
+      },
+    },
+  },
 });
