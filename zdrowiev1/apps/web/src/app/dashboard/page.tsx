@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts'
+import { NotificationBell } from './NotificationBell'
 
 interface DashboardData {
     healthScore: number
@@ -90,6 +91,11 @@ export default function Dashboard() {
 
     return (
         <div className="space-y-8">
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold dark:text-white">Dashboard</h1>
+                <NotificationBell />
+            </div>
+
             {/* Health Score */}
             <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow">
                 <h2 className="text-2xl font-bold mb-4 dark:text-white">Health Score</h2>

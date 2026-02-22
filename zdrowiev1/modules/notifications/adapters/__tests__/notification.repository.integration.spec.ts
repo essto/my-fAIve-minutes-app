@@ -8,7 +8,7 @@ import {
   NotificationType,
   NotificationChannel,
 } from '../../domain/notification.entity';
-import * as schema from '../../../shared/database/src/drizzle/schema';
+import * as schema from '@monorepo/database';
 import * as fs from 'fs';
 import * as path from 'path';
 

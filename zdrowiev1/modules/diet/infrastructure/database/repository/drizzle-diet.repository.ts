@@ -1,4 +1,4 @@
-import { db } from '../../../../shared/database/src/index';
+import { db } from '@monorepo/database';
 import { mealEntries } from '../../schemas/diet.schema';
 import { DietRepository } from '../../../domain/ports/diet.repository';
 import { MealEntry } from '@monorepo/shared-types';

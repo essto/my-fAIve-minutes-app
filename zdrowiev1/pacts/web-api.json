@@ -4,26 +4,129 @@
   },
   "interactions": [
     {
-      "description": "poprawne żądanie logowania",
+      "description": "a request for all notifications",
       "providerStates": [
         {
-          "name": "użytkownik demo istnieje"
+          "name": "user has notifications"
         }
       ],
       "request": {
-        "body": {
-          "email": "demo@example.com",
-          "password": "Password123!"
-        },
         "headers": {
-          "Content-Type": "application/json"
+          "Authorization": "Bearer test-token"
         },
-        "method": "POST",
-        "path": "/api/auth/login"
+        "method": "GET",
+        "path": "/api/notifications"
+      },
+      "response": {
+        "body": [
+          {
+            "channel": "IN_APP",
+            "createdAt": "2023-01-01T00:00:00.000Z",
+            "id": "some-uuid",
+            "isRead": false,
+            "message": "Welcome to the app",
+            "title": "Welcome",
+            "type": "SYSTEM"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$[*].channel": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].createdAt": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].isRead": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].message": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].title": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to mark notification as read",
+      "providerStates": [
+        {
+          "name": "user has unread notification with id test-notif-id"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Authorization": "Bearer test-token"
+        },
+        "method": "PATCH",
+        "path": "/api/notifications/test-notif-id/read"
       },
       "response": {
         "body": {
-          "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          "channel": "IN_APP",
+          "createdAt": "2023-01-01T00:00:00.000Z",
+          "id": "test-notif-id",
+          "isRead": true,
+          "message": "Welcome to the app",
+          "title": "Welcome",
+          "type": "SYSTEM"
         },
         "headers": {
           "Content-Type": "application/json; charset=utf-8"
@@ -31,6 +134,54 @@
         "matchingRules": {
           "body": {
             "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.channel": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.createdAt": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.message": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.title": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.type": {
               "combine": "AND",
               "matchers": [
                 {

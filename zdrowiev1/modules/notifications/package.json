@@ -1,0 +1,11 @@
+{
+    "name": "@monorepo/notifications",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./notifications.module.ts",
+    "dependencies": {
+        "@monorepo/database": "*",
+        "@nestjs/common": "^10.0.0",
+        "drizzle-orm": "^0.29.0"
+    }
+}

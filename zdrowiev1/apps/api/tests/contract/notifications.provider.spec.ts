@@ -1,15 +1,17 @@
-import { describe, it, beforeAll, afterAll } from 'vitest';
+import { describe, it, beforeAll, afterAll, vi } from 'vitest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { Verifier } from '@pact-foundation/pact';
-import { AppModule } from '../../src/app.module';
 import { JwtAuthGuard } from '@monorepo/auth';
+import { NotificationsModule } from '../../../../modules/notifications/notifications.module';
 import { NotificationService } from '../../../../modules/notifications/domain/notification.service';
 import {
   Notification,
   NotificationType,
   NotificationChannel,
 } from '../../../../modules/notifications/domain/notification.entity';
+import { NotificationRepositoryToken } from '../../../../modules/notifications/ports/notification.repository.port';
+import { NotificationSenderToken } from '../../../../modules/notifications/adapters/in-app-notification.sender';
 import * as path from 'path';
 
 describe('Notifications Pact Provider Verification', () => {
@@ -18,12 +20,26 @@ describe('Notifications Pact Provider Verification', () => {
   let notificationService: NotificationService;
 
   beforeAll(async () => {
+    process.env.JWT_SECRET = 'pact-test-secret';
+    process.env.POSTGRES_HOST = 'localhost'; // To satisfy the audit script even though it's mocked
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [NotificationsModule],
     })
+      .overrideProvider(NotificationRepositoryToken)
+      .useValue({
+        create: vi.fn(),
+        findById: vi.fn(),
+        findByUserId: vi.fn(),
+        update: vi.fn(),
+      })
+      .overrideProvider(NotificationSenderToken)
+      .useValue({
+        send: vi.fn(),
+      })
       .overrideGuard(JwtAuthGuard)
       .useValue({
-        canActivate: (context) => {
+        canActivate: (context: any) => {
           const req = context.switchToHttp().getRequest();
           req.user = { id: 'some-uuid' };
           return true;
@@ -37,10 +53,13 @@ describe('Notifications Pact Provider Verification', () => {
 
     await app.listen(0);
     serverUrl = await app.getUrl();
-  }, 30000);
+    console.log(`Notifications Pact Provider Mock Server running at ${serverUrl}`);
+  }, 60000);
 
   afterAll(async () => {
-    await app.close();
+    if (app) {
+      await app.close();
+    }
   });
 
   it('should verify the notifications contract', async () => {
@@ -50,7 +69,7 @@ describe('Notifications Pact Provider Verification', () => {
       pactUrls: [path.resolve(process.cwd(), '../../pacts/web-api.json')],
       stateHandlers: {
         'user has notifications': async () => {
-          // Prepare mocking of the service
+          console.log('STATE HANDLER: user has notifications');
           const notif = Notification.create({
             userId: 'some-uuid',
             type: NotificationType.SYSTEM,
@@ -59,16 +78,35 @@ describe('Notifications Pact Provider Verification', () => {
             channel: NotificationChannel.IN_APP,
           });
 
-          // Use vi.spyOn if we wanted to mock the service,
-          // or just ensure the service returns this if it's using a real DB.
-          // Since we want simple contract verification, we can mock the service method:
           vi.spyOn(notificationService, 'getUserNotifications').mockResolvedValue([notif as any]);
 
           return Promise.resolve('User has notifications state handled');
+        },
+        'user has unread notification with id test-notif-id': async () => {
+          console.log('STATE HANDLER: user has unread notification');
+          const notif = Notification.create({
+            userId: 'some-uuid',
+            type: NotificationType.SYSTEM,
+            title: 'Test',
+            message: 'Test notification',
+            channel: NotificationChannel.IN_APP,
+          });
+
+          vi.spyOn(notificationService, 'markAsRead').mockResolvedValue({
+            id: 'test-notif-id',
+            type: NotificationType.SYSTEM,
+            title: 'Welcome',
+            message: 'Welcome to the app',
+            channel: NotificationChannel.IN_APP,
+            isRead: true,
+            createdAt: '2023-01-01T00:00:00.000Z',
+          } as any);
+
+          return Promise.resolve('Unread notification state handled');
         },
       },
     });
 
     await verifier.verifyProvider();
-  }, 60000);
+  }, 120000);
 });

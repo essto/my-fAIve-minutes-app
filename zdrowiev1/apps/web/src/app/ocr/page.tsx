@@ -97,7 +97,7 @@ export default function OCRPage() {
                     <div className="space-y-2">
                         {editMode
                             ? editedValues.map((v, i) => (
-                                <input key={i} value={v} onChange={(e) => {
+                                <input key={i} id={`edited-value-${i}`} value={v} onChange={(e) => {
                                     const n = [...editedValues]; n[i] = e.target.value; setEditedValues(n)
                                 }} className="w-full p-2 border border-gray-300 rounded-lg dark:bg-slate-700 dark:text-white" />
                             ))

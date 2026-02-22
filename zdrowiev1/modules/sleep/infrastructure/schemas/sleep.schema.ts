@@ -1,5 +1,5 @@
 import { pgTable, uuid, timestamp, integer } from 'drizzle-orm/pg-core';
-import { users } from '../../../shared/database/src/drizzle/schema';
+import { users } from '@monorepo/database';
 
 export const sleepRecords = pgTable('sleep_records', {
   id: uuid('id').primaryKey().defaultRandom(),

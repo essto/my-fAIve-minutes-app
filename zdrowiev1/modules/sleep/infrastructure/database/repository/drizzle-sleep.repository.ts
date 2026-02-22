@@ -1,4 +1,4 @@
-import { db } from '../../../../shared/database/src/index';
+import { db } from '@monorepo/database';
 import { sleepRecords } from '../../schemas/sleep.schema';
 import { SleepRepository } from '../../../domain/ports/sleep.repository';
 import { SleepRecord } from '@monorepo/shared-types';

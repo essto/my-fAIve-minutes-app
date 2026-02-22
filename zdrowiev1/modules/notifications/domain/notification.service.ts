@@ -1,6 +1,8 @@
+import { Injectable } from '@nestjs/common';
 import { Notification, NotificationType, NotificationChannel } from './notification.entity';
 import { NotificationRepository } from '../ports/notification.repository.port';
 
+@Injectable()
 export class NotificationService {
   constructor(private readonly repository: NotificationRepository) {}
 

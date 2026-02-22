@@ -99,7 +99,7 @@ Zautomatyzowany skrypt uruchamiany natychmiast po `docker compose up` lub deploy
 | **PostgreSQL** | 5432 | Główna baza danych |
 | **Redis** | 6379 | Cache / Sesje |
 | **API (Backend)** | 3000 | NestJS API |
-| **Web (Frontend)** | 4000 | Next.js Dev Server |
+| **Web (Frontend)** | 3001 | Next.js Dev Server |
 | **MCP Server** | 8080 | AI Maintenance Interface |
 
 ### 5.2 Kolejność Uruchamiania
@@ -111,7 +111,7 @@ Zautomatyzowany skrypt uruchamiany natychmiast po `docker compose up` lub deploy
 Po uruchomieniu serwerów, AI Agent musi sprawdzić ich status:
 - **DB:** `pg_isready -h localhost -p 5432`
 - **API:** `curl -f http://localhost:3000/health` (Oczekiwany status: 200 OK)
-- **Web:** Sprawdzenie dostępności strony głównej na porcie 4000.
+- **Web:** Sprawdzenie dostępności strony głównej na porcie 3001.
 
 ---
 

@@ -1,5 +1,5 @@
 import { pgTable, uuid, timestamp, integer, text, doublePrecision } from 'drizzle-orm/pg-core';
-import { users } from '../../../shared/database/src/drizzle/schema';
+import { users } from '@monorepo/database';
 
 export const mealEntries = pgTable('meal_entries', {
   id: uuid('id').primaryKey().defaultRandom(),

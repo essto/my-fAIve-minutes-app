@@ -5,7 +5,7 @@ import { SymptomCheckerService } from './domain/services/symptom-checker.service
 import { TriageService } from './domain/services/triage.service';
 import { ReportGeneratorService } from './domain/services/report-generator.service';
 import { DrizzleDiagnosisRepository } from './infrastructure/database/repository/drizzle-diagnosis.repository';
-import { db } from '../shared/database/src/index';
+import { db, DATABASE_CONNECTION } from '@monorepo/database';
 
 @Module({
   controllers: [DiagnosisController],
@@ -32,7 +32,8 @@ import { db } from '../shared/database/src/index';
     },
     {
       provide: DrizzleDiagnosisRepository,
-      useFactory: () => new DrizzleDiagnosisRepository(db),
+      useFactory: (db) => new DrizzleDiagnosisRepository(db),
+      inject: [DATABASE_CONNECTION],
     },
   ],
   exports: ['DIAGNOSIS_SERVICE'],

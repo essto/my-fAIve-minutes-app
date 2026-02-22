@@ -29,6 +29,24 @@
             ],
             "@monorepo/shared-types": [
                 "packages/shared-types/src"
+            ],
+            "@monorepo/notifications": [
+                "modules/notifications"
+            ],
+            "@monorepo/weight": [
+                "modules/weight"
+            ],
+            "@monorepo/heart-rate": [
+                "modules/heart-rate"
+            ],
+            "@monorepo/sleep": [
+                "modules/sleep"
+            ],
+            "@monorepo/diet": [
+                "modules/diet"
+            ],
+            "@monorepo/diagnosis": [
+                "modules/diagnosis"
             ]
         }
     },

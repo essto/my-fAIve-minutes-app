@@ -1,10 +1,21 @@
-import { Controller, Get, Param, Patch, UseGuards, Request as NestRequest } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Patch,
+  UseGuards,
+  Request as NestRequest,
+  Inject,
+} from '@nestjs/common';
 import { NotificationService } from '../domain/notification.service';
 import { JwtAuthGuard } from '@monorepo/auth';
 
 @Controller('notifications')
 export class NotificationController {
-  constructor(private readonly notificationService: NotificationService) {}
+  constructor(
+    @Inject(NotificationService)
+    private readonly notificationService: NotificationService,
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()

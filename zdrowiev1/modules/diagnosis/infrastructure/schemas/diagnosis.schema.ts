@@ -7,7 +7,7 @@ import {
   doublePrecision,
   jsonb,
 } from 'drizzle-orm/pg-core';
-import { users } from '../../../shared/database/src/drizzle/schema';
+import { users } from '@monorepo/database';
 
 export const symptomReports = pgTable('symptom_reports', {
   id: uuid('id').primaryKey().defaultRandom(),

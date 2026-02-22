@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it, beforeEach } from 'vitest';
 import { GenericContainer, StartedTestContainer } from 'testcontainers';
 import { DrizzleWeightRepository } from '../infrastructure/database/repository/drizzle-weight.repository';
 import { weightReadings } from '../infrastructure/schemas/weight.schema';
-import { users } from '../../shared/database/src/drizzle/schema';
+import { users } from '@monorepo/database';
 import { sql } from 'drizzle-orm';
 
 describe('WeightRepository (Drizzle) Contract Test', () => {

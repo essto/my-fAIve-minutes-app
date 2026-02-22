@@ -1,11 +1,17 @@
 import { eq, and } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { Inject, Injectable } from '@nestjs/common';
+import { DATABASE_CONNECTION } from '@monorepo/database';
 import { Notification, NotificationType, NotificationChannel } from '../domain/notification.entity';
 import { NotificationRepository } from '../ports/notification.repository.port';
-import * as schema from '../../shared/database/src/drizzle/schema';
+import * as schema from '@monorepo/database';
 
+@Injectable()
 export class DrizzleNotificationRepository implements NotificationRepository {
-  constructor(private readonly db: NodePgDatabase<typeof schema>) {}
+  constructor(
+    @Inject(DATABASE_CONNECTION)
+    private readonly db: NodePgDatabase<typeof schema>,
+  ) {}
 
   async create(notification: Notification): Promise<Notification> {
     const [record] = await this.db

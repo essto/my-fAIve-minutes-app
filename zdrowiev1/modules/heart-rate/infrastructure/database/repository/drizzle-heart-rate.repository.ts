@@ -1,4 +1,4 @@
-import { db } from '../../../../shared/database/src/index';
+import { db } from '@monorepo/database';
 import { heartRateReadings } from '../../schemas/heart-rate.schema';
 import { HeartRateRepository } from '../../../domain/ports/heart-rate.repository';
 import { HeartRateReading } from '@monorepo/shared-types';
