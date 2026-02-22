@@ -1,12 +1,24 @@
 import { Module } from '@nestjs/common';
-import { WeightModule } from '@modules/weight/weight.module';
-import { HeartRateModule } from '@modules/heart-rate/heart-rate.module';
-import { SleepModule } from '@modules/sleep/sleep.module';
-import { DietModule } from '@modules/diet/diet.module';
-import { DiagnosisModule } from '@modules/diagnosis/diagnosis.module';
+import { WeightModule } from '@monorepo/weight';
+import { HeartRateModule } from '@monorepo/heart-rate';
+import { SleepModule } from '@monorepo/sleep';
+import { DietModule } from '@monorepo/diet';
+import { DiagnosisModule } from '@monorepo/diagnosis';
+import { AuthModule } from '@monorepo/auth';
+import { UserModule } from '@monorepo/user';
+import { SeedModule } from '@monorepo/database';
 
 @Module({
-  imports: [WeightModule, HeartRateModule, SleepModule, DietModule, DiagnosisModule],
+  imports: [
+    AuthModule,
+    UserModule,
+    SeedModule,
+    WeightModule,
+    HeartRateModule,
+    SleepModule,
+    DietModule,
+    DiagnosisModule,
+  ],
   controllers: [],
   providers: [],
 })

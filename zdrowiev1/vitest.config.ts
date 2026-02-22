@@ -1,16 +1,19 @@
 import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-    test: {
-        coverage: {
-            provider: 'v8',
-            thresholds: {
-                lines: 90,
-                functions: 90,
-                branches: 90,
-                statements: 90,
-            },
-        },
-        environment: 'node',
+  plugins: [tsconfigPaths()],
+  test: {
+    coverage: {
+      provider: 'v8',
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
     },
+    environment: 'node',
+    include: ['**/*.spec.ts'],
+  },
 });

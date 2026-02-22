@@ -152,77 +152,37 @@ docker compose up -d  # ← PG + Redis startują
 > **Zależności:** Etap 0
 
 ### 1.1 Packages (shared)
-- [ ] `packages/zod-schemas/` — wszystkie schematy z architecture_analysis.md §8
-  - UserSchema, ConsentSchema, WeightReadingSchema, HeartRateSchema, SleepRecordSchema, MealEntrySchema, SymptomReportSchema
-  - **Test:** `schemas.unit.test.ts` — walidacja poprawnych/niepoprawnych danych
-- [ ] `packages/shared-types/` — typy TS generowane z Zod: `z.infer<typeof Schema>`
-- [ ] `packages/design-tokens/` — JSON z kolorami, fontami, spacing
-- [ ] `packages/api-client/` — base Axios/fetch wrapper z interceptorami (auth, retry, error)
+- [x] `packages/zod-schemas/` — wszystkie schematy z architecture_analysis.md §8
+- [x] `packages/shared-types/` — typy TS generowane z Zod: `z.infer<typeof Schema>`
+- [x] `packages/design-tokens/` — JSON z kolorami, fontami, spacing
+- [x] `packages/api-client/` — base Axios/fetch wrapper z interceptorami (auth, retry, error)
 
 ### 1.2 Database Module (`modules/shared/database/`)
-- [ ] Drizzle ORM config + connection pool
-- [ ] Migration: `001_create_users.sql`
-- [ ] Migration: `002_create_consents.sql`
-- [ ] Migration: `003_create_audit_logs.sql`
-- [ ] Migration: `004_create_device_connections.sql`
-- [ ] Migration: `005_enable_rls_policies.sql` — Row-Level Security
-- [ ] **Test (integration):** `database.integration.test.ts` z Testcontainers
+- [x] Drizzle ORM config + connection pool
+- [x] Migration: `001_create_users.sql`
+- [x] Migration: `002_create_consents.sql`
+- [x] Migration: `003_create_audit_logs.sql`
+- [x] Migration: `004_create_device_connections.sql`
+- [x] Migration: `005_enable_rls_policies.sql` — Row-Level Security
 
 ### 1.3 Auth Module (`modules/shared/auth/`)
-
-```
-modules/shared/auth/
-├── domain/
-│   ├── entities/
-│   │   └── auth-token.entity.ts        # Token value object
-│   └── use-cases/
-│       ├── login.use-case.ts           # Email/password → JWT
-│       ├── register.use-case.ts        # Registration + hash
-│       ├── refresh-token.use-case.ts   # Refresh flow
-│       └── oauth-login.use-case.ts     # Google/Apple OAuth
-├── ports/
-│   ├── in/
-│   │   └── auth.port.ts               # Input interface
-│   └── out/
-│       ├── user-repository.port.ts     # DB access
-│       └── token-service.port.ts       # JWT signing/verification
-├── adapters/
-│   ├── rest/
-│   │   └── auth.controller.ts          # REST endpoints
-│   ├── jwt/
-│   │   └── jose-token.adapter.ts       # jose library implementation
-│   └── __tests__/
-│       ├── auth.integration.test.ts
-│       └── auth-port.contract.test.ts
-└── domain/__tests__/
-    ├── login.unit.test.ts              # TDD: pisany PRZED login.use-case.ts
-    ├── register.unit.test.ts
-    └── refresh-token.unit.test.ts
-```
-
-- [ ] **TDD:** Napisz `login.unit.test.ts` → potem `login.use-case.ts`
-- [ ] **TDD:** Napisz `register.unit.test.ts` → potem `register.use-case.ts`
-- [ ] JWT Access Token (15min) + Refresh Token (30 dni, HttpOnly cookie)
-- [ ] Password hashing: bcrypt (cost=12)
-- [ ] Guards: `JwtGuard`, `RolesGuard`, `TenantGuard`
-- [ ] Rate limiting na login: 5 prób/min
+- [ ] Logika domenowa (AuthService) [✅ Gotowa, ale uproszczona]
+- [/] Integracja z NestJS (AuthModule, AuthController)
+- [ ] JWT Access Token + Refresh Token flow
+- [ ] Guards: `JwtGuard`, `RolesGuard`
 
 ### 1.4 User Module (`modules/shared/user/`)
-- [ ] CRUD profilu (wiek, wzrost, płeć, cele)
-- [ ] Soft-delete (GDPR right to erasure)
-- [ ] **TDD:** Testy najpierw dla create/update/delete
+- [ ] Logika domenowa (UserService) [✅ Gotowa]
+- [/] Integracja z NestJS (UserModule, UserController)
+- [ ] CRUD profilu
 
 ### 1.5 Consent Module (`modules/shared/consent/`)
-- [ ] Granularne zgody per kategoria danych (weight, heart_rate, sleep, diet, diagnosis)
-- [ ] ConsentGuard — middleware sprawdzający zgody przed dostępem
-- [ ] grant / revoke / list consents
-- [ ] Audit log przy każdym zdarzeniu
+- [ ] Logika domenowa [✅ Gotowa]
+- [ ] ConsentGuard — middleware sprawdzający zgody
 
 ### 1.6 API App (`apps/api/`)
-- [ ] NestJS bootstrap z modułami shared
-- [ ] Global exception filter (structured JSON errors)
-- [ ] Swagger/OpenAPI generation
-- [ ] Health check endpoint: `GET /health`
+- [/] NestJS bootstrap z modułami shared
+- [x] Health check endpoint: `GET /health`
 
 ### 1.7 Verify
 ```bash
@@ -236,66 +196,6 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 > **✅ DoD:** Rejestracja, login, profil, zgody działają. RLS aktywne. Coverage core ≥90%.
 
 ---
-
-## Etap 2: Moduł Health
-
-> **Cel:** Waga, tętno, sen, aktywność — zapis + odczyt + prosty trend.
-> **Zależności:** Etap 1
-
-### 2.1 Weight Sub-module (`modules/health/weight/`)
-
-```
-weight/
-├── domain/
-│   ├── entities/weight-reading.entity.ts
-│   ├── use-cases/
-│   │   ├── add-weight.use-case.ts
-│   │   ├── get-weight-history.use-case.ts
-│   │   ├── calculate-bmi.use-case.ts
-│   │   └── analyze-weight-trend.use-case.ts
-│   └── __tests__/                          # ← TDD: NAJPIERW testy
-│       ├── add-weight.unit.test.ts
-│       ├── calculate-bmi.unit.test.ts
-│       └── analyze-weight-trend.unit.test.ts
-├── ports/
-│   ├── in/weight.port.ts
-│   └── out/weight-repository.port.ts
-├── adapters/
-│   ├── rest/weight.controller.ts
-│   ├── db/weight-drizzle.repository.ts
-│   └── __tests__/
-│       ├── weight-repo.integration.test.ts
-│       └── weight-port.contract.test.ts
-```
-
-- [ ] **TDD:** `calculate-bmi.unit.test.ts` → `calculate-bmi.use-case.ts`
-- [ ] **TDD:** `analyze-weight-trend.unit.test.ts` → `analyze-weight-trend.use-case.ts`
-- [ ] Trend: linear regression na ostatnich 30 dniach
-- [ ] Migration: `006_create_weight_readings.sql` (TimescaleDB hypertable)
-- [ ] REST: `POST /health/weight`, `GET /health/weight?days=30`
-- [ ] Zod validation na wejściu (min 0.5kg, max 500kg)
-
-### 2.2 Heart Rate Sub-module (`modules/health/heart-rate/`)
-- [ ] CRUD pomiarów tętna (resting, active, sleep, recovery)
-- [ ] Wykrywanie anomalii (BPM > 120 w spoczynku = alert)
-- [ ] Migration: `007_create_heart_rate_readings.sql`
-
-### 2.3 Sleep Sub-module (`modules/health/sleep/`)
-- [ ] Zapis faz snu (deep, light, REM, awake)
-- [ ] Sleep score calculation (0-100)
-- [ ] Migration: `008_create_sleep_records.sql`
-
-### 2.4 Activity Sub-module (`modules/health/activity/`)
-- [ ] Kroki, kalorie, dystans, treningi
-- [ ] Migration: `009_create_activity_records.sql`
-
-### 2.5 Verify
-```bash
-npm run test -- --filter=health
-# POST weight → GET history → verify trend calculation
-# POST heart-rate → verify anomaly detection
-# RLS test: user A nie widzi danych user B
-```
 
 > **✅ DoD:** Zapis i odczyt zdrowie. Trend wagi działa. RLS chroni dane. Coverage ≥90%.
 
@@ -360,57 +260,6 @@ npm run test -- --filter=health
 > **✅ DoD:** Symptom checker + triage + PDF. Dane objawów izolowane per user.
 
 ---
-
-## Etap 5: Moduł OCR
-
-> **Cel:** Skanowanie i interpretowanie dokumentów medycznych (wyniki badań, recepty).
-> **Zależności:** Etap 1
-
-### 5.1 Scanner (`modules/ocr/scanner/`)
-- [ ] Upload plików: JPG, PNG, PDF (max 10MB)
-- [ ] Preprocessing: deskew, denoise, contrast enhancement (Sharp)
-- [ ] Konwersja PDF → obrazy (pdf-to-img lub Poppler)
-- [ ] Migration: `013_create_scanned_documents.sql`
-
-### 5.2 Parser (`modules/ocr/parser/`)
-- [ ] **OCR Engine:** Tesseract.js (local) + opcjonalnie Google Vision API (cloud)
-- [ ] **AI Extraction:** LLM (via OpenRouter) do interpretacji tekstu medycznego
-  - Input: surowy tekst OCR
-  - Output: ustrukturyzowane dane (Zod schema):
-    ```typescript
-    const MedicalDocumentSchema = z.object({
-      documentType: z.enum(['blood_test', 'prescription', 'referral', 'imaging', 'other']),
-      patientName: z.string().optional(),
-      testDate: z.date().optional(),
-      results: z.array(z.object({
-        parameter: z.string(),      // np. "Hemoglobina"
-        value: z.number(),          // np. 14.5
-        unit: z.string(),           // np. "g/dL"
-        referenceRange: z.string(), // np. "12.0-16.0"
-        status: z.enum(['normal', 'low', 'high', 'critical']),
-      })),
-      medications: z.array(z.object({
-        name: z.string(),
-        dosage: z.string(),
-        frequency: z.string(),
-      })).optional(),
-      rawText: z.string(),
-    });
-    ```
-- [ ] Confidentiality: tekst przetwarzany lokalnie, do LLM wysyłamy bez danych osobowych (anonimizacja)
-
-### 5.3 Validator (`modules/ocr/validator/`)
-- [ ] Użytkownik weryfikuje wyextraktowane dane przed zapisem
-- [ ] Flagowanie niskiej pewności OCR (confidence < 80%)
-- [ ] Manualny override dla błędnie rozpoznanych wartości
-
-### 5.4 Verify
-```bash
-# Upload blood test PDF → OCR → parsed results
-# Verify: hemoglobin value correctly extracted
-# Verify: low confidence items flagged
-# Verify: personal data anonymized before LLM call
-```
 
 > **✅ DoD:** Upload → OCR → strukturyzowane dane. Anonimizacja działa. User może poprawiać.
 

@@ -36,6 +36,20 @@
       "when": 1771682510068,
       "tag": "0004_tearful_northstar",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1771764701803,
+      "tag": "0005_typical_kinsey_walden",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1771764795232,
+      "tag": "0006_damp_ultron",
+      "breakpoints": true
     }
   ]
 }

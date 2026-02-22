@@ -15,8 +15,9 @@ export default {
     './modules/diagnosis/infrastructure/schemas/diagnosis.schema.ts',
   ],
   out: './modules/shared/database/src/migrations',
+  driver: 'pg',
   dialect: 'postgresql',
   dbCredentials: {
-    url: databaseUrl,
+    connectionString: databaseUrl,
   },
 };

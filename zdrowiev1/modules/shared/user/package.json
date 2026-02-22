@@ -6,5 +6,8 @@
     "dependencies": {
         "@monorepo/database": "*",
         "@monorepo/zod-schemas": "*"
+    },
+    "scripts": {
+        "test": "vitest run"
     }
 }

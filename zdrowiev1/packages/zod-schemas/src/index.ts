@@ -3,11 +3,13 @@ import { z } from 'zod';
 export const UserSchema = z.object({
   id: z.string().uuid(),
   email: z.string().email(),
+  password: z.string().min(8),
   firstName: z.string().min(1).optional(),
   lastName: z.string().min(1).optional(),
   age: z.number().int().min(0).max(120).optional(),
   height: z.number().min(0).max(300).optional(),
   gender: z.enum(['male', 'female', 'other']).optional(),
+  isDemo: z.boolean().default(false),
   createdAt: z.coerce.date().default(() => new Date()),
   updatedAt: z.coerce.date().default(() => new Date()),
 });

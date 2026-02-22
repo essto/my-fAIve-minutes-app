@@ -15,14 +15,20 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@modules/*": [
-                "modules/*"
+            "@monorepo/auth": [
+                "modules/shared/auth/src"
             ],
-            "@packages/*": [
-                "packages/*"
+            "@monorepo/user": [
+                "modules/shared/user/src"
             ],
-            "@infrastructure/*": [
-                "infrastructure/*"
+            "@monorepo/database": [
+                "modules/shared/database/src"
+            ],
+            "@monorepo/zod-schemas": [
+                "packages/zod-schemas/src"
+            ],
+            "@monorepo/shared-types": [
+                "packages/shared-types/src"
             ]
         }
     },
