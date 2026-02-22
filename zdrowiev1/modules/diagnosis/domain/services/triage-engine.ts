@@ -1,7 +1,20 @@
 import { Symptom, TriageResult } from '../entities/symptom.entity';
 
 export class TriageEngine {
-  evaluate(symptoms: Symptom[]): Omit<TriageResult, 'id' | 'reportId'> {
+  evaluate(
+    symptoms: Symptom[],
+    aiHeuristic?: (symptoms: Symptom[]) => 'LOW' | 'MEDIUM' | 'HIGH' | undefined,
+  ): Omit<TriageResult, 'id' | 'reportId'> {
+    // 1. Check AI Heuristic first
+    const aiResult = aiHeuristic?.(symptoms);
+    if (aiResult) {
+      return {
+        riskLevel: aiResult,
+        recommendation: this.getRecommendationForLevel(aiResult),
+      };
+    }
+
+    // 2. Fallback to standard heuristic logic
     let maxRisk: 'LOW' | 'MEDIUM' | 'HIGH' = 'LOW';
     let recommendations: string[] = [];
 
@@ -35,5 +48,16 @@ export class TriageEngine {
       'duszność',
     ];
     return emergencyKeywords.some((key) => symptom.name.toLowerCase().includes(key));
+  }
+
+  private getRecommendationForLevel(level: 'LOW' | 'MEDIUM' | 'HIGH'): string {
+    switch (level) {
+      case 'HIGH':
+        return 'NATYCHMIAST skontaktuj się z SOR lub zadzwoń pod 112.';
+      case 'MEDIUM':
+        return 'Zalecana konsultacja z lekarzem pierwszego kontaktu w ciągu 24h.';
+      case 'LOW':
+        return 'Odpoczynek i monitorowanie stanu zdrowia. Pij dużo płynów.';
+    }
   }
 }

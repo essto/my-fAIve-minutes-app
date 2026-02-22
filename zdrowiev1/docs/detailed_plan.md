@@ -241,19 +241,19 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 
 ### 3.1 Meal Log (`modules/diet/meal-log/`)
 - [x] Schemat: `meal_entries` (Drizzle)
-- [ ] CRUD posiłków (śniadanie/obiad/kolacja/snack)
-- [ ] Dodawanie produktów z listy lub skanera kodów
-- [ ] Dzienne podsumowanie kalorii i makro
+- [x] CRUD posiłków (śniadanie/obiad/kolacja/snack)
+- [x] Dodawanie produktów z listy lub skanera kodów
+- [ ] Dzienne podsumowanie kalorii i makro (Logic done, UI pending)
 
 ### 3.2 Nutrition Calc (`modules/diet/nutrition-calc/`)
-- [ ] Kalkulacja sum kalorii/białko/tłuszcz/węgle
+- [x] Kalkulacja sum kalorii/białko/tłuszcz/węgle
 - [ ] Wykrywanie deficytów (np. za mało białka)
 - [ ] Cele dzienne per użytkownik
 
 ### 3.3 Food DB Adapter (`modules/diet/food-db/`)
-- [ ] Adapter do Open Food Facts API (darmowe)
-- [ ] Lokalne cache produktów w Redis
-- [ ] Obsługa barcode lookup
+- [x] Adapter do Open Food Facts API (darmowe)
+- [x] Lokalne cache produktów w Redis
+- [x] Obsługa barcode lookup
 
 ### 3.4 Verify
 ```bash
@@ -274,7 +274,7 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 ### 4.1 Symptom Checker (`modules/diagnosis/symptom-checker/`)
 - [x] Schemat: `symptom_reports` (Drizzle)
 - [x] Strona UI: `/diagnosis` (formularz objawów)
-- [ ] Matching chorób na podstawie objawów (algorytm + opcjonalnie AI)
+- [x] Matching chorób na podstawie objawów (algorytm + opcjonalnie AI)
 
 ### 4.2 Triage (`modules/diagnosis/triage/`)
 - [ ] Ocena ryzyka: 🟢 zostań w domu / 🟡 lekarz / 🔴 SOR
@@ -324,7 +324,7 @@ Typy wykresów:
 - [x] Chart config factory (`ChartConfigService`)
 - [x] `VisualizationOrchestratorService`
 - [x] `ExportService`
-- [ ] Responsive: mobile (uproszczony) vs desktop (pełny)
+- [x] Responsive: mobile (uproszczony) vs desktop (pełny)
 - [ ] Animacje: smooth transitions przy zmianie zakresu dat
 - [ ] Ciemny/jasny motyw z design tokens
 
