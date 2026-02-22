@@ -1,0 +1,160 @@
+/* apps/web/src/styles/Auth.module.css */
+.authContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-gray-50);
+    padding: var(--space-4);
+    background-image: radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(15, 23, 42, 0.05) 0%, transparent 40%);
+}
+
+[data-theme='dark'] .authContainer {
+    background: var(--color-navy);
+    background-image: radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
+}
+
+.authCard {
+    width: 100%;
+    max-width: 420px;
+    padding: var(--space-8);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: var(--space-2);
+    text-align: center;
+}
+
+.subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    margin-bottom: var(--space-8);
+    text-align: center;
+}
+
+.formGroup {
+    margin-bottom: var(--space-4);
+}
+
+.label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-1);
+}
+
+[data-theme='dark'] .label {
+    color: var(--color-gray-300);
+}
+
+.input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--foreground);
+    font-size: var(--font-size-base);
+    transition: all 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.errorText {
+    color: var(--destructive);
+    font-size: var(--font-size-xs);
+    margin-top: var(--space-1);
+}
+
+.generalError {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--destructive);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-6);
+    text-align: center;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.button {
+    width: 100%;
+    padding: var(--space-3);
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: var(--space-4);
+}
+
+.button:hover:not(:disabled) {
+    background: var(--color-green-dark);
+    transform: translateY(-1px);
+}
+
+.button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.linkContainer {
+    margin-top: var(--space-6);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+.link {
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--color-green-dark);
+    text-decoration: underline;
+}
+
+/* Glassmorphism for card */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: var(--glass-border);
+}

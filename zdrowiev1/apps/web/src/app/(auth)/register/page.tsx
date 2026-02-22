@@ -1,103 +1,111 @@
-'use client'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { z } from 'zod'
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { z } from 'zod';
+import Link from 'next/link';
+import styles from '../../../styles/Auth.module.css';
 
 const schema = z.object({
     email: z.string({ required_error: 'Email jest wymagany' }).min(1, 'Email jest wymagany').email('Nieprawidłowy email'),
     password: z.string({ required_error: 'Hasło jest wymagane' }).min(1, 'Hasło jest wymagane').min(8, 'Hasło musi mieć przynajmniej 8 znaków'),
-})
+});
 
 export default function Register() {
-    const [form, setForm] = useState({ email: '', password: '' })
-    const [errors, setErrors] = useState<Record<string, string>>({})
-    const [isLoading, setIsLoading] = useState(false)
-    const router = useRouter()
+    const [form, setForm] = useState({ email: '', password: '' });
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsLoading(true)
-        setErrors({})
+        e.preventDefault();
+        setIsLoading(true);
+        setErrors({});
 
         try {
-            schema.parse(form)
+            schema.parse(form);
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
-            })
+            });
 
             if (!response.ok) {
-                const errorData = await response.json()
-                throw new Error(errorData.message || 'Registration failed')
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Registration failed');
             }
 
-            router.push('/login?registered=true')
+            router.push('/login?registered=true');
         } catch (err: any) {
             if (err instanceof z.ZodError) {
-                const newErrors: Record<string, string> = {}
+                const newErrors: Record<string, string> = {};
                 err.errors.forEach((e) => {
-                    if (e.path) newErrors[e.path[0]] = e.message
-                })
-                setErrors(newErrors)
+                    if (e.path) newErrors[e.path[0] as string] = e.message;
+                });
+                setErrors(newErrors);
             } else {
-                setErrors({ general: err.message || 'Błąd rejestracji.' })
+                setErrors({ general: err.message || 'Błąd rejestracji.' });
             }
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
 
     return (
-        <div className="min-h-screen flex items-center justify-center dark:bg-slate-900 bg-gray-50">
-            <form
-                onSubmit={handleSubmit}
-                className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg w-96"
-            >
-                <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">Rejestracja</h2>
+        <div className={styles.authContainer}>
+            <div className={`${styles.authCard} ${styles.glass}`}>
+                <h1 className={styles.title}>Dołącz do nas</h1>
+                <p className={styles.subtitle}>Rozpocznij monitorowanie swojego zdrowia</p>
 
-                {errors.general && (
-                    <p className="text-red-500 mb-4 text-center" id="general-error">{errors.general}</p>
-                )}
+                <form onSubmit={handleSubmit} noValidate>
+                    {errors.general && (
+                        <div className={styles.generalError} id="general-error">{errors.general}</div>
+                    )}
 
-                <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium dark:text-gray-300 mb-1">Email</label>
-                    <input
-                        id="email"
-                        type="text"
-                        autoComplete="email"
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full p-2 border border-gray-300 rounded-lg dark:bg-slate-700 dark:text-white"
-                    />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                    <div className={styles.formGroup}>
+                        <label htmlFor="email" className={styles.label}>Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Twój adres email"
+                            autoComplete="email"
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                            className={styles.input}
+                            disabled={isLoading}
+                        />
+                        {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="password" className={styles.label}>Hasło</label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Min. 8 znaków"
+                            autoComplete="new-password"
+                            value={form.password}
+                            onChange={(e) => setForm({ ...form, password: e.target.value })}
+                            className={styles.input}
+                            disabled={isLoading}
+                        />
+                        {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+                    </div>
+
+                    <button
+                        id="register-submit"
+                        type="submit"
+                        disabled={isLoading}
+                        className={styles.button}
+                    >
+                        {isLoading ? 'Rejestrowanie...' : 'Zarejestruj się'}
+                    </button>
+                </form>
+
+                <div className={styles.linkContainer}>
+                    Masz już konto? <Link href="/login" className={styles.link}>Zaloguj się</Link>
                 </div>
-
-                <div className="mb-6">
-                    <label htmlFor="password" className="block text-sm font-medium dark:text-gray-300 mb-1">Hasło</label>
-                    <input
-                        id="password"
-                        type="password"
-                        value={form.password}
-                        onChange={(e) => setForm({ ...form, password: e.target.value })}
-                        className="w-full p-2 border border-gray-300 rounded-lg dark:bg-slate-700 dark:text-white"
-                    />
-                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-                </div>
-
-                <button
-                    id="register-submit"
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
-                >
-                    {isLoading ? 'Rejestrowanie...' : 'Zarejestruj się'}
-                </button>
-
-                <p className="mt-4 text-center text-sm dark:text-gray-400">
-                    Masz już konto? <a href="/login" className="text-indigo-600 hover:underline">Zaloguj się</a>
-                </p>
-            </form>
+            </div>
         </div>
-    )
+    );
 }

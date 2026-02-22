@@ -512,6 +512,7 @@ jobs:
 - [ ] **Helmet.js:** security headers (CSP, HSTS, X-Frame-Options)
 - [ ] **SQL injection test:** SQLMap scan
 - [ ] **Dependency audit:** `npm audit --production` → 0 critical
+- [ ] **GitHub Security Alerts:** Patch 8 vulnerabilities (1 critical: `nanoid`, 4 high: `cross-spawn`, `body-parser`, `micromatch`, `path-to-regexp`)
 
 > **✅ DoD:** 0 critical/high vulnerabilities. RLS leak test passed. Penetration test clean.
 

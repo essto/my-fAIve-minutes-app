@@ -1,0 +1,26 @@
+/* apps/web/src/components/shared/ui/ThemeToggle/ThemeToggle.module.css */
+.toggle {
+    background: var(--color-gray-100);
+    border: 1px solid var(--border);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.toggle:hover {
+    background: var(--color-gray-200);
+}
+
+[data-theme='dark'] .toggle {
+    background: var(--color-gray-800);
+    border-color: var(--color-gray-700);
+}
+
+[data-theme='dark'] .toggle:hover {
+    background: var(--color-gray-700);
+}
