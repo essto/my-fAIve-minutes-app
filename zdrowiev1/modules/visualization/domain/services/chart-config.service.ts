@@ -1,12 +1,25 @@
+import { ChartConfig, ChartDataPoint, ChartType, ThemeMode } from '../types/visualization.types';
+
 export class ChartConfigService {
-  static generateConfig(type: string, data: any[]): any {
-    const supportedTypes = [
+  private static readonly PALETTES = {
+    light: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
+    dark: ['#60a5fa', '#34d399', '#fbbf24', '#f87171', '#a78bfa'],
+  };
+
+  static generateConfig(
+    type: ChartType,
+    data: ChartDataPoint[],
+    theme: ThemeMode = 'light',
+  ): ChartConfig {
+    const supportedTypes: ChartType[] = [
       'line',
       'area',
       'bar',
       'radar',
       'gauge',
       'heatmap',
+      'scatter',
+      'progress_ring',
       'sparkline',
       'candlestick',
     ];
@@ -15,28 +28,35 @@ export class ChartConfigService {
       throw new Error(`Nieobsługiwany typ wykresu: ${type}`);
     }
 
-    if (type === 'line') {
-      return {
-        type: 'line',
-        data: data.map((d) => ({
-          x: d.timestamp,
-          y: d.steps,
-        })),
-      };
-    }
+    let processedData = data;
 
     if (type === 'heatmap') {
-      // Fill missing values for 24 hours
-      const filledData = [...data];
-      const day = data[0]?.day || 'Mon';
-      for (let hour = 0; hour < 24; hour++) {
-        if (!filledData.find((d) => d.day === day && d.hour === hour)) {
-          filledData.push({ day, hour, value: 0 });
-        }
-      }
-      return { type: 'heatmap', data: filledData };
+      processedData = this.fillHeatmapData(data);
     }
 
-    return { type, data };
+    return {
+      type,
+      data: processedData,
+      theme,
+      options: {
+        responsive: true,
+        animations: true,
+        colors: this.PALETTES[theme],
+      },
+    };
+  }
+
+  private static fillHeatmapData(data: ChartDataPoint[]): ChartDataPoint[] {
+    const filled: ChartDataPoint[] = [];
+    const existing = new Map(data.map((d) => [new Date(d.timestamp).getUTCHours(), d.value]));
+
+    for (let hour = 0; hour < 24; hour++) {
+      filled.push({
+        timestamp: hour,
+        hour: hour,
+        value: existing.get(hour) || 0,
+      } as any);
+    }
+    return filled;
   }
 }
