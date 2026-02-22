@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { DietController } from './application/controllers/diet.controller';
-import { DietService } from './domain/services/diet.service';
+import { MealService } from './application/services/meal.service';
 import { BarcodeLookupService } from './domain/services/barcode-lookup.service';
-import { DrizzleDietRepository } from './infrastructure/database/repository/drizzle-diet.repository';
+import { DrizzleMealRepository } from './infrastructure/database/repository/drizzle-meal.repository';
 import { OpenFoodFactsAdapter } from './infrastructure/external-api/open-food-facts.adapter';
 import { RedisCacheAdapter } from './infrastructure/cache/redis-cache.adapter';
 
@@ -10,10 +10,10 @@ import { RedisCacheAdapter } from './infrastructure/cache/redis-cache.adapter';
   controllers: [DietController],
   providers: [
     {
-      provide: 'DIET_SERVICE',
+      provide: 'MEAL_SERVICE',
       useFactory: () => {
-        const repository = new DrizzleDietRepository();
-        return new DietService(repository);
+        const repository = new DrizzleMealRepository();
+        return new MealService(repository);
       },
     },
     {
@@ -25,6 +25,6 @@ import { RedisCacheAdapter } from './infrastructure/cache/redis-cache.adapter';
       },
     },
   ],
-  exports: ['DIET_SERVICE', 'BARCODE_SERVICE'],
+  exports: ['MEAL_SERVICE', 'BARCODE_SERVICE'],
 })
 export class DietModule {}

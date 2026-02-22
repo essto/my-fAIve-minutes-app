@@ -109,29 +109,29 @@ Zdrowie_v1/
 npx -y create-turbo@latest ./ --skip-install
 npm install
 ```
-- [ ] **Plik:** `turbo.json` — pipeline: build, test, lint, dev
-- [ ] **Plik:** `package.json` — workspaces: `apps/*`, `modules/*`, `packages/*`, `infrastructure/*`
+- [x] **Plik:** `turbo.json` — pipeline: build, test, lint, dev
+- [x] **Plik:** `package.json` — workspaces: `apps/*`, `modules/*`, `packages/*`, `infrastructure/*`
 
 #### 0.2 Konfiguracja TypeScript
-- [ ] **Plik:** `tsconfig.base.json` — strict mode, paths aliases
-- [ ] Każdy moduł dziedziczy z `tsconfig.base.json`
-- [ ] Path aliasy: `@modules/health/*`, `@packages/schemas/*`, itd.
+- [x] **Plik:** `tsconfig.base.json` — strict mode, paths aliases
+- [x] Każdy moduł dziedziczy z `tsconfig.base.json`
+- [x] Path aliasy: `@monorepo/*`
 
 #### 0.3 Konfiguracja narzędzi jakości
-- [ ] **ESLint:** `eslint.config.mjs` z regułami: no-console, no-any, max-lines-per-function (50)
-- [ ] **Prettier:** `.prettierrc` — spójne formatowanie
-- [ ] **Husky + lint-staged:** pre-commit hook → lint + unit tests
+- [x] **ESLint:** `eslint.config.mjs` z regułami: no-console, no-any, max-lines-per-function (50)
+- [x] **Prettier:** `.prettierrc` — spójne formatowanie
+- [x] **Husky + lint-staged:** pre-commit hook → lint + unit tests
 - [ ] **Commitlint:** conventional commits (feat:, fix:, test:, docs:)
 
 #### 0.4 Konfiguracja testów
-- [ ] **Vitest:** `vitest.config.ts` — coverage thresholds: core ≥90%, adapters ≥80%
-- [ ] **Playwright:** `playwright.config.ts` — E2E web tests
+- [x] **Vitest:** `vitest.config.ts` — coverage thresholds: core ≥90%, adapters ≥80%
+- [x] **Playwright:** `playwright.config.ts` — E2E web tests
 - [ ] **Testcontainers:** setup dla PostgreSQL w testach integracyjnych
 
 #### 0.5 Docker
-- [ ] **Plik:** `docker-compose.yml` — PostgreSQL 16 + Redis 7
+- [x] **Plik:** `docker-compose.yml` — PostgreSQL 16 + Redis 7
 - [ ] **Plik:** `docker-compose.dev.yml` — hot reload, volumes
-- [ ] `.env.example` — wszystkie zmienne środowiskowe
+- [x] `.env.example` — wszystkie zmienne środowiskowe
 
 #### 0.6 Verify
 ```bash
@@ -164,25 +164,28 @@ docker compose up -d  # ← PG + Redis startują
 - [x] Migration: `003_create_audit_logs.sql`
 - [x] Migration: `004_create_device_connections.sql`
 - [x] Migration: `005_enable_rls_policies.sql` — Row-Level Security
+- [x] Migration: `0007_create_notifications.sql`
 
 ### 1.3 Auth Module (`modules/shared/auth/`)
-- [ ] Logika domenowa (AuthService) [✅ Gotowa, ale uproszczona]
-- [/] Integracja z NestJS (AuthModule, AuthController)
-- [ ] JWT Access Token + Refresh Token flow
-- [ ] Guards: `JwtGuard`, `RolesGuard`
+- [x] Logika domenowa (AuthService)
+- [x] Integracja z NestJS (AuthModule, AuthController)
+- [x] JWT Access Token + Refresh Token flow
+- [x] Guards: `JwtGuard`, `RolesGuard`
 
 ### 1.4 User Module (`modules/shared/user/`)
-- [ ] Logika domenowa (UserService) [✅ Gotowa]
-- [/] Integracja z NestJS (UserModule, UserController)
-- [ ] CRUD profilu
+- [x] Logika domenowa (UserService)
+- [x] Integracja z NestJS (UserModule, UserController)
+- [x] CRUD profilu
 
 ### 1.5 Consent Module (`modules/shared/consent/`)
-- [ ] Logika domenowa [✅ Gotowa]
+- [x] Logika domenowa
 - [ ] ConsentGuard — middleware sprawdzający zgody
 
 ### 1.6 API App (`apps/api/`)
-- [/] NestJS bootstrap z modułami shared
+- [x] NestJS bootstrap z modułami shared
 - [x] Health check endpoint: `GET /health`
+- [x] Notifications Module zintegrowany
+- [x] Activity Module zintegrowany
 
 ### 1.7 Verify
 ```bash
@@ -197,6 +200,36 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 
 ---
 
+## Etap 2: Moduł Health
+
+> **Cel:** Waga, Tętno, Sen, Aktywność.
+> **Zależności:** Etap 1
+
+### 2.1 Weight (`modules/weight/`)
+- [x] WeightModule, WeightController, WeightService
+- [x] Drizzle repository
+- [x] Schemat: `weight_readings`
+- [x] Testy jednostkowe + kontraktowe
+
+### 2.2 Heart Rate (`modules/heart-rate/`)
+- [x] HeartRateModule, Controller, Service
+- [x] Schemat: `heart_rate_readings`
+
+### 2.3 Sleep (`modules/sleep/`)
+- [x] SleepModule, Controller, Service
+- [x] Schemat: `sleep_records`
+
+### 2.4 Activity (`modules/activity/`)
+- [x] ActivityModule, Controller, Service
+- [x] Zintegrowany z API app
+
+### 2.5 Notifications (`modules/notifications/`)
+- [x] NotificationModule, Controller, Service
+- [x] Drizzle repository
+- [x] Pact Consumer + Provider testy
+- [x] E2E Playwright testy (4/4)
+- [x] NotificationBell frontend component
+
 > **✅ DoD:** Zapis i odczyt zdrowie. Trend wagi działa. RLS chroni dane. Coverage ≥90%.
 
 ---
@@ -207,10 +240,10 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 > **Zależności:** Etap 1
 
 ### 3.1 Meal Log (`modules/diet/meal-log/`)
+- [x] Schemat: `meal_entries` (Drizzle)
 - [ ] CRUD posiłków (śniadanie/obiad/kolacja/snack)
 - [ ] Dodawanie produktów z listy lub skanera kodów
 - [ ] Dzienne podsumowanie kalorii i makro
-- [ ] Migration: `010_create_meal_entries.sql`
 
 ### 3.2 Nutrition Calc (`modules/diet/nutrition-calc/`)
 - [ ] Kalkulacja sum kalorii/białko/tłuszcz/węgle
@@ -239,9 +272,9 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 > **Zależności:** Etap 1
 
 ### 4.1 Symptom Checker (`modules/diagnosis/symptom-checker/`)
-- [ ] Formularz objawów (nazwa, obszar ciała, intensywność, czas trwania)
+- [x] Schemat: `symptom_reports` (Drizzle)
+- [x] Strona UI: `/diagnosis` (formularz objawów)
 - [ ] Matching chorób na podstawie objawów (algorytm + opcjonalnie AI)
-- [ ] Migration: `011_create_symptom_reports.sql`, `012_create_conditions.sql`
 
 ### 4.2 Triage (`modules/diagnosis/triage/`)
 - [ ] Ocena ryzyka: 🟢 zostań w domu / 🟡 lekarz / 🔴 SOR
@@ -288,7 +321,9 @@ Typy wykresów:
 | **Sparkline** | Mini trend | Szybki podgląd w karcie |
 | **Candlestick** | Waga dzień | Min/max/avg wagi w tygodniu |
 
-- [ ] Chart config factory: `createChart(type, data, options) → React component`
+- [x] Chart config factory (`ChartConfigService`)
+- [x] `VisualizationOrchestratorService`
+- [x] `ExportService`
 - [ ] Responsive: mobile (uproszczony) vs desktop (pełny)
 - [ ] Animacje: smooth transitions przy zmianie zakresu dat
 - [ ] Ciemny/jasny motyw z design tokens
@@ -323,25 +358,25 @@ Typy wykresów:
 > **Zależności:** Etap 1-6
 
 ### 7.1 Setup
-- [ ] Next.js 15 (App Router) w `apps/web/`
-- [ ] Design system z design tokens
-- [ ] Layout: Sidebar + Main content area
-- [ ] Auth pages: Login, Register, Forgot Password
+- [x] Next.js 15 (App Router) w `apps/web/`
+- [x] Design system z design tokens
+- [x] Layout: Sidebar + Main content area
+- [x] Auth pages: Login, Register
 
 ### 7.2 Strony
 
-| Strona | Opis | Kluczowe elementy |
-|--------|------|-------------------|
-| `/dashboard` | Główny pulpit | Health Score, Activity Rings, sparkliny, alerts |
-| `/health/weight` | Zarządzanie wagą | Line chart trend, BMI gauge, tabela pomiarów |
-| `/health/heart` | Tętno | Area chart, spoczynek vs aktywność |
-| `/health/sleep` | Sen | Stacked area (fazy), sleep score |
-| `/health/activity` | Aktywność | Heatmap, kroki bar chart |
-| `/diet` | Dieta | Dzienne makro bars, lista posiłków, barcode scan |
-| `/diagnosis` | Diagnoza | Formularz objawów, body map, historia |
-| `/ocr` | Skanowanie | Upload zone, preview OCR, edycja wyników |
-| `/reports` | Raporty | Generator raportów, export PDF |
-| `/settings` | Ustawienia | Profil, urządzenia, zgody, theme |
+| Strona | Opis | Status |
+|--------|------|--------|
+| `/dashboard` | Główny pulpit z NotificationBell | ✅ Zrobione |
+| `/health/weight` | Zarządzanie wagą | ⬜ Do zrobienia |
+| `/health/heart` | Tętno | ⬜ Do zrobienia |
+| `/health/sleep` | Sen | ⬜ Do zrobienia |
+| `/health/activity` | Aktywność | ⬜ Do zrobienia |
+| `/diet` | Dieta | ⬜ Do zrobienia |
+| `/diagnosis` | Diagnoza | ✅ Formularz gotowy |
+| `/ocr` | Skanowanie | ✅ Upload + OCR + edycja |
+| `/reports` | Raporty | ⬜ Do zrobienia |
+| `/settings` | Ustawienia | ⬜ Do zrobienia |
 
 ### 7.3 Kluczowe wymagania UI
 - [ ] **Dark/Light mode** — przełącznik + system preference

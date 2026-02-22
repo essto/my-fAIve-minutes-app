@@ -6,6 +6,7 @@ import {
   doublePrecision,
   varchar,
   boolean,
+  integer,
 } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
@@ -68,3 +69,58 @@ export const notificationPreferences = pgTable(
     };
   },
 );
+
+// --- DIET MODULE ---
+
+export const meals = pgTable('meals', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  name: varchar('name', { length: 255 }).notNull(),
+  consumedAt: timestamp('consumed_at').defaultNow().notNull(),
+});
+
+export const mealProducts = pgTable('meal_products', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  mealId: uuid('meal_id')
+    .notNull()
+    .references(() => meals.id, { onDelete: 'cascade' }),
+  name: varchar('name', { length: 255 }).notNull(),
+  barcode: varchar('barcode', { length: 50 }),
+  productId: varchar('product_id', { length: 255 }),
+  quantity: integer('quantity').notNull(), // grams
+  calories: integer('calories').notNull(),
+  protein: integer('protein').notNull(),
+  carbs: integer('carbs').notNull(),
+  fat: integer('fat').notNull(),
+});
+
+// --- DIAGNOSIS MODULE ---
+
+export const symptomReports = pgTable('symptom_reports', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const symptoms = pgTable('symptoms', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  reportId: uuid('report_id')
+    .notNull()
+    .references(() => symptomReports.id, { onDelete: 'cascade' }),
+  name: varchar('name', { length: 100 }).notNull(),
+  severity: integer('severity').notNull(), // 1-10
+  durationHours: integer('duration_hours').notNull(),
+});
+
+export const triageResults = pgTable('triage_results', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  reportId: uuid('report_id')
+    .notNull()
+    .references(() => symptomReports.id, { onDelete: 'cascade' }),
+  riskLevel: varchar('risk_level', { length: 20 }), // LOW, MEDIUM, HIGH
+  recommendation: text('recommendation').notNull(),
+});

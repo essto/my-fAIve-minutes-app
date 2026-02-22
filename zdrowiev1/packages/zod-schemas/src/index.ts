@@ -49,33 +49,63 @@ export const SleepRecordSchema = z.object({
   createdAt: z.coerce.date().default(() => new Date()),
 });
 
-export const MealEntrySchema = z.object({
+export const NutritionValueSchema = z.object({
+  calories: z.number().int().min(0),
+  protein: z.number().int().min(0),
+  carbs: z.number().int().min(0),
+  fat: z.number().int().min(0),
+});
+
+export const MealProductSchema = z.object({
+  id: z.string().uuid().optional(),
+  mealId: z.string().uuid().optional(),
+  name: z.string().min(1),
+  productId: z.string().optional(),
+  barcode: z.string().optional(),
+  quantity: z.number().int().min(1), // in grams
+  calories: z.number().int().min(0),
+  protein: z.number().int().min(0),
+  carbs: z.number().int().min(0),
+  fat: z.number().int().min(0),
+});
+
+export const MealSchema = z.object({
   id: z.string().uuid(),
   userId: z.string().uuid(),
   name: z.string().min(1),
-  calories: z.number().int().min(0),
-  carbs: z.number().optional(),
-  protein: z.number().optional(),
-  fat: z.number().optional(),
-  timestamp: z.coerce.date().default(() => new Date()),
+  consumedAt: z.coerce.date().default(() => new Date()),
+  products: z.array(MealProductSchema).optional(),
+});
+
+export const DailyNutritionSummarySchema = z.object({
+  userId: z.string().uuid(),
+  date: z.string(),
+  total: NutritionValueSchema,
+  target: NutritionValueSchema.optional(),
+  isDeficit: z.boolean(),
+  isSurplus: z.boolean(),
+});
+
+export const SymptomSchema = z.object({
+  id: z.string().uuid().optional(),
+  reportId: z.string().uuid().optional(),
+  name: z.string().min(1),
+  severity: z.number().int().min(1).max(10),
+  durationHours: z.number().int().min(1),
 });
 
 export const SymptomReportSchema = z.object({
   id: z.string().uuid(),
   userId: z.string().uuid(),
-  description: z.string().min(1),
-  severity: z.number().int().min(1).max(10),
-  timestamp: z.coerce.date().default(() => new Date()),
+  createdAt: z.coerce.date().default(() => new Date()),
+  symptoms: z.array(SymptomSchema).optional(),
 });
 
-export const DiagnosisSchema = z.object({
+export const TriageResultSchema = z.object({
   id: z.string().uuid(),
-  userId: z.string().uuid(),
-  symptomReportId: z.string().uuid(),
-  result: z.string().min(1),
-  confidence: z.number().min(0).max(1),
-  recommendations: z.array(z.string()),
-  createdAt: z.coerce.date().default(() => new Date()),
+  reportId: z.string().uuid(),
+  riskLevel: z.enum(['LOW', 'MEDIUM', 'HIGH']),
+  recommendation: z.string().min(1),
 });
 
 export const ActivityEntrySchema = z.object({

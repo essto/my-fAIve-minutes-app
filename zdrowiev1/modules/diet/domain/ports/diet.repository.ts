@@ -1,6 +1,7 @@
-import { MealEntry } from '@monorepo/shared-types';
+import { Meal } from '../entities/meal.entity';
 
-export interface DietRepository {
-  save(entry: Partial<MealEntry>): Promise<MealEntry>;
-  findByUserId(userId: string): Promise<MealEntry[]>;
+export interface MealRepository {
+  save(meal: Meal): Promise<Meal>;
+  findById(id: string): Promise<Meal | null>;
+  findByUserId(userId: string, date?: Date): Promise<Meal[]>;
 }

@@ -1,8 +1,8 @@
-import { SymptomReport, Diagnosis } from '@monorepo/shared-types';
+import { SymptomReport, TriageResult } from '../entities/symptom.entity';
 
 export interface DiagnosisRepository {
-  saveSymptomReport(report: Partial<SymptomReport>): Promise<SymptomReport>;
-  saveDiagnosis(diagnosis: Partial<Diagnosis>): Promise<Diagnosis>;
+  saveReport(report: SymptomReport): Promise<SymptomReport>;
+  saveTriageResult(result: TriageResult): Promise<TriageResult>;
   findReportsByUserId(userId: string): Promise<SymptomReport[]>;
-  findDiagnosesByUserId(userId: string): Promise<Diagnosis[]>;
+  findTriageResultByReportId(reportId: string): Promise<TriageResult | null>;
 }
