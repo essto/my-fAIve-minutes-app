@@ -1,13 +1,5 @@
-import {
-  pgTable,
-  uuid,
-  timestamp,
-  integer,
-  text,
-  doublePrecision,
-  jsonb,
-} from 'drizzle-orm/pg-core';
-import { users } from '@monorepo/database';
+import { pgTable, uuid, timestamp, varchar, integer, text } from 'drizzle-orm/pg-core';
+import { users } from '../../../shared/database/src/drizzle/schema';
 
 export const symptomReports = pgTable('symptom_reports', {
   id: uuid('id').primaryKey().defaultRandom(),

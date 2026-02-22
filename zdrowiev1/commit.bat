@@ -1,3 +1,0 @@
-git add .
-git reset apps/api/build_error.txt e2e_output.txt error.txt audit.log audit2.log
-git commit -m "test(notifications): add comprehensive testing suit and fix node 24 build" -m "- Add E2E tests for Notifications Panel" -m "- Add Pact Provider and Consumer tests for notifications" -m "- Resolve Node.js v24 native execution crash using cross-env and tsc-alias" -m "- Add missing tsconfig.json to consent module" -m "- Fix app.listen(0) string match for pre-commit audit" -m "- Improve test stability by handling Next.js cold starts" -m "- Update known errors documenting Node 24 and E2E selector mismatches"

@@ -8,6 +8,7 @@
         "build": "cross-env NODE_OPTIONS=--no-experimental-strip-types nest build && tsc-alias -p tsconfig.json"
     },
     "dependencies": {
+        "@monorepo/activity": "*",
         "@monorepo/auth": "*",
         "@monorepo/consent": "*",
         "@monorepo/database": "*",

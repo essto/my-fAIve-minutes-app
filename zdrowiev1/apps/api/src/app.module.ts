@@ -8,6 +8,7 @@ import { AuthModule } from '@monorepo/auth';
 import { UserModule } from '@monorepo/user';
 import { SeedModule } from '@monorepo/database';
 import { NotificationsModule } from '../../../modules/notifications/notifications.module';
+import { ActivityModule } from '../../../modules/activity/src/infrastructure/activity.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { NotificationsModule } from '../../../modules/notifications/notification
     UserModule,
     SeedModule,
     NotificationsModule,
+    ActivityModule,
     WeightModule,
     HeartRateModule,
     SleepModule,

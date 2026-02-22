@@ -1,5 +1,5 @@
 import { pgTable, uuid, integer, timestamp, boolean } from 'drizzle-orm/pg-core';
-import { users } from '@monorepo/database';
+import { users } from '../../../shared/database/src/drizzle/schema';
 
 export const heartRateReadings = pgTable('heart_rate_readings', {
   id: uuid('id').primaryKey().defaultRandom(),

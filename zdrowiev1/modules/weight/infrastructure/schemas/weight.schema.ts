@@ -1,5 +1,5 @@
 import { pgTable, uuid, doublePrecision, timestamp, text } from 'drizzle-orm/pg-core';
-import { users } from '@monorepo/database';
+import { users } from '../../../shared/database/src/drizzle/schema';
 
 export const weightReadings = pgTable('weight_readings', {
   id: uuid('id').primaryKey().defaultRandom(),

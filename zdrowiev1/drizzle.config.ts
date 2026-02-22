@@ -13,6 +13,7 @@ export default {
     './modules/sleep/infrastructure/schemas/sleep.schema.ts',
     './modules/diet/infrastructure/schemas/diet.schema.ts',
     './modules/diagnosis/infrastructure/schemas/diagnosis.schema.ts',
+    './modules/activity/src/infrastructure/schemas/activity.schema.ts',
   ],
   out: './modules/shared/database/src/migrations',
   driver: 'pg',

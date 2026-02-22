@@ -9,3 +9,4 @@ export type SleepRecord = z.infer<typeof schemas.SleepRecordSchema>;
 export type MealEntry = z.infer<typeof schemas.MealEntrySchema>;
 export type SymptomReport = z.infer<typeof schemas.SymptomReportSchema>;
 export type Diagnosis = z.infer<typeof schemas.DiagnosisSchema>;
+export type ActivityEntry = z.infer<typeof schemas.ActivityEntrySchema>;

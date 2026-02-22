@@ -77,3 +77,14 @@ export const DiagnosisSchema = z.object({
   recommendations: z.array(z.string()),
   createdAt: z.coerce.date().default(() => new Date()),
 });
+
+export const ActivityEntrySchema = z.object({
+  id: z.string().uuid(),
+  userId: z.string().uuid(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  steps: z.number().int().min(0).default(0),
+  caloriesBurned: z.number().min(0).default(0),
+  activityType: z.string().max(50).optional(),
+  durationMinutes: z.number().int().min(0).optional(),
+  createdAt: z.coerce.date().default(() => new Date()),
+});
