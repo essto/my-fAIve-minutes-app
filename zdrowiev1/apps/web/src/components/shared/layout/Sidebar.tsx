@@ -8,12 +8,48 @@ import styles from './Sidebar.module.css';
 import { ThemeToggle } from '../ui/ThemeToggle/ThemeToggle';
 
 const navItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: '📊' },
-    { name: 'Zdrowie', href: '/health', icon: '❤️' },
-    { name: 'Dieta', href: '/diet', icon: '🍎' },
-    { name: 'Diagnoza', href: '/diagnosis', icon: '🧠' },
-    { name: 'OCR / Skanuj', href: '/ocr', icon: '📄' },
-    { name: 'Raporty', href: '/reports', icon: '📈' },
+    {
+        name: 'Dashboard',
+        href: '/dashboard',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" /></svg>
+        )
+    },
+    {
+        name: 'Zdrowie',
+        href: '/health',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+        )
+    },
+    {
+        name: 'Dieta',
+        href: '/diet',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" /><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></svg>
+        )
+    },
+    {
+        name: 'Diagnoza',
+        href: '/diagnosis',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></svg>
+        )
+    },
+    {
+        name: 'OCR / Skanuj',
+        href: '/ocr',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><path d="M7 8h8" /><path d="M7 12h10" /><path d="M7 16h6" /></svg>
+        )
+    },
+    {
+        name: 'Raporty',
+        href: '/reports',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" /></svg>
+        )
+    }
 ];
 
 export function Sidebar() {
@@ -22,32 +58,34 @@ export function Sidebar() {
     return (
         <aside className={styles.sidebar}>
             <div className={styles.logo}>
-                <div className={styles.logoIcon} />
-                <span className={styles.logoText}>Zdrowie v1</span>
+                <div className={styles.logoIcon}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
+                </div>
+                <h2>Zdrowie App</h2>
             </div>
 
             <nav className={styles.nav}>
-                {navItems.map((item) => (
-                    <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`${styles.navItem} ${pathname === item.href ? styles.navItemActive : ''
-                            }`}
-                    >
-                        <span>{item.icon}</span>
-                        <span>{item.name}</span>
-                    </Link>
-                ))}
+                {navItems.map((item) => {
+                    const isActive = pathname.startsWith(item.href);
+                    return (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`${styles.navItem} ${isActive ? styles.active : ''}`.trim()}
+                        >
+                            <span className={styles.icon}>{item.icon}</span>
+                            <span>{item.name}</span>
+                        </Link>
+                    );
+                })}
             </nav>
 
             <div className={styles.footer}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-                    <button className={styles.navItem} style={{ border: 'none', background: 'none', cursor: 'pointer', flex: 1 }}>
-                        <span>⚙️</span>
-                        <span>Ustawienia</span>
-                    </button>
-                    <ThemeToggle />
-                </div>
+                <ThemeToggle />
+                <button className={styles.logoutBtn}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
+                    <span>Wyloguj</span>
+                </button>
             </div>
         </aside>
     );

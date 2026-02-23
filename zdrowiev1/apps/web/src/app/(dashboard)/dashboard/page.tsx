@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { HealthChart } from '@/components/shared/charts/HealthChart';
 import { NotificationBell } from './NotificationBell';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/shared/ui/Card/Card';
+import { SkeletonLoader } from '@/components/shared/ui/SkeletonLoader/SkeletonLoader';
 import styles from './Dashboard.module.css';
 
 interface Anomaly {
@@ -14,9 +16,10 @@ interface Anomaly {
 
 interface ChartConfig {
     type: 'line' | 'area' | 'bar' | 'radar' | 'gauge' | 'heatmap' | 'scatter' | 'progress_ring' | 'sparkline' | 'candlestick';
-    title?: string;
     data: any[];
+    keys: string[];
     colors: string[];
+    indexBy?: string;
 }
 
 interface DashboardData {
@@ -24,9 +27,8 @@ interface DashboardData {
     anomalies: Anomaly[];
     charts: {
         healthTrend: ChartConfig;
-        dietTrend: ChartConfig;
         activityRings: ChartConfig;
-        heartRate: ChartConfig;
+        sleepQuality: ChartConfig;
     };
 }
 
@@ -36,166 +38,157 @@ export default function Dashboard() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchDashboardData = async () => {
             try {
-                const token = localStorage.getItem('token');
-                const response = await fetch('/api/visualization/dashboard', {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-
+                const response = await fetch('/api/dashboard');
                 if (!response.ok) throw new Error('Błąd pobierania danych');
-
                 const result = await response.json();
                 setData(result);
             } catch (err: any) {
-                console.error('Failed to fetch dashboard data:', err);
-                setError(err.message);
+                setError(err.message || 'Wystąpił błąd');
             } finally {
                 setLoading(false);
             }
         };
-        fetchData();
+
+        fetchDashboardData();
     }, []);
 
     if (loading) {
         return (
             <div className={styles.dashboard}>
-                <div className={styles.header}>
-                    <div className={`${styles.skeleton} h-10 w-48`} />
-                    <div className={`${styles.skeleton} h-10 w-10 rounded-full`} />
-                </div>
-                <div className={styles.statsGrid}>
-                    <div className={`${styles.skeleton} h-32`} />
-                    <div className={`${styles.skeleton} h-32`} />
-                    <div className={`${styles.skeleton} h-32`} />
-                </div>
-                <div className={styles.chartsGrid}>
-                    <div className={`${styles.skeleton} h-64`} />
-                    <div className={`${styles.skeleton} h-64`} />
+                <header className={styles.header}>
+                    <div>
+                        <SkeletonLoader className="h-8 w-48 mb-2" />
+                        <SkeletonLoader className="h-4 w-64" />
+                    </div>
+                </header>
+                <div className={styles.grid}>
+                    {/* Main Health Score Skeleton */}
+                    <Card className={styles.mainScoreCard}>
+                        <CardContent className="flex justify-center items-center h-48">
+                            <SkeletonLoader variant="circle" className="w-32 h-32" />
+                        </CardContent>
+                    </Card>
+
+                    {/* Secondary Cards Skeletons */}
+                    <Card>
+                        <CardHeader>
+                            <SkeletonLoader className="h-6 w-32" />
+                        </CardHeader>
+                        <CardContent>
+                            <SkeletonLoader className="h-32 w-full" />
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <SkeletonLoader className="h-6 w-32" />
+                        </CardHeader>
+                        <CardContent>
+                            <SkeletonLoader className="h-4 w-full mb-2" />
+                            <SkeletonLoader className="h-4 w-3/4" />
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
         );
     }
 
-    if (error || !data) {
-        return (
-            <div className={`${styles.card} flex flex-col items-center justify-center h-96 text-center`}>
-                <p className="text-xl font-semibold text-destructive mb-2">Ups! Coś poszło nie tak.</p>
-                <p className="text-color-gray-500 mb-6">{error || 'Nie udało się załadować danych'}</p>
-                <button
-                    onClick={() => window.location.reload()}
-                    className="px-6 py-2 bg-primary text-white rounded-lg"
-                >
-                    Odśwież
-                </button>
-            </div>
-        );
+    if (error) {
+        return <div className={styles.error}>{error}</div>;
     }
+
+    if (!data) return null;
 
     return (
         <div className={styles.dashboard}>
             <header className={styles.header}>
-                <h1 className={styles.title}>Panel Zdrowia</h1>
-                <div className="flex items-center gap-4">
+                <div>
+                    <h1 className={styles.title}>Witaj ponownie! 👋</h1>
+                    <p className={styles.subtitle}>Oto podsumowanie Twojego zdrowia na dziś</p>
+                </div>
+                <div className={styles.actions}>
                     <NotificationBell />
                 </div>
             </header>
 
-            <section className={styles.statsGrid}>
-                {/* Health Score Card */}
-                <div className={styles.card}>
-                    <h2 className={styles.cardTitle}>Global Health Score</h2>
-                    <div className={styles.scoreContainer}>
-                        <div className={styles.scoreCircle}>
-                            <svg viewBox="0 0 100 100" className="w-full h-full">
+            <div className={styles.grid}>
+                {/* Główny wynik zdrowia */}
+                <Card className={styles.mainScoreCard} gradientAccent>
+                    <CardContent className={styles.scoreContent}>
+                        <div className={styles.scoreRingContainer}>
+                            <svg className={styles.scoreRing} viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" className={styles.scoreRingBg} />
                                 <circle
                                     cx="50" cy="50" r="45"
-                                    fill="none"
-                                    stroke="var(--border)"
-                                    strokeWidth="8"
-                                />
-                                <circle
-                                    cx="50" cy="50" r="45"
-                                    fill="none"
-                                    stroke="var(--primary)"
-                                    strokeWidth="8"
-                                    strokeDasharray="283"
-                                    strokeDashoffset={283 - (283 * data.healthScore) / 100}
-                                    strokeLinecap="round"
-                                    transform="rotate(-90 50 50)"
-                                    style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+                                    className={styles.scoreRingProgress}
+                                    strokeDasharray={`${(data.healthScore / 100) * 283} 283`}
                                 />
                             </svg>
-                            <span className={styles.scoreValue}>{data.healthScore}</span>
+                            <div className={styles.scoreValue}>
+                                <span>{data.healthScore}</span>
+                                <span className={styles.scoreLabel}>/100</span>
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-sm text-color-gray-500">Twój aktualny wskaźnik zdrowia obliczony na podstawie tętna, snu i diety.</p>
+                        <div className={styles.scoreInfo}>
+                            <h3>Twój wynik zdrowia</h3>
+                            <p>Utrzymujesz się w górnych 20% w swojej grupie wiekowej.</p>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
 
-                {/* Anomalies Card */}
-                <div className={`${styles.card} ${data.anomalies.length > 0 ? styles.anomalyCard : ''}`}>
-                    <h2 className={styles.cardTitle}>Wykryte Anomalie</h2>
-                    {data.anomalies.length === 0 ? (
-                        <p className="text-success flex items-center gap-2">
-                            <span>✅</span> Wszystkie parametry w normie
-                        </p>
-                    ) : (
-                        <ul className={styles.anomalyList}>
-                            {data.anomalies.map((anomaly, idx) => (
-                                <li key={idx} className={styles.anomalyItem}>
-                                    <span>⚠️</span>
-                                    <div>
-                                        <p className={anomaly.severity === 'high' ? styles.severityHigh : styles.severityMedium}>
-                                            {anomaly.message}
-                                        </p>
-                                        <p className="text-xs opacity-70">Wartość: {anomaly.value}</p>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                {/* Wykryte anomalia */}
+                <Card className={styles.anomaliesCard}>
+                    <CardHeader>
+                        <CardTitle>Wymaga uwagi</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        {data.anomalies.length > 0 ? (
+                            <ul className={styles.anomaliesList}>
+                                {data.anomalies.map((anomaly, index) => (
+                                    <li key={index} className={`${styles.anomalyItem} ${styles[anomaly.severity]}`}>
+                                        <div className={styles.anomalyIcon}>⚠️</div>
+                                        <div className={styles.anomalyDetails}>
+                                            <span className={styles.anomalyMetric}>{anomaly.metric}</span>
+                                            <span className={styles.anomalyMessage}>{anomaly.message}</span>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <div className={styles.noAnomalies}>
+                                <span className={styles.successIcon}>✅</span>
+                                <p>Wszystkie wskaźniki w normie!</p>
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
 
-                {/* Summary Card */}
-                <div className={styles.card}>
-                    <h2 className={styles.cardTitle}>Ostatnia Aktywność</h2>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex justify-between items-center text-sm">
-                            <span>Waga</span>
-                            <span className="font-bold">72.5 kg</span>
+                {/* Trendy zdrowotne */}
+                <Card className={styles.chartCard}>
+                    <CardHeader>
+                        <CardTitle>Trendy zdrowotne (30 dni)</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className={styles.chartContainer} data-testid="weight-chart">
+                            <HealthChart config={data.charts.healthTrend} />
                         </div>
-                        <div className="flex justify-between items-center text-sm">
-                            <span>Kalorie dziś</span>
-                            <span className="font-bold">1,850 kcal</span>
-                        </div>
-                        <div className="flex justify-between items-center text-sm">
-                            <span>Sen</span>
-                            <span className="font-bold">7h 20m</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </CardContent>
+                </Card>
 
-            <section className={styles.chartsGrid}>
-                <div className={styles.chartCard}>
-                    <h2 className={styles.cardTitle}>{data.charts.healthTrend.title || 'Trend Zdrowia'}</h2>
-                    <HealthChart config={data.charts.healthTrend} />
-                </div>
-                <div className={styles.chartCard}>
-                    <h2 className={styles.cardTitle}>{data.charts.heartRate.title || 'Tętno'}</h2>
-                    <HealthChart config={data.charts.heartRate} />
-                </div>
-                <div className={styles.chartCard}>
-                    <h2 className={styles.cardTitle}>{data.charts.dietTrend.title || 'Bilans Kaloryczny'}</h2>
-                    <HealthChart config={data.charts.dietTrend} />
-                </div>
-                <div className={styles.chartCard}>
-                    <h2 className={styles.cardTitle}>Podsumowanie Aktywności</h2>
-                    <HealthChart config={data.charts.activityRings} />
-                </div>
-            </section>
+                {/* Aktywność i sen */}
+                <Card className={styles.chartCard}>
+                    <CardHeader>
+                        <CardTitle>Aktywność i regeneracja</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className={styles.chartContainer} data-testid="activity-rings">
+                            <HealthChart config={data.charts.activityRings} />
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 }

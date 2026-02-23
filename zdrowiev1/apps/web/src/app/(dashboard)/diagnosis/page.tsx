@@ -1,7 +1,10 @@
+/* apps/web/src/app/(dashboard)/diagnosis/page.tsx */
 'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/shared/ui/Card/Card';
+import { Button } from '@/components/shared/ui/Button/Button';
 import styles from '@/styles/Feature.module.css';
 
 interface Symptom {
@@ -72,33 +75,36 @@ export default function DiagnosisPage() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className={`${styles.card} ${styles.glass}`}
                     >
-                        <h2 className={styles.sectionTitle}>Co Ci dzisiaj dolega?</h2>
-                        <p className="text-sm text-color-gray-500 mb-6">Wybierz objawy, które u siebie obserwujesz.</p>
-                        <div className={styles.grid}>
-                            {COMMON_SYMPTOMS.map(s => (
-                                <button
-                                    key={s}
-                                    onClick={() => toggleSymptom(s)}
-                                    className={`${styles.button} ${selectedSymptoms.find(sym => sym.name === s)
-                                        ? styles.primaryButton
-                                        : styles.secondaryButton
-                                        }`}
-                                >
-                                    {s}
-                                </button>
-                            ))}
-                        </div>
-                        <div className="mt-10">
-                            <button
-                                disabled={selectedSymptoms.length === 0}
-                                onClick={() => setStep(2)}
-                                className={`${styles.button} ${styles.primaryButton} w-full`}
-                            >
-                                Kontynuuj
-                            </button>
-                        </div>
+                        <Card glass gradientAccent>
+                            <CardContent className="pt-8">
+                                <h2 className="text-xl font-bold mb-2">Co Ci dzisiaj dolega?</h2>
+                                <p className="text-sm text-color-gray-500 mb-6">Wybierz objawy, które u siebie obserwujesz.</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {COMMON_SYMPTOMS.map(s => {
+                                        const isSelected = !!selectedSymptoms.find(sym => sym.name === s);
+                                        return (
+                                            <Button
+                                                key={s}
+                                                variant={isSelected ? 'primary' : 'secondary'}
+                                                onClick={() => toggleSymptom(s)}
+                                            >
+                                                {s}
+                                            </Button>
+                                        );
+                                    })}
+                                </div>
+                                <div className="mt-10">
+                                    <Button
+                                        disabled={selectedSymptoms.length === 0}
+                                        onClick={() => setStep(2)}
+                                        className="w-full"
+                                    >
+                                        Kontynuuj
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
                 )}
 
@@ -108,51 +114,60 @@ export default function DiagnosisPage() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className={`${styles.card} ${styles.glass}`}
                     >
-                        <h2 className={styles.sectionTitle}>Szczegóły wybranych objawów</h2>
-                        <div className="space-y-6 mb-10">
-                            {selectedSymptoms.map(s => (
-                                <div key={s.name} className="p-4 bg-color-gray-100 dark:bg-color-gray-800 rounded-xl border border-border">
-                                    <h3 className="font-bold mb-4">{s.name}</h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label className={styles.label}>Nasilenie (1-10)</label>
-                                            <input
-                                                type="range" min="1" max="10"
-                                                value={s.severity}
-                                                onChange={e => updateSymptom(s.name, { severity: parseInt(e.target.value) })}
-                                                className="w-full mt-2 accent-primary"
-                                            />
-                                            <div className="flex justify-between text-[10px] text-color-gray-500 mt-1">
-                                                <span>Lekkie</span>
-                                                <span>Bardzo silne</span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label htmlFor={`duration-${s.name}`} className={styles.label}>Czas trwania (godz)</label>
-                                            <input
-                                                id={`duration-${s.name}`}
-                                                type="number"
-                                                value={s.durationHours}
-                                                onChange={e => updateSymptom(s.name, { durationHours: parseInt(e.target.value) })}
-                                                className={styles.input}
-                                            />
-                                        </div>
-                                    </div>
+                        <Card glass gradientAccent>
+                            <CardHeader>
+                                <CardTitle>Szczegóły wybranych objawów</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-6 mb-10">
+                                    {selectedSymptoms.map(s => (
+                                        <Card key={s.name} interactive className="bg-background/50">
+                                            <CardContent className="pt-6">
+                                                <h3 className="font-bold mb-4">{s.name}</h3>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div>
+                                                        <label className={styles.label}>Nasilenie (1-10)</label>
+                                                        <input
+                                                            type="range" min="1" max="10"
+                                                            value={s.severity}
+                                                            onChange={e => updateSymptom(s.name, { severity: parseInt(e.target.value) })}
+                                                            className="w-full mt-2 accent-primary"
+                                                        />
+                                                        <div className="flex justify-between text-[10px] text-color-gray-500 mt-1">
+                                                            <span>Lekkie</span>
+                                                            <span>Bardzo silne</span>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label htmlFor={`duration-${s.name}`} className={styles.label}>Czas trwania (godz)</label>
+                                                        <input
+                                                            id={`duration-${s.name}`}
+                                                            type="number"
+                                                            value={s.durationHours}
+                                                            onChange={e => updateSymptom(s.name, { durationHours: parseInt(e.target.value) })}
+                                                            className={styles.input}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                        <div className="flex gap-4">
-                            <button onClick={() => setStep(1)} className={`${styles.button} ${styles.secondaryButton} flex-1`}>Wstecz</button>
-                            <button
-                                onClick={handleReport}
-                                disabled={loading}
-                                className={`${styles.button} ${styles.primaryButton} flex-[2]`}
-                            >
-                                {loading ? 'Analizowanie przez AI...' : 'Odbierz Diagnozę'}
-                            </button>
-                        </div>
+                                <div className="flex gap-4">
+                                    <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
+                                        Wstecz
+                                    </Button>
+                                    <Button
+                                        isLoading={loading}
+                                        onClick={handleReport}
+                                        className="flex-[2]"
+                                    >
+                                        Odbierz Diagnozę
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
                 )}
 
@@ -161,30 +176,37 @@ export default function DiagnosisPage() {
                         key="step3"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className={`${styles.card} ${styles.glass} border-t-8`}
-                        style={{ borderTopColor: result.riskLevel === 'HIGH' ? 'var(--destructive)' : result.riskLevel === 'MEDIUM' ? 'var(--warning)' : 'var(--success)' }}
                     >
-                        <div className="text-center mb-8">
-                            <div className={`inline-block px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest mb-4 ${result.riskLevel === 'HIGH' ? 'bg-red-100 text-red-600' :
-                                result.riskLevel === 'MEDIUM' ? 'bg-yellow-100 text-yellow-600' :
-                                    'bg-green-100 text-green-600'
-                                }`}>
-                                POZIOM RYZYKA: {result.riskLevel}
-                            </div>
-                            <h2 className={styles.title}>Zalecenia medyczne</h2>
-                        </div>
-                        <div className="p-8 bg-color-gray-100 dark:bg-color-gray-800 rounded-2xl text-lg leading-relaxed italic mb-8 border border-border">
-                            "{result.recommendation}"
-                        </div>
-                        <div className="p-4 rounded-xl bg-accent/10 border border-accent/20 text-accent text-sm mb-10">
-                            <strong>UWAGA:</strong> To narzędzie służy jedynie do celów informacyjnych i nie zastępuje profesjonalnej porady lekarskiej.
-                        </div>
-                        <button
-                            onClick={() => { setStep(1); setSelectedSymptoms([]); setResult(null); }}
-                            className={`${styles.button} ${styles.secondaryButton} w-full`}
+                        <Card
+                            glass
+                            className="border-t-8"
+                            style={{ borderTopColor: result.riskLevel === 'HIGH' ? 'var(--destructive)' : result.riskLevel === 'MEDIUM' ? 'var(--warning)' : 'var(--success)' }}
                         >
-                            Uruchom nowe sprawdzenie
-                        </button>
+                            <CardContent className="pt-8">
+                                <div className="text-center mb-8">
+                                    <div className={`inline-block px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest mb-4 ${result.riskLevel === 'HIGH' ? 'bg-red-100 text-red-600' :
+                                        result.riskLevel === 'MEDIUM' ? 'bg-yellow-100 text-yellow-600' :
+                                            'bg-green-100 text-green-600'
+                                        }`}>
+                                        POZIOM RYZYKA: {result.riskLevel}
+                                    </div>
+                                    <CardTitle className="text-2xl">Zalecenia medyczne</CardTitle>
+                                </div>
+                                <div className="p-8 bg-color-gray-100 dark:bg-color-gray-800 rounded-2xl text-lg leading-relaxed italic mb-8 border border-border">
+                                    "{result.recommendation}"
+                                </div>
+                                <div className="p-4 rounded-xl bg-accent/10 border border-accent/20 text-accent text-sm mb-10">
+                                    <strong>UWAGA:</strong> To narzędzie służy jedynie do celów informacyjnych i nie zastępuje profesjonalnej porady lekarskiej.
+                                </div>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => { setStep(1); setSelectedSymptoms([]); setResult(null); }}
+                                    className="w-full"
+                                >
+                                    Uruchom nowe sprawdzenie
+                                </Button>
+                            </CardContent>
+                        </Card>
                     </motion.div>
                 )}
             </AnimatePresence>

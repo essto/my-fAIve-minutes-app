@@ -38,7 +38,7 @@ Kompleksowa aplikacja monitorowania zdrowia — waga, tętno, sen, dieta, diagno
 
 ## 🚀 Status
 
-📋 **Faza:** Planowanie zakończone → Gotowe do implementacji (Etap 0)
+📋 **Faza:** Implementacja Etapu 7 (Frontend Web) w toku → Większość modułów Core gotowa do integracji mobilnej (Etap 8)
 
 ## 📜 Licencja
 

@@ -1,21 +1,8 @@
-/* apps/web/src/app/(dashboard)/dashboard/Dashboard.module.css */
 .dashboard {
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
     animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .header {
@@ -27,48 +14,60 @@
 .title {
     font-size: var(--font-size-2xl);
     font-weight: 700;
+    margin: 0 0 var(--space-1) 0;
     color: var(--foreground);
 }
 
-.statsGrid {
+.subtitle {
+    color: var(--color-gray-500);
+    margin: 0;
+}
+
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-6);
 }
 
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.mainScoreCard {
+    grid-column: 1 / -1;
 }
 
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.cardTitle {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--color-gray-500);
-    margin-bottom: var(--space-4);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.scoreContainer {
+.scoreContent {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-8);
+    padding: var(--space-6);
 }
 
-.scoreCircle {
+.scoreRingContainer {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
+}
+
+.scoreRing {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.scoreRingBg {
+    fill: none;
+    stroke: var(--color-gray-200);
+    stroke-width: 8;
+}
+
+[data-theme='dark'] .scoreRingBg {
+    stroke: var(--color-gray-700);
+}
+
+.scoreRingProgress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s ease-out;
 }
 
 .scoreValue {
@@ -76,31 +75,40 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: var(--font-size-2xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.scoreValue span:first-child {
+    font-size: var(--font-size-3xl);
     font-weight: 800;
-    color: var(--primary);
+    color: var(--foreground);
 }
 
-.chartsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: var(--space-8);
+.scoreLabel {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+    margin-top: 2px;
 }
 
-.chartCard {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6);
-    min-height: 350px;
+.scoreInfo h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin: 0 0 var(--space-2) 0;
 }
 
-.anomalyCard {
-    border-left: 4px solid var(--destructive);
+.scoreInfo p {
+    color: var(--color-gray-600);
+    margin: 0;
 }
 
-.anomalyList {
+.anomaliesList {
     list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
@@ -111,47 +119,74 @@
     align-items: flex-start;
     gap: var(--space-3);
     padding: var(--space-3);
-    background: rgba(239, 68, 68, 0.05);
     border-radius: var(--radius-md);
-    color: var(--destructive);
-    font-size: var(--font-size-sm);
+    background: var(--color-gray-50);
 }
 
-.severityHigh {
-    color: var(--destructive);
-    font-weight: 600;
-}
-
-.severityMedium {
-    color: var(--warning);
-}
-
-.skeleton {
-    background: var(--color-gray-200);
-    border-radius: var(--radius-xl);
-    animation: pulse 1.5s infinite ease-in-out;
-}
-
-[data-theme='dark'] .skeleton {
+[data-theme='dark'] .anomalyItem {
     background: var(--color-gray-800);
 }
 
-@keyframes pulse {
-    0% {
-        opacity: 0.6;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0.6;
-    }
+.high {
+    border-left: 4px solid var(--color-rose);
 }
 
-@media (max-width: 768px) {
-    .chartsGrid {
+.medium {
+    border-left: 4px solid var(--warning);
+}
+
+.low {
+    border-left: 4px solid var(--accent);
+}
+
+.anomalyIcon {
+    font-size: var(--font-size-lg);
+}
+
+.anomalyDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.anomalyMetric {
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.anomalyMessage {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+}
+
+.noAnomalies {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8) 0;
+    color: var(--color-gray-500);
+    gap: var(--space-2);
+}
+
+.successIcon {
+    font-size: var(--font-size-2xl);
+}
+
+.chartCard {
+    grid-column: span 1;
+}
+
+.chartContainer {
+    height: 300px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .grid {
         grid-template-columns: 1fr;
+    }
+
+    .chartCard {
+        grid-column: 1 / -1;
     }
 }

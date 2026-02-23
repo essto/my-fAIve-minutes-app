@@ -1,7 +1,10 @@
+/* apps/web/src/app/(dashboard)/ocr/page.tsx */
 'use client';
 
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/shared/ui/Card/Card';
+import { Button } from '@/components/shared/ui/Button/Button';
 import styles from '@/styles/Feature.module.css';
 
 type OCRResult = { original: string; editable: boolean; values: string[] };
@@ -63,18 +66,19 @@ export default function OCRPage() {
             </header>
 
             <section
-                className={`${styles.card} ${styles.glass} border-2 border-dashed border-primary/30 flex flex-col items-center justify-center py-20 text-center cursor-pointer hover:border-primary transition-all`}
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
             >
-                <input type="file" accept=".jpg,.jpeg,.png,.pdf" className="hidden"
-                    id="dropzone-input" data-testid="dropzone-input" onChange={handleFileChange} />
-                <label htmlFor="dropzone-input" className="cursor-pointer">
-                    <div className="text-5xl mb-6">📄</div>
-                    <h2 className={styles.sectionTitle}>Przeciągnij i upuść dokument</h2>
-                    <p className="text-color-gray-500 mb-6">Lub kliknij, aby wybrać plik z dysku</p>
-                    <p className="text-xs text-color-gray-400">WSPIERANE: JPG, PNG, PDF (DO 10MB)</p>
-                </label>
+                <Card className="border-2 border-dashed border-primary/30 flex flex-col items-center justify-center py-20 text-center cursor-pointer hover:border-primary transition-all bg-background/50 glass">
+                    <input type="file" accept=".jpg,.jpeg,.png,.pdf" className="hidden"
+                        id="dropzone-input" data-testid="dropzone-input" onChange={handleFileChange} />
+                    <label htmlFor="dropzone-input" className="cursor-pointer">
+                        <div className="text-5xl mb-6">📄</div>
+                        <h2 className="text-xl font-bold mb-2 text-foreground">Przeciągnij i upuść dokument</h2>
+                        <p className="text-color-gray-500 mb-6">Lub kliknij, aby wybrać plik z dysku</p>
+                        <p className="text-xs text-color-gray-400 font-bold">WSPIERANE: JPG, PNG, PDF (DO 10MB)</p>
+                    </label>
+                </Card>
             </section>
 
             <AnimatePresence>
@@ -82,29 +86,34 @@ export default function OCRPage() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className={styles.card}
                     >
-                        <h2 className={styles.sectionTitle}>Podgląd przesłanego pliku</h2>
-                        <div className="flex flex-col items-center gap-6">
-                            <div className="w-full max-w-lg bg-color-gray-50 dark:bg-color-gray-900 p-4 rounded-xl border border-border">
-                                {file?.type.startsWith('image/') ? (
-                                    <img src={preview} alt="Preview" className="w-full h-auto rounded-lg shadow-sm" data-testid="file-preview" />
-                                ) : (
-                                    <div className="flex flex-col items-center p-10" data-testid="file-preview">
-                                        <span className="text-6xl mb-4">📑</span>
-                                        <p className="font-bold">{file?.name}</p>
-                                        <p className="text-xs text-color-gray-500 uppercase mt-1">Dokument PDF</p>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Podgląd przesłanego pliku</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="flex flex-col items-center gap-6 pt-4">
+                                    <div className="w-full max-w-lg bg-color-gray-50 dark:bg-color-gray-900 p-4 rounded-xl border border-border">
+                                        {file?.type.startsWith('image/') ? (
+                                            <img src={preview} alt="Preview" className="w-full h-auto rounded-lg shadow-sm" data-testid="file-preview" />
+                                        ) : (
+                                            <div className="flex flex-col items-center p-10" data-testid="file-preview">
+                                                <span className="text-6xl mb-4">📑</span>
+                                                <p className="font-bold">{file?.name}</p>
+                                                <p className="text-xs text-color-gray-500 uppercase mt-1">Dokument PDF</p>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
-                            <button
-                                onClick={handleSubmit}
-                                disabled={isLoading}
-                                className={`${styles.button} ${styles.primaryButton} w-full max-w-xs`}
-                            >
-                                {isLoading ? 'Przetwarzanie przez AI...' : 'Rozpocznij analizę OCR'}
-                            </button>
-                        </div>
+                                    <Button
+                                        onClick={handleSubmit}
+                                        isLoading={isLoading}
+                                        className="w-full max-w-xs"
+                                    >
+                                        Rozpocznij analizę OCR
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </motion.div>
                 )}
 
@@ -112,48 +121,50 @@ export default function OCRPage() {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className={`${styles.card} ${styles.glass}`}
                     >
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className={styles.sectionTitle}>Wyniki ekstrakcji danych</h2>
-                            <button
-                                onClick={() => setEditMode(!editMode)}
-                                className={`${styles.button} ${styles.secondaryButton}`}
-                            >
-                                {editMode ? 'Zakończ edycję' : 'Edytuj dane'}
-                            </button>
-                        </div>
-
-                        <div className="grid grid-cols-1 gap-3">
-                            {editMode
-                                ? editedValues.map((v, i) => (
-                                    <div key={i}>
-                                        <input
-                                            id={`edited-value-${i}`}
-                                            value={v}
-                                            onChange={(e) => {
-                                                const n = [...editedValues];
-                                                n[i] = e.target.value;
-                                                setEditedValues(n);
-                                            }}
-                                            className={styles.input}
-                                        />
+                        <Card glass gradientAccent>
+                            <CardHeader className="flex flex-row justify-between items-center">
+                                <CardTitle>Wyniki ekstrakcji danych</CardTitle>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => setEditMode(!editMode)}
+                                >
+                                    {editMode ? 'Zakończ edycję' : 'Edytuj dane'}
+                                </Button>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="grid grid-cols-1 gap-3">
+                                    {editMode
+                                        ? editedValues.map((v, i) => (
+                                            <div key={i}>
+                                                <input
+                                                    id={`edited-value-${i}`}
+                                                    value={v}
+                                                    onChange={(e) => {
+                                                        const n = [...editedValues];
+                                                        n[i] = e.target.value;
+                                                        setEditedValues(n);
+                                                    }}
+                                                    className={styles.input}
+                                                />
+                                            </div>
+                                        ))
+                                        : result.values.map((v, i) => (
+                                            <div key={i} className="p-3 bg-color-gray-50 dark:bg-color-gray-800 rounded-lg border border-border">
+                                                <p className="text-sm">{v}</p>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                {!editMode && (
+                                    <div className="mt-8 flex justify-end">
+                                        <Button>
+                                            Zatwierdź i zapisz w profilu
+                                        </Button>
                                     </div>
-                                ))
-                                : result.values.map((v, i) => (
-                                    <div key={i} className="p-3 bg-color-gray-50 dark:bg-color-gray-800 rounded-lg border border-border">
-                                        <p className="text-sm">{v}</p>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        {!editMode && (
-                            <div className="mt-8 flex justify-end">
-                                <button className={`${styles.button} ${styles.primaryButton}`}>
-                                    Zatwierdź i zapisz w profilu
-                                </button>
-                            </div>
-                        )}
+                                )}
+                            </CardContent>
+                        </Card>
                     </motion.div>
                 )}
             </AnimatePresence>

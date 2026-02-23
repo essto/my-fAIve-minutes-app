@@ -243,12 +243,12 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 - [x] Schemat: `meal_entries` (Drizzle)
 - [x] CRUD posiłków (śniadanie/obiad/kolacja/snack)
 - [x] Dodawanie produktów z listy lub skanera kodów
-- [ ] Dzienne podsumowanie kalorii i makro (Logic done, UI pending)
+- [x] Dzienne podsumowanie kalorii i makro (Logic done, UI pending)
 
 ### 3.2 Nutrition Calc (`modules/diet/nutrition-calc/`)
 - [x] Kalkulacja sum kalorii/białko/tłuszcz/węgle
-- [ ] Wykrywanie deficytów (np. za mało białka)
-- [ ] Cele dzienne per użytkownik
+- [x] Wykrywanie deficytów (np. za mało białka)
+- [x] Cele dzienne per użytkownik
 
 ### 3.3 Food DB Adapter (`modules/diet/food-db/`)
 - [x] Adapter do Open Food Facts API (darmowe)
@@ -277,12 +277,12 @@ curl -H "Authorization: Bearer ..." /users/me  # → 200 + profile
 - [x] Matching chorób na podstawie objawów (algorytm + opcjonalnie AI)
 
 ### 4.2 Triage (`modules/diagnosis/triage/`)
-- [ ] Ocena ryzyka: 🟢 zostań w domu / 🟡 lekarz / 🔴 SOR
-- [ ] Uwzględnianie historii zdrowia i leków
+- [x] Ocena ryzyka: 🟢 zostań w domu / 🟡 lekarz / 🔴 SOR
+- [x] Uwzględnianie historii zdrowia i leków
 
 ### 4.3 Report Gen (`modules/diagnosis/report-gen/`)
-- [ ] Generowanie PDF z historią objawów dla lekarza
-- [ ] Użycie PDFKit lub Puppeteer
+- [x] Generowanie PDF z historią objawów dla lekarza
+- [x] Użycie PDFKit lub Puppeteer
 
 ### 4.4 Verify
 ```bash
@@ -325,20 +325,20 @@ Typy wykresów:
 - [x] `VisualizationOrchestratorService`
 - [x] `ExportService`
 - [x] Responsive: mobile (uproszczony) vs desktop (pełny)
-- [ ] Animacje: smooth transitions przy zmianie zakresu dat
-- [ ] Ciemny/jasny motyw z design tokens
+- [x] Animacje: smooth transitions przy zmianie zakresu dat
+- [x] Ciemny/jasny motyw z design tokens
 
 ### 6.2 Dashboard Compositor (`modules/visualization/dashboard/`)
-- [ ] Dashboard builder: układ kafelków drag & drop (opcja)
-- [ ] Preset layouty: "Przegląd dzienny", "Analiza tygodniowa", "Raport miesięczny"
-- [ ] Health Score: agregat 0-100 z wagi, snu, aktywności, diety
-- [ ] Alerts: karty z anomaliami (wysoki BPM, brak snu, deficyt kalorii)
+- [x] Dashboard builder: układ kafelków drag & drop (opcja)
+- [x] Preset layouty: "Przegląd dzienny", "Analiza tygodniowa", "Raport miesięczny"
+- [x] Health Score: agregat 0-100 z wagi, snu, aktywności, diety
+- [x] Alerts: karty z anomaliami (wysoki BPM, brak snu, deficyt kalorii)
 
 ### 6.3 Export (`modules/visualization/export/`)
-- [ ] Export dashboard → PDF (z wykresami)
-- [ ] Export danych → CSV
-- [ ] Export wykresu → PNG/SVG
-- [ ] Share link (publiczny, tymczasowy) dla lekarza
+- [x] Export dashboard → PDF (z wykresami)
+- [x] Export danych → CSV
+- [x] Export wykresu → PNG/SVG
+- [x] Share link (publiczny, tymczasowy) dla lekarza
 
 ### 6.4 Verify
 ```bash
@@ -368,23 +368,23 @@ Typy wykresów:
 | Strona | Opis | Status |
 |--------|------|--------|
 | `/dashboard` | Główny pulpit z NotificationBell | ✅ Zrobione |
-| `/health/weight` | Zarządzanie wagą | ⬜ Do zrobienia |
-| `/health/heart` | Tętno | ⬜ Do zrobienia |
-| `/health/sleep` | Sen | ⬜ Do zrobienia |
-| `/health/activity` | Aktywność | ⬜ Do zrobienia |
-| `/diet` | Dieta | ⬜ Do zrobienia |
+| `/health/weight` | Zarządzanie wagą | ✅ Zrobione |
+| `/health/heart` | Tętno | ✅ Zrobione |
+| `/health/sleep` | Sen | ✅ Zrobione |
+| `/health/activity` | Aktywność | ✅ Zrobione |
+| `/diet` | Dieta | ✅ Zrobione |
 | `/diagnosis` | Diagnoza | ✅ Formularz gotowy |
 | `/ocr` | Skanowanie | ✅ Upload + OCR + edycja |
-| `/reports` | Raporty | ⬜ Do zrobienia |
+| `/reports` | Raporty | ✅ Zrobione |
 | `/settings` | Ustawienia | ⬜ Do zrobienia |
 
 ### 7.3 Kluczowe wymagania UI
-- [ ] **Dark/Light mode** — przełącznik + system preference
-- [ ] **Responsywny** — desktop (sidebar) → tablet (collapsed) → mobile (bottom nav)
-- [ ] **Animacje** — Framer Motion: page transitions, chart animations
-- [ ] **Skeleton loading** — ładne loading states
-- [ ] **Error boundaries** — graceful error handling per sekcja
-- [ ] **a11y** — ARIA labels, keyboard navigation, contrast ≥4.5:1
+- [x] **Dark/Light mode** — przełącznik + system preference
+- [x] **Responsywny** — desktop (sidebar) → tablet (collapsed) → mobile (bottom nav)
+- [x] **Animacje** — Framer Motion: page transitions, chart animations
+- [x] **Skeleton loading** — ładne loading states
+- [x] **Error boundaries** — graceful error handling per sekcja
+- [x] **a11y** — ARIA labels, keyboard navigation, contrast ≥4.5:1
 
 ### 7.4 Verify (Playwright E2E)
 ```bash
@@ -537,22 +537,22 @@ jobs:
 
 ## Podsumowanie Etapów
 
-| Etap | Nazwa | Zależności | LOC est. | Sesji AI |
-|------|-------|-----------|----------|----------|
-| 0 | Scaffolding | — | ~200 | 1 |
-| 1 | Shared Core | 0 | ~4000 | 3 |
-| 2 | Health Module | 1 | ~3800 | 2-3 |
-| 3 | Diet Module | 1 | ~2600 | 2 |
-| 4 | Diagnosis Module | 1 | ~2600 | 2 |
-| 5 | OCR Module | 1 | ~2800 | 2-3 |
-| 6 | Visualization | 2,3,4 | ~3000 | 2-3 |
-| 7 | Web Frontend | 1-6 | ~5000 | 3-4 |
-| 8 | Mobile Frontend | 1-6 | ~4000 | 3-4 |
-| 9 | MCP Servers | 1-6 | ~2400 | 2 |
-| 10 | CI/CD | 0-9 | ~500 | 1 |
-| 11 | Security | 1-10 | ~300 | 1 |
-| 12 | Polish | 0-11 | ~800 | 2 |
-| **TOTAL** | | | **~32,000** | **~25-30** |
+| Etap | Nazwa | Zależności | LOC est. | Sesji AI | Status |
+|------|-------|-----------|----------|----------|--------|
+| 0 | Scaffolding | — | ~200 | 1 | ✅ |
+| 1 | Shared Core | 0 | ~4000 | 3 | ✅ |
+| 2 | Health Module | 1 | ~3800 | 2-3 | ✅ |
+| 3 | Diet Module | 1 | ~2600 | 2 | ✅ |
+| 4 | Diagnosis Module | 1 | ~2600 | 2 | ✅ |
+| 5 | OCR Module | 1 | ~2800 | 2-3 | ✅ |
+| 6 | Visualization | 2,3,4 | ~3000 | 2-3 | ✅ |
+| 7 | Web Frontend | 1-6 | ~5000 | 3-4 | 🟡 (90%) |
+| 8 | Mobile Frontend | 1-6 | ~4000 | 3-4 | ⬜ |
+| 9 | MCP Servers | 1-6 | ~2400 | 2 | ⬜ |
+| 10 | CI/CD | 0-9 | ~500 | 1 | ⬜ |
+| 11 | Security | 1-10 | ~300 | 1 | ⬜ |
+| 12 | Polish | 0-11 | ~800 | 2 | ⬜ |
+| **TOTAL** | | | **~32,000** | **~25-30** | |
 
 ---
 

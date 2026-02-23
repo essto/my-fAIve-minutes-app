@@ -1,0 +1,16 @@
+.skeleton {
+    display: block;
+    background-color: var(--color-gray-200);
+    border-radius: var(--radius-md);
+    width: 100%;
+    min-height: 1rem;
+}
+
+[data-theme='dark'] .skeleton {
+    background-color: var(--color-gray-800);
+}
+
+.circle {
+    border-radius: 50%;
+    /* Width and height should be provided via inline styles or className for a circle */
+}
