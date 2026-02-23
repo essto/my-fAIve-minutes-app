@@ -33,9 +33,8 @@ test.describe('Auth: Login', () => {
 
         await page.click('button[type="submit"]');
 
-        // Powinien pojawić się błąd (selektor na podstawie page.tsx - errors.general)
-        const errorMsg = page.locator('p.text-red-500');
-        await expect(errorMsg).toBeVisible();
-        await expect(errorMsg).toContainText('Błąd logowania');
+        // Powinien pojawić się błąd (generalError div z CSS Modules)
+        const errorMsg = page.getByText('Błąd logowania');
+        await expect(errorMsg).toBeVisible({ timeout: 10000 });
     });
 });

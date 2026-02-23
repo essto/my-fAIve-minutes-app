@@ -1,0 +1,197 @@
+﻿{
+  "config": {
+    "rootDir": "C:/od_zera_do_ai/Zdrowie_v1/zdrowiev1/apps/web",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/od_zera_do_ai/Zdrowie_v1/zdrowiev1/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/od_zera_do_ai/Zdrowie_v1/zdrowiev1/apps/web",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tests\\e2e\\auth-login.spec.ts",
+      "file": "tests/e2e/auth-login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Auth: Login",
+          "file": "tests/e2e/auth-login.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "powinien pozwoli─ç u┼╝ytkownikowi zalogowa─ç si─Ö poprawnymi danymi",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 252,
+                      "error": {
+                        "message": "Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall log:\n\u001b[2m  - navigating to \"/login\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall log:\n\u001b[2m  - navigating to \"/login\", waiting until \"load\"\u001b[22m\n\n    at C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts:11:20",
+                        "location": {
+                          "file": "C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts",
+                          "column": 20,
+                          "line": 11
+                        },
+                        "snippet": "\u001b[0m \u001b[90m  9 |\u001b[39m     test(\u001b[32m'powinien pozwoli─ç u┼╝ytkownikowi zalogowa─ç si─Ö poprawnymi danymi'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m 10 |\u001b[39m         \u001b[90m// Wejd┼║ na stron─Ö logowania\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 11 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 12 |\u001b[39m\n \u001b[90m 13 |\u001b[39m         \u001b[90m// Wype┼énij formularz\u001b[39m\n \u001b[90m 14 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByLabel(\u001b[32m'Email'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'demo@example.com'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts",
+                            "column": 20,
+                            "line": 11
+                          },
+                          "message": "Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall log:\n\u001b[2m  - navigating to \"/login\", waiting until \"load\"\u001b[22m\n\n\n   9 |     test('powinien pozwoli─ç u┼╝ytkownikowi zalogowa─ç si─Ö poprawnymi danymi', async ({ page }) => {\n  10 |         // Wejd┼║ na stron─Ö logowania\n> 11 |         await page.goto('/login');\n     |                    ^\n  12 |\n  13 |         // Wype┼énij formularz\n  14 |         await page.getByLabel('Email').fill('demo@example.com');\n    at C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts:11:20"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-23T22:36:05.340Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts",
+                        "column": 20,
+                        "line": 11
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2a36c254494666e526a0-9c2f02548edb019f6116",
+              "file": "tests/e2e/auth-login.spec.ts",
+              "line": 9,
+              "column": 9
+            },
+            {
+              "title": "powinien pokaza─ç b┼é─ůd przy b┼é─Ödnych danych",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 244,
+                      "error": {
+                        "message": "Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall log:\n\u001b[2m  - navigating to \"/login\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall log:\n\u001b[2m  - navigating to \"/login\", waiting until \"load\"\u001b[22m\n\n    at C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts:29:20",
+                        "location": {
+                          "file": "C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts",
+                          "column": 20,
+                          "line": 29
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 27 |\u001b[39m\n \u001b[90m 28 |\u001b[39m     test(\u001b[32m'powinien pokaza─ç b┼é─ůd przy b┼é─Ödnych danych'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByLabel(\u001b[32m'Email'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'wrong@example.com'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByLabel(\u001b[32m'Has┼éo'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'WrongPassword123'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts",
+                            "column": 20,
+                            "line": 29
+                          },
+                          "message": "Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall log:\n\u001b[2m  - navigating to \"/login\", waiting until \"load\"\u001b[22m\n\n\n  27 |\n  28 |     test('powinien pokaza─ç b┼é─ůd przy b┼é─Ödnych danych', async ({ page }) => {\n> 29 |         await page.goto('/login');\n     |                    ^\n  30 |\n  31 |         await page.getByLabel('Email').fill('wrong@example.com');\n  32 |         await page.getByLabel('Has┼éo').fill('WrongPassword123');\n    at C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts:29:20"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-23T22:36:08.535Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "C:\\od_zera_do_ai\\Zdrowie_v1\\zdrowiev1\\apps\\web\\tests\\e2e\\auth-login.spec.ts",
+                        "column": 20,
+                        "line": 29
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2a36c254494666e526a0-d5f413e7dfc8b748070d",
+              "file": "tests/e2e/auth-login.spec.ts",
+              "line": 28,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-23T22:36:02.273Z",
+    "duration": 6992.258,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
