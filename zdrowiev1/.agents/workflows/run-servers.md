@@ -48,6 +48,14 @@ Wait for `✓ Ready` log.
 ### 5. Verify login works
 // turbo
 ```bash
+powershell -File ../../scripts/check-stack.ps1
+```
+This script automatically checks: Docker containers, DB tables, API on port 3001, and login endpoint.
+If ALL checks pass → stack is healthy. If any FAIL → follow the printed fix instructions.
+
+### 6. Manual verification (optional)
+// turbo
+```bash
 $body = '{"email":"demo@example.com","password":"Password123!"}'; Invoke-RestMethod -Uri http://localhost:3001/api/auth/login -Method POST -ContentType 'application/json' -Body $body
 ```
 Should return an `access_token`. If yes, open `http://localhost:3000/login` in the browser.
