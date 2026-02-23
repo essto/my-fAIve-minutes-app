@@ -98,20 +98,28 @@ Zautomatyzowany skrypt uruchamiany natychmiast po `docker compose up` lub deploy
 |--------|------|------|
 | **PostgreSQL** | 5432 | Główna baza danych |
 | **Redis** | 6379 | Cache / Sesje |
-| **API (Backend)** | 3000 | NestJS API |
-| **Web (Frontend)** | 3001 | Next.js Dev Server |
+| **Web (Frontend)** | 3000 | Next.js Dev Server |
+| **API (Backend)** | 3001 | NestJS API |
 | **MCP Server** | 8080 | AI Maintenance Interface |
 
-### 5.2 Kolejność Uruchamiania
-1. **Infrastruktura:** `docker compose up -d db redis`
-2. **Backend:** `cd apps/api && npm run dev`
+### 5.2 Kolejność Uruchamiania (lub użyj `/run-servers`)
+1. **Infrastruktura:** `docker compose up -d`
+2. **Backend:** `cd apps/api && npm run build && npm run start`
 3. **Frontend:** `cd apps/web && npm run dev`
+4. **Smoke Test:** `powershell -File scripts/check-stack.ps1`
 
 ### 5.3 Weryfikacja Startu (Health Checks)
 Po uruchomieniu serwerów, AI Agent musi sprawdzić ich status:
-- **DB:** `pg_isready -h localhost -p 5432`
-- **API:** `curl -f http://localhost:3000/health` (Oczekiwany status: 200 OK)
-- **Web:** Sprawdzenie dostępności strony głównej na porcie 3001.
+- **Smoke test:** Uruchomienie `scripts/check-stack.ps1` weryfikuje cały stos.
+- **Web:** Sprawdzenie dostępności strony głównej na porcie 3000.
+- **API:** Sprawdzenie dostępności na porcie 3001.
+
+### 5.4 Pułapki Monorepo i E2E (Krytyczne dla AI!)
+> W przeszłości narobiliśmy tutaj sporo błędów. Zapamiętaj te punkty:
+1. **Konflikt portów i Pętla Proxy:** Next.js ZAWSZE na 3000. NestJS ZAWSZE na 3001. Rewrite w Next.js musi wskazywać na `localhost:3001/api`. Nie twórz pętli (proxy do 3000).
+2. **NestJS `start --watch` w Monorepo:** Zwykły `nest start --watch` nie zadziała przy importach poza `src/` (np. relatywne `../../modules`). Skrypt `dev` musi korzystać z pre-buildowanej wersji (`npm run build && npm run start`).
+3. **Kontekst Playwright:** Testy E2E (Playwright) uruchamiaj ZAWSZE z roota monorepo (`npx playwright test`), NIE z `apps/web/`. W przeciwnym razie testy nie znajdą konfiguracji `playwright.config.ts` i `baseURL`.
+4. **Playwright `baseURL`:** Musi wskazywać na frontend (port 3000), a nie na API. Zawsze o tym pamiętaj.
 
 ---
 
