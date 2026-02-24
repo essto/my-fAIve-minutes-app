@@ -7,6 +7,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { useAuth } from '../hooks/useAuth';
 import { LoginScreen } from '../screens/LoginScreen';
 import { OcrScreen } from '../screens/OcrScreen';
+import { ScaleScreen } from '../screens/ScaleScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,7 @@ export const TabNavigator = () => (
     <Tab.Screen name="Health" component={HealthScreen} />
     <Tab.Screen name="Diet" component={DietScreen} />
     <Tab.Screen name="Skaner" component={OcrScreen} />
+    <Tab.Screen name="Waga" component={ScaleScreen} />
   </Tab.Navigator>
 );
 
