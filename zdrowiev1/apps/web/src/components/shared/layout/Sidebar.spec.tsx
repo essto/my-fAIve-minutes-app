@@ -9,7 +9,7 @@ vi.mock('next/navigation', () => ({
 
 // Mock next/link (render as standard anchor tag)
 vi.mock('next/link', () => ({
-    default: ({ children, href, className }: any) => (
+    default: ({ children, href, className }: { children: React.ReactNode, href: string, className?: string }) => (
         <a href={href} className={className}>{children}</a>
     ),
 }));
@@ -30,9 +30,7 @@ describe('Sidebar', () => {
     it('highlights the active link correctly using gradient active state class', () => {
         render(<Sidebar />);
         const activeLink = screen.getByText('Dashboard').closest('a');
-        expect(activeLink).toHaveClass(/active/);
-        // The active link should have a specific data attribute or class that we use for styling
-        expect(activeLink?.className).toContain('active');
+        expect(activeLink?.className).toContain('bg-brand');
     });
 
     it('does not use emoji icons anymore, but renders SVG icons', () => {

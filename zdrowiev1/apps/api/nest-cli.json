@@ -6,5 +6,5 @@
         "tsConfigPath": "tsconfig.json",
         "plugins": []
     },
-    "entryFile": "apps/api/src/main"
+    "entryFile": "main"
 }

@@ -1,10 +1,14 @@
-import { Controller, Get, Post, Body, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Inject } from '@nestjs/common';
 import { VisualizationOrchestrator } from '../../domain/services/visualization-orchestrator.service';
 import { ExportService } from '../../domain/services/export.service';
+import { WeightService } from '../../../weight/domain/services/weight.service';
 
 @Controller('visualization')
 export class VisualizationController {
-  constructor(private readonly orchestrator: VisualizationOrchestrator) {}
+  constructor(
+    private readonly orchestrator: VisualizationOrchestrator,
+    @Inject('WEIGHT_SERVICE') private readonly weightService: WeightService,
+  ) {}
 
   @Get('dashboard')
   async getDashboard(@Req() req: any) {
@@ -68,49 +72,43 @@ export class VisualizationController {
 
   @Get('health-details')
   async getHealthDetails(@Req() req: any) {
-    // Mock health detail data for the Health page
-    const now = new Date();
-    const generateDates = (days: number) =>
-      Array.from({ length: days }, (_, i) => {
-        const d = new Date(now);
-        d.setDate(d.getDate() - (days - 1 - i));
-        return d.toISOString().split('T')[0];
-      });
+    const userId = req.user?.id || '550e8400-e29b-41d4-a716-446655440000';
 
-    const dates7 = generateDates(7);
-    const dates90 = generateDates(90);
+    // Real data: weight history and summary
+    const readings = await this.weightService.getHistory(userId);
+    const summary = await this.weightService.getHealthSummary(userId);
+
+    const weightHistory = readings
+      .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
+      .map((r) => ({
+        label: new Date(r.timestamp).toISOString().split('T')[0],
+        value: r.value,
+      }));
 
     return {
       metrics: {
         heartRate: { current: 72, avg7d: 70, min: 58, max: 95 },
         sleep: { lastNight: '7h 32min', avg7d: '7h 15min', quality: 'Dobra' },
-        weight: { current: 78.5, change30d: -1.2, bmi: 24.1 },
+        weight: {
+          current: summary.current,
+          change30d: summary.change30d,
+          bmi: summary.bmi ?? 0,
+        },
       },
       charts: {
         heartRateHistory: {
           type: 'line' as const,
-          data: dates7.map((date) => ({
-            label: date,
-            value: 65 + Math.round(Math.random() * 20),
-          })),
+          data: [], // mock for now
           colors: ['#6366f1'],
         },
         sleepHistory: {
           type: 'bar' as const,
-          data: dates7.map((date) => ({
-            label: date,
-            value: +(6 + Math.random() * 2.5).toFixed(1),
-          })),
+          data: [], // mock for now
           colors: ['#8b5cf6'],
         },
         weightHistory: {
           type: 'area' as const,
-          data: dates90
-            .filter((_, i) => i % 3 === 0)
-            .map((date, i) => ({
-              label: date,
-              value: +(80 - i * 0.05 + (Math.random() - 0.5)).toFixed(1),
-            })),
+          data: weightHistory,
           colors: ['#10b981'],
         },
       },

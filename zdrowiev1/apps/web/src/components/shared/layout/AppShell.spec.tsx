@@ -7,7 +7,7 @@ vi.mock('./Sidebar', () => ({
     Sidebar: () => <div data-testid="sidebar">Sidebar Mock</div>
 }));
 vi.mock('next/link', () => ({
-    default: ({ children, href, className }: any) => <a href={href} className={className}>{children}</a>
+    default: ({ children, href, className }: { children: React.ReactNode, href: string, className?: string }) => <a href={href} className={className}>{children}</a>
 }));
 vi.mock('next/navigation', () => ({
     usePathname: () => '/dashboard'
@@ -35,7 +35,6 @@ describe('AppShell', () => {
     it('renders mobile bottom navigation', () => {
         render(<AppShell><div>Content</div></AppShell>);
         // Expect a nav element explicitly for mobile (can be identified by class or standard nav)
-        const navs = screen.getAllByRole('navigation');
         // Since Sidebar might have a nav, there should be at least two navs or a specific mobile block 
         // We'll look for bottom nav specific links (like 'Strona główna' or matching hrefs)
         const mobileNavContainer = screen.getByTestId('mobile-bottom-nav');

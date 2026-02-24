@@ -5,17 +5,16 @@ import React from 'react';
 import {
     LineChart, Line, AreaChart, Area, BarChart, Bar,
     XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-    RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
-    PieChart, Pie, Cell,
+    RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
 } from 'recharts';
 
-interface ChartDataPoint {
+export interface ChartDataPoint {
     label: string;
     value: number;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
-interface ChartConfig {
+export interface ChartConfig {
     type: 'line' | 'area' | 'bar' | 'radar' | 'gauge' | 'heatmap' | 'scatter' | 'progress_ring' | 'sparkline' | 'candlestick';
     title?: string;
     data: ChartDataPoint[];

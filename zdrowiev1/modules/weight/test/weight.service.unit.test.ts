@@ -59,4 +59,28 @@ describe('WeightService (Domain Logic)', () => {
       expect(trend.slope).toBeCloseTo(4 / 14, 2);
     });
   });
+  describe('getHealthSummary', () => {
+    it('returns current weight, change30d, and bmi correctly based on history', async () => {
+      const now = new Date();
+      const d31ago = new Date(now);
+      d31ago.setDate(now.getDate() - 31);
+
+      (mockRepository.findByUserId as any).mockResolvedValue([
+        { value: 80.0, bmi: 25.0, fatPercent: 20.0, timestamp: now },
+        { value: 82.0, bmi: 25.5, fatPercent: 20.5, timestamp: d31ago },
+      ]);
+
+      const summary = await service.getHealthSummary('u1');
+
+      expect(summary.current).toBe(80.0);
+      expect(summary.change30d).toBeCloseTo(-2.0);
+      expect(summary.bmi).toBe(25.0);
+    });
+
+    it('handles empty history safely', async () => {
+      (mockRepository.findByUserId as any).mockResolvedValue([]);
+      const summary = await service.getHealthSummary('u1');
+      expect(summary).toEqual({ current: 0, change30d: 0, bmi: 0 });
+    });
+  });
 });

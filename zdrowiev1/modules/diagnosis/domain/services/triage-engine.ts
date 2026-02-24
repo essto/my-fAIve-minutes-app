@@ -24,10 +24,8 @@ export class TriageEngine {
         recommendations = ['NATYCHMIAST skontaktuj się z SOR lub zadzwoń pod 112.'];
         break; // Zatrzymujemy analizę, mamy stan zagrożenia życia
       } else if (symptom.severity >= 5 || (symptom.severity >= 3 && symptom.durationHours > 24)) {
-        if (maxRisk !== 'HIGH') {
-          maxRisk = 'MEDIUM';
-          recommendations.push('Zalecana konsultacja z lekarzem pierwszego kontaktu w ciągu 24h.');
-        }
+        maxRisk = 'MEDIUM';
+        recommendations.push('Zalecana konsultacja z lekarzem pierwszego kontaktu w ciągu 24h.');
       } else {
         if (maxRisk === 'LOW') {
           recommendations.push('Odpoczynek i monitorowanie stanu zdrowia. Pij dużo płynów.');

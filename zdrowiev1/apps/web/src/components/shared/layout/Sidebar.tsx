@@ -2,8 +2,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/routing';
 import { ThemeToggle } from '../ui/ThemeToggle/ThemeToggle';
 
 const navItems = [
@@ -71,8 +70,8 @@ export function Sidebar() {
                             key={item.href}
                             href={item.href}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${isActive
-                                    ? 'bg-brand text-white shadow-glow'
-                                    : 'text-muted-foreground hover:bg-neutral-bg2 hover:text-foreground'
+                                ? 'bg-brand text-white shadow-glow'
+                                : 'text-muted-foreground hover:bg-neutral-bg2 hover:text-foreground'
                                 }`}
                         >
                             <span className="flex items-center justify-center">{item.icon}</span>

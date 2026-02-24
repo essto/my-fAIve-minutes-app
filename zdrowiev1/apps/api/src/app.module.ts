@@ -11,13 +11,14 @@ import { UserModule } from '@monorepo/user';
 import { SeedModule } from '@monorepo/database';
 import { NotificationsModule } from '../../../modules/notifications/notifications.module';
 import { ActivityModule } from '../../../modules/activity/src/infrastructure/activity.module';
+import { VisualizationModule } from '../../../modules/visualization/visualization.module';
 
 @Module({
   imports: [
     ThrottlerModule.forRoot([
-      { name: 'short', ttl: 1000, limit: 3 },   // 3 req/s
+      { name: 'short', ttl: 1000, limit: 3 }, // 3 req/s
       { name: 'medium', ttl: 10000, limit: 20 }, // 20 req/10s
-      { name: 'long', ttl: 60000, limit: 100 },  // 100 req/min
+      { name: 'long', ttl: 60000, limit: 100 }, // 100 req/min
     ]),
     AuthModule,
     UserModule,
@@ -29,10 +30,9 @@ import { ActivityModule } from '../../../modules/activity/src/infrastructure/act
     SleepModule,
     DietModule,
     DiagnosisModule,
+    VisualizationModule,
   ],
   controllers: [],
-  providers: [
-    { provide: APP_GUARD, useClass: ThrottlerGuard },
-  ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
-export class AppModule { }
+export class AppModule {}

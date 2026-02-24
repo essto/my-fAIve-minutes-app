@@ -1,0 +1,100 @@
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(auth)\register\page.tsx[24m[0m
+[0m  [2m39:23[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\dashboard\NotificationBell.tsx[24m[0m
+[0m  [2m33:9[22m  [31merror[39m  Error: Calling setState synchronously within an effect can trigger cascading renders[0m
+[0m[0m
+[0mEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:[0m
+[0m* Update external systems with the latest state from React.[0m
+[0m* Subscribe for updates from some external system, calling setState in a callback function when external state changes.[0m
+[0m[0m
+[0mCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).[0m
+[0m[0m
+[0mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\dashboard\NotificationBell.tsx:33:9[0m
+[0m  31 |[0m
+[0m  32 |     useEffect(() => {[0m
+[0m> 33 |         fetchNotifications();[0m
+[0m     |         ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect[0m
+[0m  34 |         const interval = setInterval(fetchNotifications, 30000);[0m
+[0m  35 |         return () => clearInterval(interval);[0m
+[0m  36 |     }, []);  [2mreact-hooks/set-state-in-effect[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\dashboard\page.tsx[24m[0m
+[0m  [2m21:11[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m  [2m72:27[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\diagnosis\page.tsx[24m[0m
+[0m  [2m196:37[22m  [31merror[39m  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  [2mreact/no-unescaped-entities[22m[0m
+[0m  [2m196:61[22m  [31merror[39m  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  [2mreact/no-unescaped-entities[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\diet\__tests__\diet.test.tsx[24m[0m
+[0m  [2m65:17[22m  [33mwarning[39m  'container' is assigned a value but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\diet\page.tsx[24m[0m
+[0m  [2m20:11[22m  [33mwarning[39m  'Meal' is defined but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\health\page.tsx[24m[0m
+[0m  [2m18:27[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m  [2m19:23[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m  [2m20:24[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\ocr\__tests__\ocr.test.tsx[24m[0m
+[0m  [2m1:26[22m  [33mwarning[39m  'waitFor' is defined but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\settings\page.tsx[24m[0m
+[0m  [2m19:9[22m  [31merror[39m  Error: Calling setState synchronously within an effect can trigger cascading renders[0m
+[0m[0m
+[0mEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:[0m
+[0m* Update external systems with the latest state from React.[0m
+[0m* Subscribe for updates from some external system, calling setState in a callback function when external state changes.[0m
+[0m[0m
+[0mCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).[0m
+[0m[0m
+[0mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\(dashboard)\settings\page.tsx:19:9[0m
+[0m  17 |[0m
+[0m  18 |     useEffect(() => {[0m
+[0m> 19 |         setMounted(true);[0m
+[0m     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect[0m
+[0m  20 |     }, []);[0m
+[0m  21 |[0m
+[0m  22 |     const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {  [2mreact-hooks/set-state-in-effect[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\app\[locale]\layout.tsx[24m[0m
+[0m   [2m6:23[22m  [33mwarning[39m  'getRequestConfig' is defined but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m  [2m52:43[22m  [31merror[39m    Unexpected any. Specify a different type      [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\features\onboarding\OnboardingWizard\OnboardingWizard.tsx[24m[0m
+[0m  [2m15:11[22m  [33mwarning[39m  't' is assigned a value but never used    [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m  [2m19:48[22m  [31merror[39m    Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\features\onboarding\OnboardingWizard\__tests__\OnboardingWizard.test.tsx[24m[0m
+[0m  [2m91:37[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\shared\ErrorBoundary\SentryErrorBoundary.tsx[24m[0m
+[0m  [2m19:44[22m  [33mwarning[39m  '_' is defined but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\shared\charts\HealthChart.tsx[24m[0m
+[0m   [2m9:5[22m   [33mwarning[39m  'PieChart' is defined but never used      [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m   [2m9:15[22m  [33mwarning[39m  'Pie' is defined but never used           [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m   [2m9:20[22m  [33mwarning[39m  'Cell' is defined but never used          [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m  [2m15:20[22m  [31merror[39m    Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\shared\layout\AppShell.spec.tsx[24m[0m
+[0m  [2m10:46[22m  [31merror[39m    Unexpected any. Specify a different type   [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m  [2m38:15[22m  [33mwarning[39m  'navs' is assigned a value but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\shared\layout\Sidebar.spec.tsx[24m[0m
+[0m  [2m12:46[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\shared\ui\Button\Button.spec.tsx[24m[0m
+[0m  [2m34:17[22m  [33mwarning[39m  'container' is assigned a value but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\components\shared\ui\SkeletonLoader\SkeletonLoader.spec.tsx[24m[0m
+[0m  [2m1:18[22m  [33mwarning[39m  'screen' is defined but never used  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\src\i18n\request.ts[24m[0m
+[0m  [2m9:56[22m  [31merror[39m  Unexpected any. Specify a different type  [2m@typescript-eslint/no-explicit-any[22m[0m
+[0m[0m
+[0m[31m[1m✖ 29 problems (17 errors, 12 warnings)[22m[39m[0m
+[0m[31m[1m[22m[39m[0m

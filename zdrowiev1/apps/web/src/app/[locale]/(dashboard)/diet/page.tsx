@@ -8,21 +8,7 @@ import { SkeletonLoader } from '@/components/shared/ui/SkeletonLoader/SkeletonLo
 import { Button } from '@/components/shared/ui/Button/Button';
 import styles from '@/styles/Feature.module.css';
 
-interface Product {
-    name: string;
-    quantity: number;
-    calories: number;
-    protein: number;
-    carbs: number;
-    fat: number;
-}
 
-interface Meal {
-    id: string;
-    name: string;
-    consumedAt: string;
-    products: Product[];
-}
 
 interface Summary {
     total: { calories: number; protein: number; carbs: number; fat: number };

@@ -4,9 +4,12 @@ import Login from '../page'
 import '@testing-library/jest-dom'
 
 const mockPush = vi.fn()
-vi.mock('next/navigation', () => ({
-    useRouter: () => ({ push: mockPush, replace: vi.fn() }),
-    usePathname: () => '/pl/login',
+const mockReplace = vi.fn()
+vi.mock('@/i18n/routing', () => ({
+    useRouter: () => ({ push: mockPush, replace: mockReplace }),
+    usePathname: () => '/login',
+    Link: ({ children, href, ...props }: { children: React.ReactNode; href: string;[key: string]: unknown }) => <a href={href} {...props}>{children}</a>,
+    redirect: vi.fn(),
 }))
 
 vi.mock('next-intl', () => ({

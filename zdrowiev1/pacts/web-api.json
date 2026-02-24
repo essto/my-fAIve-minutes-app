@@ -193,6 +193,46 @@
         },
         "status": 200
       }
+    },
+    {
+      "description": "poprawne żądanie logowania",
+      "providerStates": [
+        {
+          "name": "użytkownik demo istnieje"
+        }
+      ],
+      "request": {
+        "body": {
+          "email": "demo@example.com",
+          "password": "Password123!"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/api/auth/login"
+      },
+      "response": {
+        "body": {
+          "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
     }
   ],
   "metadata": {

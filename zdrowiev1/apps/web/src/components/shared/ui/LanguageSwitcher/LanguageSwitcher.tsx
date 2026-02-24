@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/routing';
 import { useTransition } from 'react';
 import { Button } from '../Button/Button';
 
@@ -11,23 +11,9 @@ export const LanguageSwitcher = () => {
     const locale = useLocale();
     const pathname = usePathname();
 
-    const switchLanguage = (newLocale: string) => {
+    const switchLanguage = (newLocale: 'pl' | 'en') => {
         startTransition(() => {
-            // Create new path by replacing the current locale prefix with the new one
-            const pathSegments = pathname.split('/').filter(Boolean);
-
-            let newPathname = `/${newLocale}`;
-
-            // If path starts with a locale, remove it
-            if (['pl', 'en'].includes(pathSegments[0])) {
-                pathSegments.shift();
-            }
-
-            if (pathSegments.length > 0) {
-                newPathname += `/${pathSegments.join('/')}`;
-            }
-
-            router.replace(newPathname);
+            router.replace(pathname, { locale: newLocale });
         });
     };
 

@@ -62,7 +62,7 @@ describe('Diet Page', () => {
             json: () => Promise.resolve(mockSummary),
         } as Response);
 
-        const { container } = render(<DietPage />);
+        render(<DietPage />);
 
         await waitFor(() => {
             expect(screen.getByText('Zaloguj Posiłek')).toBeInTheDocument();

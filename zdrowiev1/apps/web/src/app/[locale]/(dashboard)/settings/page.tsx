@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { User, Globe, Moon, Bell, Smartphone, Monitor, Sun } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -16,13 +16,13 @@ export default function SettingsPage() {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
     }, []);
 
     const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newLocale = e.target.value;
-        const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-        router.replace(newPath);
+        const newLocale = e.target.value as 'pl' | 'en';
+        router.replace(pathname, { locale: newLocale });
     };
 
     return (

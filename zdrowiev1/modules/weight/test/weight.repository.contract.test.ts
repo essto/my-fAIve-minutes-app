@@ -51,6 +51,17 @@ describe('WeightRepository (Drizzle) Contract Test', () => {
                 user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                 value DOUBLE PRECISION NOT NULL,
                 unit VARCHAR(10) DEFAULT 'kg',
+                bmi DOUBLE PRECISION,
+                fat_percent DOUBLE PRECISION,
+                fat_kg DOUBLE PRECISION,
+                muscle_mass_kg DOUBLE PRECISION,
+                muscle_percent DOUBLE PRECISION,
+                water_percent DOUBLE PRECISION,
+                bmr_kcal DOUBLE PRECISION,
+                bone_mass_kg DOUBLE PRECISION,
+                protein_percent DOUBLE PRECISION,
+                lean_mass_kg DOUBLE PRECISION,
+                metabolic_age DOUBLE PRECISION,
                 source VARCHAR(50),
                 timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
@@ -105,5 +116,25 @@ describe('WeightRepository (Drizzle) Contract Test', () => {
     const saved = await repository.save(reading);
     const fetched = await repository.findByUserId(testUserId);
     expect(fetched[0].value).toBe(82.345);
+  });
+
+  it('saves and retrieves bmi and fatPercent', async () => {
+    const saved = await repository.save({
+      userId: testUserId,
+      value: 83.0,
+      unit: 'kg',
+      bmi: 26.3,
+      fatPercent: 22.1,
+      muscleMassKg: 38.5,
+      waterPercent: 56.0,
+      metabolicAge: 40,
+      timestamp: new Date('2024-06-01'),
+    });
+
+    expect(saved.bmi).toBe(26.3);
+    expect(saved.fatPercent).toBe(22.1);
+
+    const found = await repository.findByUserId(testUserId);
+    expect(found[0].bmi).toBeCloseTo(26.3);
   });
 });

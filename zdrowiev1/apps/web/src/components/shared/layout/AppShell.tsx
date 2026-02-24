@@ -3,8 +3,7 @@
 
 import React from 'react';
 import { Sidebar } from './Sidebar';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/routing';
 import { ThemeToggle } from '../ui/ThemeToggle/ThemeToggle';
 import { motion } from 'framer-motion';
 

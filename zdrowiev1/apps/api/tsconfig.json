@@ -15,6 +15,7 @@
         "../../modules/*/ports/**/*",
         "../../modules/*/adapters/**/*",
         "../../modules/*/src/**/*",
+        "../../modules/*/*.ts",
         "../../modules/shared/*/src/**/*",
         "../../modules/notifications/*.ts",
         "../../packages/*/src/**/*"

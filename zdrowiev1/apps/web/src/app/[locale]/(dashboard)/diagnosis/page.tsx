@@ -193,7 +193,7 @@ export default function DiagnosisPage() {
                                     <CardTitle className="text-2xl">Zalecenia medyczne</CardTitle>
                                 </div>
                                 <div className="p-8 bg-color-gray-100 dark:bg-color-gray-800 rounded-2xl text-lg leading-relaxed italic mb-8 border border-border">
-                                    "{result.recommendation}"
+                                    &quot;{result.recommendation}&quot;
                                 </div>
                                 <div className="p-4 rounded-xl bg-accent/10 border border-accent/20 text-accent text-sm mb-10">
                                     <strong>UWAGA:</strong> To narzędzie służy jedynie do celów informacyjnych i nie zastępuje profesjonalnej porady lekarskiej.

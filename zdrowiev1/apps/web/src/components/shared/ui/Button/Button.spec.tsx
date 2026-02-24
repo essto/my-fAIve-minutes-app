@@ -31,7 +31,7 @@ describe('Button', () => {
     });
 
     it('applies variant classes correctly', () => {
-        const { container } = render(<Button variant="secondary">Secondary</Button>);
+        render(<Button variant="secondary">Secondary</Button>);
         // We will check if it has the secondary class from CSS modules
         // Using a data attribute or class name matching
         const button = screen.getByRole('button');

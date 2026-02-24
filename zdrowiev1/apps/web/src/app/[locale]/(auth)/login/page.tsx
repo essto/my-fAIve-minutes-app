@@ -1,15 +1,15 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '../../../../i18n/routing';
 import { useState } from 'react';
 import { z } from 'zod';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { LanguageSwitcher } from '../../../../components/shared/ui/LanguageSwitcher/LanguageSwitcher';
 
 export default function Login() {
     const t = useTranslations('Auth');
+    const locale = useLocale();
     const [form, setForm] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [isLoading, setIsLoading] = useState(false);

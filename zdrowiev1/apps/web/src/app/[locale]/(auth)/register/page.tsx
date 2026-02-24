@@ -1,9 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, Link } from '@/i18n/routing';
 import { useState } from 'react';
 import { z } from 'zod';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const schema = z.object({
@@ -36,15 +35,17 @@ export default function Register() {
             }
 
             router.push('/login?registered=true');
-        } catch (err: any) {
+        } catch (err: unknown) {
             if (err instanceof z.ZodError) {
                 const newErrors: Record<string, string> = {};
                 err.errors.forEach((e) => {
                     if (e.path) newErrors[e.path[0] as string] = e.message;
                 });
                 setErrors(newErrors);
-            } else {
+            } else if (err instanceof Error) {
                 setErrors({ general: err.message || 'Błąd rejestracji.' });
+            } else {
+                setErrors({ general: 'Wystąpił nieznany błąd.' });
             }
         } finally {
             setIsLoading(false);

@@ -25,6 +25,30 @@ export class WeightService {
     return this.repository.findByUserId(userId);
   }
 
+  async getHealthSummary(userId: string): Promise<{
+    current: number;
+    change30d: number;
+    bmi: number | null;
+  }> {
+    const all = await this.repository.findByUserId(userId);
+    if (!all || all.length === 0) {
+      return { current: 0, change30d: 0, bmi: 0 };
+    }
+    const sorted = [...all].sort(
+      (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    );
+    const latest = sorted[0];
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const baseline = sorted.find((r) => new Date(r.timestamp) <= thirtyDaysAgo);
+    const change30d = baseline ? +(latest.value - baseline.value).toFixed(1) : 0;
+    return {
+      current: latest.value,
+      change30d,
+      bmi: latest.bmi ?? null,
+    };
+  }
+
   analyzeWeightTrend(readings: { value: number; timestamp: Date }[]): { slope: number } {
     if (readings.length < 2) {
       throw new Error('At least 2 records required');

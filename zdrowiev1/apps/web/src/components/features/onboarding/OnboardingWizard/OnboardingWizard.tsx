@@ -1,9 +1,9 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+
 
 import { useOnboarding } from './useOnboarding';
 import { ProfileStep } from './steps/ProfileStep';
@@ -12,11 +12,9 @@ import { DevicesStep } from './steps/DevicesStep';
 
 export const OnboardingWizard = () => {
     const router = useRouter();
-    const t = useTranslations('Onboarding');
     const { step, data, nextStep, prevStep, updateProfile, updateGoals, updateDevices } = useOnboarding();
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleComplete = async (devicesData: any) => {
+    const handleComplete = async (devicesData: Record<string, unknown>) => {
         updateDevices(devicesData);
         setIsSubmitting(true);
 

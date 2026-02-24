@@ -1,0 +1,185 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/od_zera_do_ai/Zdrowie_v1/zdrowiev1/apps/web[39m
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx
+[22m[39m[18:01:52.368] [32mINFO[39m (65020): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/settings/__tests__/page.test.tsx
+[22m[39m[18:01:52.616] [32mINFO[39m (69800): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/diagnosis/__tests__/diagnosis.test.tsx
+[22m[39m[18:01:52.915] [32mINFO[39m (18084): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/features/onboarding/OnboardingWizard/__tests__/OnboardingWizard.test.tsx
+[22m[39m[18:01:52.975] [32mINFO[39m (58488): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ui/Card/Card.spec.tsx
+[22m[39m[18:01:53.034] [32mINFO[39m (61688): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ui/Button/Button.spec.tsx
+[22m[39m[18:01:53.050] [32mINFO[39m (10800): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ui/Button/__tests__/Button.test.tsx
+[22m[39m[18:01:53.091] [32mINFO[39m (9268): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(auth)/login/__tests__/login.test.tsx
+[22m[39m[18:01:53.331] [32mINFO[39m (50052): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/layout/AppShell.spec.tsx
+[22m[39m[18:01:53.486] [32mINFO[39m (28456): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/diet/__tests__/diet.test.tsx
+[22m[39m[18:01:53.620] [32mINFO[39m (36624): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx
+[22m[39m[18:01:53.668] [32mINFO[39m (48824): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/components/shared/ui/Button/__tests__/Button.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 965[2mms[22m[39m
+     [33m[2m✓[22m[39m should trigger onClick handler when clicked [33m 713[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/Card/Card.spec.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 1027[2mms[22m[39m
+     [33m[2m✓[22m[39m renders CardTitle and CardHeader properly [33m 843[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/Button/Button.spec.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 1396[2mms[22m[39m
+     [33m[2m✓[22m[39m renders children correctly [33m 943[2mms[22m[39m
+ [31m❯[39m src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 148[2mms[22m[39m
+[31m     [31m×[31m shows premium SkeletonLoaders on loading[39m[32m 127[2mms[22m[39m
+[31m     [31m×[31m displays dashboard with Cards and Health Score ring after loading[39m[32m 12[2mms[22m[39m
+ [31m❯[39m src/app/[locale]/(auth)/login/__tests__/login.test.tsx [2m([22m[2m4 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[32m 237[2mms[22m[39m
+[31m     [31m×[31m renders login form[39m[32m 164[2mms[22m[39m
+[31m     [31m×[31m shows validation errors for empty form[39m[32m 9[2mms[22m[39m
+[31m     [31m×[31m shows validation errors for invalid input[39m[32m 17[2mms[22m[39m
+[31m     [31m×[31m submits valid form and redirects[39m[32m 19[2mms[22m[39m
+ [32m✓[39m src/app/[locale]/(dashboard)/settings/__tests__/page.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1470[2mms[22m[39m
+     [33m[2m✓[22m[39m theme toggle switches dark/light [33m 907[2mms[22m[39m
+ [32m✓[39m src/components/shared/layout/AppShell.spec.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 894[2mms[22m[39m
+     [33m[2m✓[22m[39m renders a mobile top header [33m 678[2mms[22m[39m
+ [32m✓[39m src/app/[locale]/(dashboard)/diet/__tests__/diet.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1663[2mms[22m[39m
+     [33m[2m✓[22m[39m opens modal using Card when Zaloguj Posiłek is clicked [33m 1439[2mms[22m[39m
+[90mstderr[2m | src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx[2m > [22m[2mOCR Page[2m > [22m[2muploads and displays results within a Card
+[22m[39mThe current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+
+[90mstderr[2m | src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx[2m > [22m[2mOCR Page[2m > [22m[2muploads and displays results within a Card
+[22m[39mEncountered two children with the same key, ``. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1451[2mms[22m[39m
+     [33m[2m✓[22m[39m previews image using Card and Button [33m 715[2mms[22m[39m
+     [33m[2m✓[22m[39m uploads and displays results within a Card [33m 545[2mms[22m[39m
+[90mstderr[2m | src/app/[locale]/(dashboard)/diagnosis/__tests__/diagnosis.test.tsx[2m > [22m[2mDiagnosis Page[2m > [22m[2msubmits report and displays results in a Card
+[22m[39mThe current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+
+ [32m✓[39m src/app/[locale]/(dashboard)/diagnosis/__tests__/diagnosis.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 3057[2mms[22m[39m
+     [33m[2m✓[22m[39m proceeds to step 2 and uses Cards for symptom details [33m 1580[2mms[22m[39m
+     [33m[2m✓[22m[39m submits report and displays results in a Card [33m 1279[2mms[22m[39m
+[90mstdout[2m | src/components/shared/ui/LanguageSwitcher/__tests__/LanguageSwitcher.test.tsx
+[22m[39m[18:02:02.119] [32mINFO[39m (50348): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/layout/Sidebar.spec.tsx
+[22m[39m[18:02:02.182] [32mINFO[39m (37656): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/health/__tests__/health.test.tsx
+[22m[39m[18:02:02.550] [32mINFO[39m (13252): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ErrorBoundary/__tests__/SentryErrorBoundary.test.tsx
+[22m[39m[18:02:02.898] [32mINFO[39m (64176): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/components/features/onboarding/OnboardingWizard/__tests__/OnboardingWizard.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[33m 7109[2mms[22m[39m
+     [33m[2m✓[22m[39m renders step 1 (Profile) by default [33m 1068[2mms[22m[39m
+     [33m[2m✓[22m[39m navigates step 1 -> 2 -> 3 [33m 2064[2mms[22m[39m
+     [33m[2m✓[22m[39m can go back preserving data [33m 1761[2mms[22m[39m
+     [33m[2m✓[22m[39m submits onboarding on final step [33m 2000[2mms[22m[39m
+ [32m✓[39m src/components/shared/layout/Sidebar.spec.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 180[2mms[22m[39m
+[90mstdout[2m | src/components/shared/ui/SkeletonLoader/SkeletonLoader.spec.tsx
+[22m[39m[18:02:03.150] [32mINFO[39m (2304): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/components/shared/ui/LanguageSwitcher/__tests__/LanguageSwitcher.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 565[2mms[22m[39m
+     [33m[2m✓[22m[39m switching language calls router.replace [33m 482[2mms[22m[39m
+ [32m✓[39m src/app/[locale]/(dashboard)/health/__tests__/health.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 206[2mms[22m[39m
+[90mstdout[2m | src/lib/__tests__/utils.test.ts
+[22m[39m[18:02:03.475] [32mINFO[39m (45624): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/components/shared/ErrorBoundary/__tests__/SentryErrorBoundary.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 98[2mms[22m[39m
+ [32m✓[39m src/lib/__tests__/utils.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/SkeletonLoader/SkeletonLoader.spec.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22mrenders login form
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22mshows validation errors for empty form
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22mshows validation errors for invalid input
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22msubmits valid form and redirects
+[31m[1mError[22m: [vitest] No "usePathname" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+[39m
+vi.mock(import("next/navigation"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+[36m [2m❯[22m LanguageSwitcher src/components/shared/ui/LanguageSwitcher/LanguageSwitcher.tsx:[2m12:22[22m[39m
+    [90m 10| [39m    [35mconst[39m router [33m=[39m [34museRouter[39m()[33m;[39m
+    [90m 11| [39m    [35mconst[39m locale [33m=[39m [34museLocale[39m()[33m;[39m
+    [90m 12| [39m    [35mconst[39m pathname [33m=[39m [34musePathname[39m()[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m 13| [39m
+    [90m 14| [39m    [35mconst[39m switchLanguage [33m=[39m (newLocale[33m:[39m string) [33m=>[39m {
+[90m [2m❯[22m Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m25904:20[22m[39m
+[90m [2m❯[22m renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m7662:22[22m[39m
+[90m [2m❯[22m updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m10166:19[22m[39m
+[90m [2m❯[22m beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m11778:18[22m[39m
+[90m [2m❯[22m runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m874:13[22m[39m
+[90m [2m❯[22m performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m17641:22[22m[39m
+[90m [2m❯[22m workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m17469:41[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx[2m > [22mDashboard Page[2m > [22mshows premium SkeletonLoaders on loading
+[41m[1m FAIL [22m[49m src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx[2m > [22mDashboard Page[2m > [22mdisplays dashboard with Cards and Health Score ring after loading
+[31m[1mTypeError[22m: router.replace is not a function[39m
+[36m [2m❯[22m src/app/[locale]/(dashboard)/dashboard/page.tsx:[2m55:24[22m[39m
+    [90m 53| [39m            const hasCompleted = localStorage.getItem('onboarding_comp…
+    [90m 54| [39m            [35mif[39m ([33m![39mhasCompleted) {
+    [90m 55| [39m                router[33m.[39m[34mreplace[39m([32m'/onboarding'[39m)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 56| [39m                [35mreturn[39m[33m;[39m
+    [90m 57| [39m            }
+[90m [2m❯[22m Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m25989:20[22m[39m
+[90m [2m❯[22m runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m874:13[22m[39m
+[90m [2m❯[22m commitHookEffectListMount ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m13249:29[22m[39m
+[90m [2m❯[22m commitHookPassiveMountEffects ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m13336:11[22m[39m
+[90m [2m❯[22m commitPassiveMountOnFiber ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m15484:13[22m[39m
+[90m [2m❯[22m recursivelyTraversePassiveMountEffects ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m15439:11[22m[39m
+[90m [2m❯[22m commitPassiveMountOnFiber ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m15519:11[22m[39m
+[90m [2m❯[22m flushPassiveEffects ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m18432:9[22m[39m
+[90m [2m❯[22m ../../node_modules/react-dom/cjs/react-dom-client.development.js:[2m17923:15[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m15 passed[39m[22m[90m (17)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m51 passed[39m[22m[90m (57)[39m
+[2m   Start at [22m 18:01:43
+[2m   Duration [22m 20.63s[2m (transform 5.80s, setup 62.73s, import 30.33s, tests 20.53s, environment 68.25s)[22m
+

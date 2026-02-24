@@ -4,8 +4,10 @@ import { VisualizationOrchestrator } from './domain/services/visualization-orche
 import { ChartConfigService } from './domain/services/chart-config.service';
 import { DashboardService } from './domain/services/dashboard.service';
 import { ExportService } from './domain/services/export.service';
+import { WeightModule } from '../weight/weight.module';
 
 @Module({
+  imports: [WeightModule],
   controllers: [VisualizationController],
   providers: [VisualizationOrchestrator, ChartConfigService, DashboardService, ExportService],
   exports: [VisualizationOrchestrator],

@@ -1,0 +1,874 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/od_zera_do_ai/Zdrowie_v1/zdrowiev1/apps/web[39m
+
+[90mstdout[2m | src/components/shared/ui/Button/__tests__/Button.test.tsx
+[22m[39m[18:05:17.354] [32mINFO[39m (37160): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx
+[22m[39m[18:05:17.599] [32mINFO[39m (60908): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ui/Button/Button.spec.tsx
+[22m[39m[18:05:17.619] [32mINFO[39m (30148): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(auth)/login/__tests__/login.test.tsx
+[22m[39m[18:05:17.718] [32mINFO[39m (47124): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ui/Card/Card.spec.tsx
+[22m[39m[18:05:17.893] [32mINFO[39m (60592): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/diet/__tests__/diet.test.tsx
+[22m[39m[18:05:18.314] [32mINFO[39m (46968): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/diagnosis/__tests__/diagnosis.test.tsx
+[22m[39m[18:05:18.351] [32mINFO[39m (16796): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/layout/AppShell.spec.tsx
+[22m[39m[18:05:18.420] [32mINFO[39m (32684): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/features/onboarding/OnboardingWizard/__tests__/OnboardingWizard.test.tsx
+[22m[39m[18:05:18.580] [32mINFO[39m (67652): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx
+[22m[39m[18:05:18.676] [32mINFO[39m (19564): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/settings/__tests__/page.test.tsx
+[22m[39m[18:05:18.863] [32mINFO[39m (42492): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/components/shared/ui/Button/__tests__/Button.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 1121[2mms[22m[39m
+     [33m[2m✓[22m[39m should trigger onClick handler when clicked [33m 731[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/Card/Card.spec.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 1559[2mms[22m[39m
+     [33m[2m✓[22m[39m renders CardTitle and CardHeader properly [33m 943[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/Button/Button.spec.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 1703[2mms[22m[39m
+     [33m[2m✓[22m[39m renders children correctly [33m 673[2mms[22m[39m
+     [33m[2m✓[22m[39m handles click events [33m 707[2mms[22m[39m
+ [32m✓[39m src/app/[locale]/(dashboard)/diet/__tests__/diet.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1885[2mms[22m[39m
+     [33m[2m✓[22m[39m shows SkeletonLoaders on loading instead of generic divs [33m 500[2mms[22m[39m
+     [33m[2m✓[22m[39m opens modal using Card when Zaloguj Posiłek is clicked [33m 1255[2mms[22m[39m
+ [31m❯[39m src/app/[locale]/(auth)/login/__tests__/login.test.tsx [2m([22m[2m4 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[33m 1745[2mms[22m[39m
+[31m     [31m×[31m renders login form[39m[33m 364[2mms[22m[39m
+[31m     [31m×[31m shows validation errors for empty form[39m[33m 1285[2mms[22m[39m
+[31m     [31m×[31m shows validation errors for invalid input[39m[32m 31[2mms[22m[39m
+[31m     [31m×[31m submits valid form and redirects[39m[32m 53[2mms[22m[39m
+ [31m❯[39m src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1177[2mms[22m[39m
+     [32m✓[39m shows premium SkeletonLoaders on loading[32m 84[2mms[22m[39m
+[31m     [31m×[31m displays dashboard with Cards and Health Score ring after loading[39m[33m 1083[2mms[22m[39m
+ [32m✓[39m src/components/shared/layout/AppShell.spec.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1333[2mms[22m[39m
+     [33m[2m✓[22m[39m renders children and the sidebar [33m 319[2mms[22m[39m
+     [33m[2m✓[22m[39m renders a mobile top header [33m 974[2mms[22m[39m
+[90mstderr[2m | src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx[2m > [22m[2mOCR Page[2m > [22m[2muploads and displays results within a Card
+[22m[39mThe current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+
+[90mstderr[2m | src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx[2m > [22m[2mOCR Page[2m > [22m[2muploads and displays results within a Card
+[22m[39mEncountered two children with the same key, ``. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m src/app/[locale]/(dashboard)/ocr/__tests__/ocr.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 2758[2mms[22m[39m
+     [33m[2m✓[22m[39m previews image using Card and Button [33m 1502[2mms[22m[39m
+     [33m[2m✓[22m[39m uploads and displays results within a Card [33m 1078[2mms[22m[39m
+ [32m✓[39m src/app/[locale]/(dashboard)/settings/__tests__/page.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 2502[2mms[22m[39m
+     [33m[2m✓[22m[39m renders all sections [33m 650[2mms[22m[39m
+     [33m[2m✓[22m[39m theme toggle switches dark/light [33m 1548[2mms[22m[39m
+[90mstderr[2m | src/app/[locale]/(dashboard)/diagnosis/__tests__/diagnosis.test.tsx[2m > [22m[2mDiagnosis Page[2m > [22m[2msubmits report and displays results in a Card
+[22m[39mThe current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+The current testing environment is not configured to support act(...)
+
+ [32m✓[39m src/app/[locale]/(dashboard)/diagnosis/__tests__/diagnosis.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 3829[2mms[22m[39m
+     [33m[2m✓[22m[39m proceeds to step 2 and uses Cards for symptom details [33m 2007[2mms[22m[39m
+     [33m[2m✓[22m[39m submits report and displays results in a Card [33m 1560[2mms[22m[39m
+[90mstdout[2m | src/components/shared/ui/LanguageSwitcher/__tests__/LanguageSwitcher.test.tsx
+[22m[39m[18:05:32.403] [32mINFO[39m (66256): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/app/[locale]/(dashboard)/health/__tests__/health.test.tsx
+[22m[39m[18:05:32.658] [32mINFO[39m (12196): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/layout/Sidebar.spec.tsx
+[22m[39m[18:05:32.827] [32mINFO[39m (30436): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/components/shared/ErrorBoundary/__tests__/SentryErrorBoundary.test.tsx
+[22m[39m[18:05:34.006] [32mINFO[39m (62564): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/app/[locale]/(dashboard)/health/__tests__/health.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 374[2mms[22m[39m
+ [32m✓[39m src/components/shared/layout/Sidebar.spec.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 562[2mms[22m[39m
+     [33m[2m✓[22m[39m renders logo and navigation links [33m 333[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/LanguageSwitcher/__tests__/LanguageSwitcher.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 976[2mms[22m[39m
+     [33m[2m✓[22m[39m switching language calls router.replace [33m 879[2mms[22m[39m
+[90mstdout[2m | src/components/shared/ui/SkeletonLoader/SkeletonLoader.spec.tsx
+[22m[39m[18:05:34.611] [32mINFO[39m (57556): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+[90mstdout[2m | src/lib/__tests__/utils.test.ts
+[22m[39m[18:05:34.672] [32mINFO[39m (58748): [36m0.4.28: pact native library successfully found, and the correct version[39m
+
+
+ [32m✓[39m src/lib/__tests__/utils.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+ [32m✓[39m src/components/shared/ErrorBoundary/__tests__/SentryErrorBoundary.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 201[2mms[22m[39m
+ [32m✓[39m src/components/features/onboarding/OnboardingWizard/__tests__/OnboardingWizard.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[33m 9448[2mms[22m[39m
+     [33m[2m✓[22m[39m renders step 1 (Profile) by default [33m 1545[2mms[22m[39m
+     [33m[2m✓[22m[39m validates required fields before next [33m 417[2mms[22m[39m
+     [33m[2m✓[22m[39m navigates step 1 -> 2 -> 3 [33m 2653[2mms[22m[39m
+     [33m[2m✓[22m[39m can go back preserving data [33m 2249[2mms[22m[39m
+     [33m[2m✓[22m[39m submits onboarding on final step [33m 2554[2mms[22m[39m
+ [32m✓[39m src/components/shared/ui/SkeletonLoader/SkeletonLoader.spec.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 5 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22mrenders login form
+[31m[1mTestingLibraryElementError[22m: Unable to find a label with the text of: Email
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen flex items-center justify-center p-4 bg-background w-full"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"w-full max-w-md glass-card p-8 md:p-10 relative overflow-hidden"[31m
+        [33mstyle[31m=[32m"opacity: 0; transform: translateY(20px) scale(0.95);"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-light"[31m
+        [36m/>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-4 right-4"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex gap-2 items-center"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-sm font-bold w-6 text-center"[31m
+            [36m>[31m
+              [0mPL[0m
+            [36m</div>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"_button_6e6273 _outline_6e6273"[31m
+              [33mdata-loading[31m=[32m"false"[31m
+              [33mtitle[31m=[32m"Zmień język / Change language"[31m
+            [36m>[31m
+              [36m<span[31m
+                [33mclass[31m=[32m"_content_6e6273"[31m
+              [36m>[31m
+                [0mEnglish[0m
+              [36m</span>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mb-8 text-center mt-2"[31m
+        [36m>[31m
+          [36m<h1[31m
+            [33mclass[31m=[32m"text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2"[31m
+          [36m>[31m
+            [0mlogin[0m
+          [36m</h1>[31m
+        [36m</div>[31m
+        [36m<form[31m
+          [33mclass[31m=[32m"space-y-5"[31m
+          [33mnovalidate[31m=[32m""[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1.5"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"text-sm font-medium text-foreground ml-1"[31m
+              [33mfor[31m=[32m"email"[31m
+            [36m>[31m
+              [0memail[0m
+            [36m</label>[31m
+            [36m<input[31m
+              [33mautocomplete[31m=[32m"email"[31m
+              [33mclass[31m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[31m
+              [33mid[31m=[32m"email"[31m
+              [33mplaceholder[31m=[32m"email"[31m
+              [33mtype[31m=[32m"email"[31m
+              [33mvalue[31m=[32m""[31m
+            [36m/>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1.5"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"text-sm font-medium text-foreground ml-1"[31m
+              [33mfor[31m=[32m"password"[31m
+            [36m>[31m
+              [0mpassword[0m
+            [36m</label>[31m
+            [36m<input[31m
+              [33mautocomplete[31m=[32m"current-password"[31m
+              [33mclass[31m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[31m
+              [33mid[31m=[32m"password"[31m
+              [33mplaceholder[31m=[32m"••••••••"[31m
+              [33mtype[31m=[32m"password"[31m
+              [33mvalue[31m=[32m""[31m
+            [36m/>[31m
+            [0m [0m
+          [36m</div>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"w-full mt-4 bg-brand hover:bg-brand-hover text-white font-semibold py-3.5 rounded-xl transition-all shadow-glow focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"[31m
+            [33mtype[31m=[32m"submit"[31m
+          [36m>[31m
+            [0mlogin[0m
+          [36m</button>[31m
+        [36m</form>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mt-8 text-center text-sm text-muted-foreground"[31m
+        [36m>[31m
+          [0mNie masz konta?[0m
+          [0m [0m
+          [36m<a[31m
+            [33mclass[31m=[32m"text-brand hover:text-brand-light font-semibold transition-colors"[31m
+            [33mhref[31m=[32m"/register"[31m
+          [36m>[31m
+            [0mZarejestruj się[0m
+          [36m</a>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m getAllByLabelText ../../node_modules/@testing-library/dom/dist/queries/label-text.js:[2m111:38[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/[locale]/(auth)/login/__tests__/login.test.tsx:[2m25:23[22m[39m
+    [90m 23| [39m    [34mtest[39m([32m'renders login form'[39m[33m,[39m () [33m=>[39m {
+    [90m 24| [39m        [34mrender[39m([33m<[39m[33mLogin[39m [33m/[39m[33m>[39m)
+    [90m 25| [39m        [34mexpect[39m(screen[33m.[39m[34mgetByLabelText[39m([32m'Email'[39m))[33m.[39m[34mtoBeInTheDocument[39m()
+    [90m   | [39m                      [31m^[39m
+    [90m 26| [39m        [34mexpect[39m(screen[33m.[39m[34mgetByLabelText[39m([32m'Hasło'[39m))[33m.[39m[34mtoBeInTheDocument[39m()
+    [90m 27| [39m        expect(screen.getByRole('button', { name: 'Zaloguj' })).toBeIn…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22mshows validation errors for empty form
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an accessible element with the role "button" and name "Zaloguj"
+
+Here are the accessible roles:
+
+  button:
+
+  Name "English":
+  [36m<button[39m
+    [33mclass[39m=[32m"_button_6e6273 _outline_6e6273"[39m
+    [33mdata-loading[39m=[32m"false"[39m
+    [33mtitle[39m=[32m"Zmień język / Change language"[39m
+  [36m/>[39m
+
+  Name "login":
+  [36m<button[39m
+    [33mclass[39m=[32m"w-full mt-4 bg-brand hover:bg-brand-hover text-white font-semibold py-3.5 rounded-xl transition-all shadow-glow focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"[39m
+    [33mtype[39m=[32m"submit"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name "login":
+  [36m<h1[39m
+    [33mclass[39m=[32m"text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "email":
+  [36m<input[39m
+    [33mautocomplete[39m=[32m"email"[39m
+    [33mclass[39m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[39m
+    [33mid[39m=[32m"email"[39m
+    [33mplaceholder[39m=[32m"email"[39m
+    [33mtype[39m=[32m"email"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  link:
+
+  Name "Zarejestruj się":
+  [36m<a[39m
+    [33mclass[39m=[32m"text-brand hover:text-brand-light font-semibold transition-colors"[39m
+    [33mhref[39m=[32m"/register"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen flex items-center justify-center p-4 bg-background w-full"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"w-full max-w-md glass-card p-8 md:p-10 relative overflow-hidden"[39m
+        [33mstyle[39m=[32m"opacity: 0; transform: translateY(20px) scale(0.95);"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-light"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"absolute top-4 right-4"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex gap-2 items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"text-sm font-bold w-6 text-center"[39m
+            [36m>[39m
+              [0mPL[0m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"_button_6e6273 _outline_6e6273"[39m
+              [33mdata-loading[39m=[32m"false"[39m
+              [33mtitle[39m=[32m"Zmień język / Change language"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"_content_6e6273"[39m
+              [36m>[39m
+                [0mEnglish[0m
+              [36m</span>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mb-8 text-center mt-2"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2"[39m
+          [36m>[39m
+            [0mlogin[0m
+          [36m</h1>[39m
+        [36m</div>[39m
+        [36m<form[39m
+          [33mclass[39m=[32m"space-y-5"[39m
+          [33mnovalidate[39m=[32m""[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"space-y-1.5"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"text-sm font-medium text-foreground ml-1"[39m
+              [33mfor[39m=[32m"email"[39m
+            [36m>[39m
+              [0memail[0m
+            [36m</label>[39m
+            [36m<input[39m
+              [33mautocomplete[39m=[32m"email"[39m
+              [33mclass[39m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[39m
+              [33mid[39m=[32m"email"[39m
+              [33mplaceholder[39m=[32m"email"[39m
+              [33mtype[39m=[32m"email"[39m
+              [33mvalue[39m=[32m""[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"space-y-1.5"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"text-sm font-medium text-foreground ml-1"[39m
+              [33mfor[39m=[32m"password"[39m
+            [36m>[39m
+              [0mpassword[0m
+            [36m</label>[39m
+            [36m<input[39m
+              [33mautocomplete[39m=[32m"current-password"[39m
+              [33mclass[39m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[39m
+              [33mid[39m=[32m"password"[39m
+              [33mplaceholder[39m=[32m"••••••••"[39m
+              [33mtype[39m=[32m"password"[39m
+              [33mvalue[39m=[32m""[39m
+            [36m/>[39m
+            [0m [0m
+          [36m</div>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"w-full mt-4 bg-brand hover:bg-brand-hover text-white font-semibold py-3.5 rounded-xl transition-all shadow-glow focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"[39m
+            [33mtype[39m=[32m"submit"[39m
+          [36m>[39m
+            [0mlogin[0m
+          [36m</button>[39m
+        [36m</form>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mt-8 text-center text-sm text-muted-foreground"[39m
+        [36m>[39m
+          [0mNie masz konta?[0m
+          [0m [0m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-brand hover:text-brand-light font-semibold transition-colors"[39m
+            [33mhref[39m=[32m"/register"[39m
+          [36m>[39m
+            [0mZarejestruj się[0m
+          [36m</a>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/[locale]/(auth)/login/__tests__/login.test.tsx:[2m32:32[22m[39m
+    [90m 30| [39m    [34mtest[39m([32m'shows validation errors for empty form'[39m[33m,[39m [35masync[39m () [33m=>[39m {
+    [90m 31| [39m        [34mrender[39m([33m<[39m[33mLogin[39m [33m/[39m[33m>[39m)
+    [90m 32| [39m        fireEvent.click(screen.getByRole('button', { name: 'Zaloguj' }…
+    [90m   | [39m                               [31m^[39m
+    [90m 33| [39m        // Find any validation error - errors container should have so…
+    [90m 34| [39m        [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22mshows validation errors for invalid input
+[31m[1mTestingLibraryElementError[22m: Unable to find a label with the text of: Email
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen flex items-center justify-center p-4 bg-background w-full"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"w-full max-w-md glass-card p-8 md:p-10 relative overflow-hidden"[31m
+        [33mstyle[31m=[32m"opacity: 0; transform: translateY(20px) scale(0.95);"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-light"[31m
+        [36m/>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-4 right-4"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex gap-2 items-center"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-sm font-bold w-6 text-center"[31m
+            [36m>[31m
+              [0mPL[0m
+            [36m</div>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"_button_6e6273 _outline_6e6273"[31m
+              [33mdata-loading[31m=[32m"false"[31m
+              [33mtitle[31m=[32m"Zmień język / Change language"[31m
+            [36m>[31m
+              [36m<span[31m
+                [33mclass[31m=[32m"_content_6e6273"[31m
+              [36m>[31m
+                [0mEnglish[0m
+              [36m</span>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mb-8 text-center mt-2"[31m
+        [36m>[31m
+          [36m<h1[31m
+            [33mclass[31m=[32m"text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2"[31m
+          [36m>[31m
+            [0mlogin[0m
+          [36m</h1>[31m
+        [36m</div>[31m
+        [36m<form[31m
+          [33mclass[31m=[32m"space-y-5"[31m
+          [33mnovalidate[31m=[32m""[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1.5"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"text-sm font-medium text-foreground ml-1"[31m
+              [33mfor[31m=[32m"email"[31m
+            [36m>[31m
+              [0memail[0m
+            [36m</label>[31m
+            [36m<input[31m
+              [33mautocomplete[31m=[32m"email"[31m
+              [33mclass[31m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[31m
+              [33mid[31m=[32m"email"[31m
+              [33mplaceholder[31m=[32m"email"[31m
+              [33mtype[31m=[32m"email"[31m
+              [33mvalue[31m=[32m""[31m
+            [36m/>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1.5"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"text-sm font-medium text-foreground ml-1"[31m
+              [33mfor[31m=[32m"password"[31m
+            [36m>[31m
+              [0mpassword[0m
+            [36m</label>[31m
+            [36m<input[31m
+              [33mautocomplete[31m=[32m"current-password"[31m
+              [33mclass[31m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[31m
+              [33mid[31m=[32m"password"[31m
+              [33mplaceholder[31m=[32m"••••••••"[31m
+              [33mtype[31m=[32m"password"[31m
+              [33mvalue[31m=[32m""[31m
+            [36m/>[31m
+            [0m [0m
+          [36m</div>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"w-full mt-4 bg-brand hover:bg-brand-hover text-white font-semibold py-3.5 rounded-xl transition-all shadow-glow focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"[31m
+            [33mtype[31m=[32m"submit"[31m
+          [36m>[31m
+            [0mlogin[0m
+          [36m</button>[31m
+        [36m</form>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mt-8 text-center text-sm text-muted-foreground"[31m
+        [36m>[31m
+          [0mNie masz konta?[0m
+          [0m [0m
+          [36m<a[31m
+            [33mclass[31m=[32m"text-brand hover:text-brand-light font-semibold transition-colors"[31m
+            [33mhref[31m=[32m"/register"[31m
+          [36m>[31m
+            [0mZarejestruj się[0m
+          [36m</a>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m getAllByLabelText ../../node_modules/@testing-library/dom/dist/queries/label-text.js:[2m111:38[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/[locale]/(auth)/login/__tests__/login.test.tsx:[2m43:33[22m[39m
+    [90m 41| [39m        [34mrender[39m([33m<[39m[33mLogin[39m [33m/[39m[33m>[39m)
+    [90m 42| [39m        [90m// Change values first, then submit[39m
+    [90m 43| [39m        fireEvent.change(screen.getByLabelText('Email'), { target: { v…
+    [90m   | [39m                                [31m^[39m
+    [90m 44| [39m        fireEvent.change(screen.getByLabelText('Hasło'), { target: { v…
+    [90m 45| [39m        // Use findByDisplayValue to ensure the state has updated befo…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(auth)/login/__tests__/login.test.tsx[2m > [22mLogin Page[2m > [22msubmits valid form and redirects
+[31m[1mTestingLibraryElementError[22m: Unable to find a label with the text of: Email
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen flex items-center justify-center p-4 bg-background w-full"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"w-full max-w-md glass-card p-8 md:p-10 relative overflow-hidden"[31m
+        [33mstyle[31m=[32m"opacity: 0; transform: translateY(20px) scale(0.95);"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-light"[31m
+        [36m/>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-4 right-4"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex gap-2 items-center"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-sm font-bold w-6 text-center"[31m
+            [36m>[31m
+              [0mPL[0m
+            [36m</div>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"_button_6e6273 _outline_6e6273"[31m
+              [33mdata-loading[31m=[32m"false"[31m
+              [33mtitle[31m=[32m"Zmień język / Change language"[31m
+            [36m>[31m
+              [36m<span[31m
+                [33mclass[31m=[32m"_content_6e6273"[31m
+              [36m>[31m
+                [0mEnglish[0m
+              [36m</span>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mb-8 text-center mt-2"[31m
+        [36m>[31m
+          [36m<h1[31m
+            [33mclass[31m=[32m"text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2"[31m
+          [36m>[31m
+            [0mlogin[0m
+          [36m</h1>[31m
+        [36m</div>[31m
+        [36m<form[31m
+          [33mclass[31m=[32m"space-y-5"[31m
+          [33mnovalidate[31m=[32m""[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1.5"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"text-sm font-medium text-foreground ml-1"[31m
+              [33mfor[31m=[32m"email"[31m
+            [36m>[31m
+              [0memail[0m
+            [36m</label>[31m
+            [36m<input[31m
+              [33mautocomplete[31m=[32m"email"[31m
+              [33mclass[31m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[31m
+              [33mid[31m=[32m"email"[31m
+              [33mplaceholder[31m=[32m"email"[31m
+              [33mtype[31m=[32m"email"[31m
+              [33mvalue[31m=[32m""[31m
+            [36m/>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1.5"[31m
+          [36m>[31m
+            [36m<label[31m
+              [33mclass[31m=[32m"text-sm font-medium text-foreground ml-1"[31m
+              [33mfor[31m=[32m"password"[31m
+            [36m>[31m
+              [0mpassword[0m
+            [36m</label>[31m
+            [36m<input[31m
+              [33mautocomplete[31m=[32m"current-password"[31m
+              [33mclass[31m=[32m"w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"[31m
+              [33mid[31m=[32m"password"[31m
+              [33mplaceholder[31m=[32m"••••••••"[31m
+              [33mtype[31m=[32m"password"[31m
+              [33mvalue[31m=[32m""[31m
+            [36m/>[31m
+            [0m [0m
+          [36m</div>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"w-full mt-4 bg-brand hover:bg-brand-hover text-white font-semibold py-3.5 rounded-xl transition-all shadow-glow focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"[31m
+            [33mtype[31m=[32m"submit"[31m
+          [36m>[31m
+            [0mlogin[0m
+          [36m</button>[31m
+        [36m</form>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mt-8 text-center text-sm text-muted-foreground"[31m
+        [36m>[31m
+          [0mNie masz konta?[0m
+          [0m [0m
+          [36m<a[31m
+            [33mclass[31m=[32m"text-brand hover:text-brand-light font-semibold transition-colors"[31m
+            [33mhref[31m=[32m"/register"[31m
+          [36m>[31m
+            [0mZarejestruj się[0m
+          [36m</a>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2m❯[22m Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m getAllByLabelText ../../node_modules/@testing-library/dom/dist/queries/label-text.js:[2m111:38[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m ../../node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/app/[locale]/(auth)/login/__tests__/login.test.tsx:[2m59:33[22m[39m
+    [90m 57| [39m
+    [90m 58| [39m        [34mrender[39m([33m<[39m[33mLogin[39m [33m/[39m[33m>[39m)
+    [90m 59| [39m        fireEvent.change(screen.getByLabelText('Email'), { target: { v…
+    [90m   | [39m                                [31m^[39m
+    [90m 60| [39m        fireEvent.change(screen.getByLabelText('Hasło'), { target: { v…
+    [90m 61| [39m        fireEvent.click(screen.getByRole('button', { name: 'Zaloguj' }…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx[2m > [22mDashboard Page[2m > [22mdisplays dashboard with Cards and Health Score ring after loading
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /85/. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col gap-6"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex flex-col gap-2"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-10 w-64 rounded-md"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-5 w-96 rounded-md"[39m
+        [36m/>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"_card_c73daa    glass-card col-span-1 lg:col-span-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_content_c73daa flex justify-center items-center h-48 pt-6"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"_skeleton_4166cf _circle_4166cf shimmer w-32 h-32"[39m
+            [36m/>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"_card_c73daa    glass-card col-span-1 md:col-span-2 lg:col-span-2"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_header_c73daa"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-6 w-32 rounded-md"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_content_c73daa"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-[120px] w-full rounded-md"[39m
+            [36m/>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"_card_c73daa    glass-card col-span-1 md:col-span-1 lg:col-span-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_header_c73daa"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-6 w-32 rounded-md"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_content_c73daa"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-4 w-full mb-2 rounded-md"[39m
+            [36m/>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-4 w-3/4 rounded-md"[39m
+            [36m/>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex flex-col gap-6"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"flex flex-col gap-2"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-10 w-64 rounded-md"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-5 w-96 rounded-md"[39m
+          [36m/>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_card_c73daa    glass-card col-span-1 lg:col-span-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"_content_c73daa flex justify-center items-center h-48 pt-6"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"_skeleton_4166cf _circle_4166cf shimmer w-32 h-32"[39m
+              [36m/>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_card_c73daa    glass-card col-span-1 md:col-span-2 lg:col-span-2"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"_header_c73daa"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-6 w-32 rounded-md"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"_content_c73daa"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-[120px] w-full rounded-md"[39m
+              [36m/>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"_card_c73daa    glass-card col-span-1 md:col-span-1 lg:col-span-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"_header_c73daa"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-6 w-32 rounded-md"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"_content_c73daa"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-4 w-full mb-2 rounded-md"[39m
+              [36m/>[39m
+              [36m<div[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"_skeleton_4166cf  shimmer h-4 w-3/4 rounded-md"[39m
+              [36m/>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+[90m [2m❯[22m Proxy.waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2m❯[22m src/app/[locale]/(dashboard)/dashboard/__tests__/dashboard.test.tsx:[2m49:15[22m[39m
+    [90m 47| [39m        [35mconst[39m { container } [33m=[39m [34mrender[39m([33m<[39m[33mDashboard[39m [33m/[39m[33m>[39m)[33m;[39m
+    [90m 48| [39m
+    [90m 49| [39m        [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   | [39m              [31m^[39m
+    [90m 50| [39m            [90m// Should contain cards[39m
+    [90m 51| [39m            const cards = container.querySelectorAll('[class*="card"]'…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m15 passed[39m[22m[90m (17)[39m
+[2m      Tests [22m [1m[31m5 failed[39m[22m[2m | [22m[1m[32m52 passed[39m[22m[90m (57)[39m
+[2m   Start at [22m 18:05:07
+[2m   Duration [22m 27.48s[2m (transform 19.24s, setup 74.28s, import 53.75s, tests 31.26s, environment 80.75s)[22m
+

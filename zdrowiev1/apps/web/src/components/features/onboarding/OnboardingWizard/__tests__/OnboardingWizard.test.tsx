@@ -88,7 +88,7 @@ describe('OnboardingWizard', () => {
             ok: true,
             json: async () => ({ success: true })
         });
-        global.fetch = mockFetch as any;
+        global.fetch = mockFetch as unknown as typeof fetch;
 
         render(<OnboardingWizard />);
 

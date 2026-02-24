@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { HealthChart } from '@/components/shared/charts/HealthChart';
+import { HealthChart, type ChartConfig } from '@/components/shared/charts/HealthChart';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/shared/ui/Card/Card';
 import { SkeletonLoader } from '@/components/shared/ui/SkeletonLoader/SkeletonLoader';
 import { Button } from '@/components/shared/ui/Button/Button';
@@ -15,9 +15,9 @@ interface HealthData {
         weight: { current: number; change30d: number; bmi: number };
     };
     charts: {
-        heartRateHistory: any;
-        sleepHistory: any;
-        weightHistory: any;
+        heartRateHistory: ChartConfig;
+        sleepHistory: ChartConfig;
+        weightHistory: ChartConfig;
     };
 }
 

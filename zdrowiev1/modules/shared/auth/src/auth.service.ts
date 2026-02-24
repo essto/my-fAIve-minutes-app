@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from '@monorepo/user';
 import { User } from '@monorepo/shared-types';
+import { RegisterDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +41,9 @@ export class AuthService {
     };
   }
 
-  async register(data: Omit<User, 'id' | 'createdAt'>) {
+  async register(
+    data: Partial<Omit<User, 'id' | 'createdAt'>> & Pick<RegisterDto, 'email' | 'password'>,
+  ) {
     const hashedPassword = await this.hashPassword(data.password as string);
     return this.userService.create({
       ...data,
