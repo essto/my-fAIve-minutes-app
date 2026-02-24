@@ -9,5 +9,11 @@
         "src/*"
       ]
     }
-  }
+  },
+  "include": [
+    "src",
+    "index.ts",
+    "App.tsx",
+    "nativewind-env.d.ts"
+  ]
 }

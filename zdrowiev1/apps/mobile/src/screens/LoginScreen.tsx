@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useAuth } from '../hooks/useAuth';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import { BlurView } from 'expo-blur';
 
 export const LoginScreen = () => {
   const { login, isLoading, error } = useAuth();
@@ -21,78 +16,66 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Zdrowie</Text>
+    <View className="flex-1 justify-center p-6 bg-background">
+      <Animated.Text
+        entering={FadeInDown.springify()}
+        className="text-4xl font-bold text-center mb-10 text-brand"
+      >
+        Zdrowie
+      </Animated.Text>
 
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error ? (
+        <Animated.Text entering={FadeInDown} className="text-red-500 font-medium text-center mb-6">
+          {error}
+        </Animated.Text>
+      ) : null}
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
+      <Animated.View
+        entering={FadeInUp.delay(100).springify()}
+        className="mb-4 overflow-hidden rounded-2xl border border-border"
+      >
+        <BlurView intensity={20} tint="dark" className="p-4">
+          <TextInput
+            className="text-foreground text-base py-2"
+            placeholder="Email"
+            placeholderTextColor="#666"
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize="none"
+            keyboardType="email-address"
+          />
+        </BlurView>
+      </Animated.View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Hasło"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+      <Animated.View
+        entering={FadeInUp.delay(200).springify()}
+        className="mb-8 overflow-hidden rounded-2xl border border-border"
+      >
+        <BlurView intensity={20} tint="dark" className="p-4">
+          <TextInput
+            className="text-foreground text-base py-2"
+            placeholder="Hasło"
+            placeholderTextColor="#666"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </BlurView>
+      </Animated.View>
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={isLoading}>
-        {isLoading ? (
-          <ActivityIndicator testID="loading-indicator" color="#fff" />
-        ) : (
-          <Text style={styles.buttonText}>Zaloguj</Text>
-        )}
-      </TouchableOpacity>
+      <Animated.View entering={FadeInUp.delay(300).springify()}>
+        <TouchableOpacity
+          className="bg-brand py-4 rounded-2xl items-center flex-row justify-center active:bg-brand-hover min-h-[56px]"
+          onPress={handleLogin}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <ActivityIndicator testID="loading-indicator" color="#fff" />
+          ) : (
+            <Text className="text-white text-lg font-bold">Zaloguj</Text>
+          )}
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    backgroundColor: '#FAF9F6', // Off-white premium feel
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 40,
-    textAlign: 'center',
-    color: '#1A1A1A',
-  },
-  input: {
-    backgroundColor: '#FFFFFF',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: '#EAEAEA',
-    fontSize: 16,
-  },
-  button: {
-    backgroundColor: '#007AFF', // iOS standard blue, fits premium
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  error: {
-    color: '#FF3B30',
-    marginBottom: 15,
-    textAlign: 'center',
-    fontWeight: '500',
-  },
-});

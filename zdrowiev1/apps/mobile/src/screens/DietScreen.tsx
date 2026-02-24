@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   ActivityIndicator,
   ScrollView,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 import { useDietData, Meal } from '../hooks/useDietData';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import { BlurView } from 'expo-blur';
 
 export const DietScreen = () => {
   const { meals, dailySummary, isLoading, fetchMeals, fetchDailySummary, logMeal } = useDietData();
@@ -24,7 +25,6 @@ export const DietScreen = () => {
   const handleAddMeal = () => {
     if (newMealName.trim() === '') return;
 
-    // For MVP we just log the name and a dummy product as actual scanning is not integrated yet.
     logMeal({
       name: newMealName,
       products: [
@@ -43,137 +43,104 @@ export const DietScreen = () => {
 
   if (isLoading && meals.length === 0) {
     return (
-      <View style={[styles.container, styles.center]}>
-        <ActivityIndicator testID="diet-loading" size="large" color="#007AFF" />
+      <View className="flex-1 bg-background justify-center items-center">
+        <ActivityIndicator testID="diet-loading" size="large" color="#8251EE" />
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Twoja Dieta</Text>
+    <ScrollView className="flex-1 bg-background p-6">
+      <Animated.Text
+        entering={FadeInDown.springify()}
+        className="text-3xl font-bold text-foreground mb-8 mt-2"
+      >
+        Twoja Dieta
+      </Animated.Text>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Podsumowanie Dnia</Text>
-        {dailySummary && (
-          <View>
-            <Text style={styles.summaryText}>Kalorie: {dailySummary.total.calories} kcal</Text>
-            <View style={styles.macrosRow}>
-              <Text style={styles.macroText}>Białko: {dailySummary.total.protein}g</Text>
-              <Text style={styles.macroText}>Węg.: {dailySummary.total.carbs}g</Text>
-              <Text style={styles.macroText}>Tł.: {dailySummary.total.fat}g</Text>
+      <Animated.View
+        entering={FadeInUp.delay(100).springify()}
+        className="mb-6 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={30} tint="dark" className="p-6">
+          <Text className="text-secondary-foreground font-medium mb-3 opacity-80 uppercase tracking-widest text-xs">
+            Podsumowanie Dnia
+          </Text>
+          {dailySummary && (
+            <View>
+              <View className="flex-row items-end gap-2 mb-4 pb-4 border-b border-border">
+                <Text className="text-5xl font-bold text-foreground">
+                  {dailySummary.total.calories}
+                </Text>
+                <Text className="text-brand text-xl font-medium mb-1">kcal</Text>
+              </View>
+              <View className="flex-row justify-between">
+                <View className="items-center">
+                  <Text className="text-xs text-muted-foreground mb-1 uppercase">Białko</Text>
+                  <Text className="text-foreground font-medium">{dailySummary.total.protein}g</Text>
+                </View>
+                <View className="items-center">
+                  <Text className="text-xs text-muted-foreground mb-1 uppercase">Węgle.</Text>
+                  <Text className="text-foreground font-medium">{dailySummary.total.carbs}g</Text>
+                </View>
+                <View className="items-center">
+                  <Text className="text-xs text-muted-foreground mb-1 uppercase">Tłuszcze</Text>
+                  <Text className="text-foreground font-medium">{dailySummary.total.fat}g</Text>
+                </View>
+              </View>
             </View>
-          </View>
-        )}
-      </View>
+          )}
+        </BlurView>
+      </Animated.View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Dodaj Posiłek</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Nazwa posiłku (np. Obiad)"
-          value={newMealName}
-          onChangeText={setNewMealName}
-        />
-        <TouchableOpacity style={styles.button} onPress={handleAddMeal} disabled={isLoading}>
-          <Text style={styles.buttonText}>Dodaj posiłek</Text>
-        </TouchableOpacity>
-      </View>
+      <Animated.View
+        entering={FadeInUp.delay(200).springify()}
+        className="mb-6 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={20} tint="dark" className="p-6 pb-4">
+          <Text className="text-foreground font-bold text-lg mb-4">Dodaj Posiłek</Text>
+          <TextInput
+            className="bg-background border border-border rounded-xl p-4 text-foreground mb-4"
+            placeholder="Nazwa posiłku (np. Obiad)"
+            placeholderTextColor="#666"
+            value={newMealName}
+            onChangeText={setNewMealName}
+          />
+          <TouchableOpacity
+            className="bg-brand py-4 rounded-xl items-center flex-row justify-center active:bg-brand-hover mb-2"
+            onPress={handleAddMeal}
+            disabled={isLoading}
+          >
+            <Text className="text-white font-bold">Dodaj posiłek</Text>
+          </TouchableOpacity>
+        </BlurView>
+      </Animated.View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Dzisiejsze Posiłki</Text>
-        {meals.length === 0 ? (
-          <Text style={styles.emptyText}>Brak posiłków</Text>
-        ) : (
-          meals.map((meal: Meal) => (
-            <View key={meal.id} style={styles.mealItem}>
-              <Text style={styles.mealName}>{meal.name}</Text>
+      <Animated.View
+        entering={FadeInUp.delay(300).springify()}
+        className="mb-8 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={20} tint="dark" className="p-6">
+          <Text className="text-foreground font-bold text-lg mb-4">Dzisiejsze Posiłki</Text>
+          {meals.length === 0 ? (
+            <Text className="text-muted-foreground italic">Brak posiłków</Text>
+          ) : (
+            <View>
+              {meals.map((meal: Meal, idx: number) => (
+                <View
+                  key={meal.id}
+                  className={`py-4 ${idx !== meals.length - 1 ? 'border-b border-border' : ''}`}
+                >
+                  <Text className="text-foreground font-medium text-lg">{meal.name}</Text>
+                  <Text className="text-muted-foreground text-xs mt-1">
+                    Skanowany produkt (MVP) • 300 kcal
+                  </Text>
+                </View>
+              ))}
             </View>
-          ))
-        )}
-      </View>
+          )}
+        </BlurView>
+      </Animated.View>
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FAF9F6',
-    padding: 20,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#1A1A1A',
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 10,
-  },
-  summaryText: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#007AFF',
-    marginBottom: 10,
-  },
-  macrosRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  macroText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  input: {
-    backgroundColor: '#FAF9F6',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: '#EAEAEA',
-    fontSize: 16,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  emptyText: {
-    color: '#999',
-    fontStyle: 'italic',
-  },
-  mealItem: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  mealName: {
-    fontSize: 16,
-    color: '#333',
-  },
-});

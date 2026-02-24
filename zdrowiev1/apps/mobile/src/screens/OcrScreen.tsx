@@ -1,162 +1,101 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { useOCR } from '../hooks/useOCR';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import { BlurView } from 'expo-blur';
 
 export const OcrScreen = () => {
   const { ocrResult, isLoading, error, takePhoto, pickFromGallery, clearResult } = useOCR();
 
   if (isLoading) {
     return (
-      <View style={[styles.container, styles.center]}>
-        <ActivityIndicator testID="ocr-loading" size="large" color="#007AFF" />
-        <Text style={styles.loadingText}>Przetwarzanie obrazu...</Text>
+      <View className="flex-1 bg-background justify-center items-center">
+        <ActivityIndicator testID="ocr-loading" size="large" color="#8251EE" />
+        <Text className="text-muted-foreground mt-6 text-base font-medium">
+          Przetwarzanie obrazu...
+        </Text>
       </View>
     );
   }
 
   if (ocrResult) {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.centerTop}>
-        <View style={styles.resultCard}>
-          <Text style={styles.resultTitle}>Wynik rozpoznawania:</Text>
-          <Text style={styles.resultText}>{ocrResult.text}</Text>
-          <Text style={styles.confidenceText}>
-            Pewność: {(ocrResult.confidence * 100).toFixed(0)}%
-          </Text>
-        </View>
+      <ScrollView className="flex-1 bg-background p-6">
+        <Animated.View
+          entering={FadeInDown.springify()}
+          className="mt-10 mb-8 overflow-hidden rounded-3xl border border-border"
+        >
+          <BlurView intensity={30} tint="dark" className="p-8">
+            <Text className="text-secondary-foreground font-medium mb-3 opacity-80 uppercase tracking-widest text-xs">
+              Wynik Rozpoznawania
+            </Text>
+            <Text className="text-xl text-foreground font-medium mb-6 leading-relaxed bg-neutral-bg3 p-4 rounded-xl border border-border/50">
+              {ocrResult.text}
+            </Text>
+            <Text className="text-brand font-bold text-sm text-right">
+              Pewność: {(ocrResult.confidence * 100).toFixed(0)}%
+            </Text>
+          </BlurView>
+        </Animated.View>
 
-        <TouchableOpacity style={styles.buttonSecondary} onPress={clearResult}>
-          <Text style={styles.buttonTextSecondary}>Skanuj ponownie</Text>
-        </TouchableOpacity>
+        <Animated.View entering={FadeInUp.delay(100).springify()}>
+          <TouchableOpacity
+            className="border border-brand py-4 rounded-xl items-center flex-row justify-center active:bg-brand/10 mb-4"
+            onPress={clearResult}
+          >
+            <Text className="text-brand font-bold">Skanuj ponownie</Text>
+          </TouchableOpacity>
+        </Animated.View>
 
-        <TouchableOpacity style={styles.buttonPrimary} onPress={() => {}}>
-          <Text style={styles.buttonTextPrimary}>Zapisz jako wynik badań</Text>
-        </TouchableOpacity>
+        <Animated.View entering={FadeInUp.delay(200).springify()}>
+          <TouchableOpacity
+            className="bg-brand py-4 rounded-xl items-center flex-row justify-center active:bg-brand-hover mb-8"
+            onPress={() => {}}
+          >
+            <Text className="text-white font-bold">Zapisz jako wynik badań</Text>
+          </TouchableOpacity>
+        </Animated.View>
       </ScrollView>
     );
   }
 
   return (
-    <View style={[styles.container, styles.center]}>
-      <Text style={styles.title}>Analiza Badań i Etykiet</Text>
-      <Text style={styles.subtitle}>
-        Zeskanuj zdjęcie swoich wyników badań lub etykiety produktu spożywczego.
-      </Text>
+    <View className="flex-1 bg-background justify-center p-6">
+      <Animated.Text
+        entering={FadeInDown.springify()}
+        className="text-3xl font-bold text-foreground text-center mb-4"
+      >
+        Skaner Etykiet i Badań
+      </Animated.Text>
+      <Animated.Text
+        entering={FadeInDown.delay(100).springify()}
+        className="text-muted-foreground text-center mb-10 text-base px-2"
+      >
+        Precyzyjne rozpoznawanie tekstu napędzane przez model Google Vision. Zrób zdjęcie aby
+        wyodrębnić wartości.
+      </Animated.Text>
 
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {error ? (
+        <Text className="text-destructive text-center font-medium mb-6">{error}</Text>
+      ) : null}
 
-      <TouchableOpacity style={styles.buttonPrimary} onPress={takePhoto}>
-        <Text style={styles.buttonTextPrimary}>Zrób zdjęcie</Text>
-      </TouchableOpacity>
+      <Animated.View entering={FadeInUp.delay(200).springify()}>
+        <TouchableOpacity
+          className="bg-brand py-4 rounded-xl items-center flex-row justify-center active:bg-brand-hover mb-4"
+          onPress={takePhoto}
+        >
+          <Text className="text-white font-bold text-base">Uruchom Aparat</Text>
+        </TouchableOpacity>
+      </Animated.View>
 
-      <TouchableOpacity style={styles.buttonSecondary} onPress={pickFromGallery}>
-        <Text style={styles.buttonTextSecondary}>Wybierz z galerii</Text>
-      </TouchableOpacity>
+      <Animated.View entering={FadeInUp.delay(300).springify()}>
+        <TouchableOpacity
+          className="border border-brand py-4 rounded-xl items-center flex-row justify-center active:bg-brand/10"
+          onPress={pickFromGallery}
+        >
+          <Text className="text-brand font-bold text-base">Wybierz z Galerii</Text>
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FAF9F6',
-    padding: 20,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  centerTop: {
-    alignItems: 'center',
-    paddingTop: 40,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1A1A1A',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 40,
-    paddingHorizontal: 10,
-  },
-  errorText: {
-    color: '#D32F2F',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  loadingText: {
-    marginTop: 20,
-    fontSize: 16,
-    color: '#666',
-  },
-  buttonPrimary: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 12,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  buttonTextPrimary: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  buttonSecondary: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#007AFF',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 12,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  buttonTextSecondary: {
-    color: '#007AFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  resultCard: {
-    backgroundColor: '#fff',
-    width: '100%',
-    padding: 20,
-    borderRadius: 15,
-    marginBottom: 30,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  resultTitle: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 10,
-  },
-  resultText: {
-    fontSize: 18,
-    color: '#1A1A1A',
-    fontWeight: '500',
-    marginBottom: 15,
-  },
-  confidenceText: {
-    fontSize: 12,
-    color: '#4CAF50',
-    textAlign: 'right',
-  },
-});

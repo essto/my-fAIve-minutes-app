@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import { useAuth } from '../hooks/useAuth';
 import { useHealthData } from '../hooks/useHealthData';
 import { useDietData } from '../hooks/useDietData';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import { BlurView } from 'expo-blur';
 
 export const HomeScreen = () => {
   const { user } = useAuth();
@@ -11,7 +13,6 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     fetchHealthScore();
-
     // In a real app, you would pass the current date. Hardcoded for MVP logic here.
     const today = new Date().toISOString().split('T')[0];
     fetchDailySummary(today);
@@ -21,66 +22,52 @@ export const HomeScreen = () => {
 
   if (isLoading) {
     return (
-      <View style={[styles.container, styles.center]}>
-        <ActivityIndicator testID="home-loading" size="large" color="#007AFF" />
+      <View className="flex-1 bg-background justify-center items-center">
+        <ActivityIndicator testID="home-loading" size="large" color="#8251EE" />
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.greeting}>Cześć, {user?.email}</Text>
+    <ScrollView className="flex-1 bg-background p-6">
+      <Animated.Text
+        entering={FadeInDown.delay(100).springify()}
+        className="text-3xl font-bold text-foreground mb-8 mt-2"
+      >
+        Cześć, {user?.email?.split('@')[0] || 'Użytkowniku'} 👋
+      </Animated.Text>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Podsumowanie Zdrowia</Text>
-        <Text style={styles.cardValue}>Health Score: {healthScore ?? '-'}</Text>
-      </View>
+      <Animated.View
+        entering={FadeInUp.delay(200).springify()}
+        className="mb-6 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={30} tint="dark" className="p-6">
+          <Text className="text-secondary-foreground font-medium mb-2 opacity-80 uppercase tracking-widest text-xs">
+            Puls Zdrowia
+          </Text>
+          <View className="flex-row items-end gap-2">
+            <Text className="text-6xl font-bold text-brand">{healthScore ?? '-'}</Text>
+            <Text className="text-xl text-foreground font-medium mb-2 opacity-90">/ 100</Text>
+          </View>
+        </BlurView>
+      </Animated.View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Dieta Dzisiaj</Text>
-        <Text style={styles.cardValue}>
-          Spożyte kalorie: {dailySummary?.total.calories ?? 0} kcal
-        </Text>
-      </View>
+      <Animated.View
+        entering={FadeInUp.delay(300).springify()}
+        className="mb-8 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={30} tint="dark" className="p-6">
+          <Text className="text-secondary-foreground font-medium mb-2 opacity-80 uppercase tracking-widest text-xs">
+            Bilans Dzienny
+          </Text>
+          <View className="flex-row items-end gap-2">
+            <Text className="text-5xl font-bold text-foreground">
+              {dailySummary?.total.calories ?? 0}
+            </Text>
+            <Text className="text-xl text-brand font-medium mb-1">kcal</Text>
+          </View>
+        </BlurView>
+      </Animated.View>
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FAF9F6',
-    padding: 20,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  greeting: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#1A1A1A',
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  cardTitle: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 10,
-  },
-  cardValue: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#007AFF',
-  },
-});

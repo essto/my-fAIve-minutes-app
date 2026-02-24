@@ -9,23 +9,29 @@ const mockUseAuth = useAuth as jest.Mock;
 jest.mock('@react-navigation/native', () => {
   return {
     NavigationContainer: ({ children }: any) => <>{children}</>,
+    DarkTheme: { colors: {} },
+    DefaultTheme: { colors: {} },
   };
 });
 
 jest.mock('@react-navigation/native-stack', () => {
+  const React = require('react');
+  const { View } = require('react-native');
   return {
     createNativeStackNavigator: () => ({
-      Navigator: ({ children }: any) => <mock-stack-navigator>{children}</mock-stack-navigator>,
-      Screen: ({ name }: any) => <mock-stack-screen testID={`screen-${name}`} />,
+      Navigator: ({ children }: any) => <>{children}</>,
+      Screen: ({ name }: any) => <View testID={`screen-${name}`} />,
     }),
   };
 });
 
 jest.mock('@react-navigation/bottom-tabs', () => {
+  const React = require('react');
+  const { View } = require('react-native');
   return {
     createBottomTabNavigator: () => ({
-      Navigator: ({ children }: any) => <mock-tab-navigator>{children}</mock-tab-navigator>,
-      Screen: ({ name }: any) => <mock-tab-screen testID={`tab-${name}`} />,
+      Navigator: ({ children }: any) => <>{children}</>,
+      Screen: ({ name }: any) => <View testID={`tab-${name}`} />,
     }),
   };
 });

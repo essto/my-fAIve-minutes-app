@@ -1,0 +1,21 @@
+{
+    "name": "@monorepo/mcp-shared",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "axios": "^1.7.9",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "vitest": "^4.0.18",
+        "typescript": "^5.9.3",
+        "@types/node": "^20.0.0"
+    }
+}

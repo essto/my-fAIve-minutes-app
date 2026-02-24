@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import { useHealthData, Anomaly, WeightReading } from '../hooks/useHealthData';
+import Animated, { FadeInDown, FadeInUp, FadeInRight } from 'react-native-reanimated';
+import { BlurView } from 'expo-blur';
 
 export const HealthScreen = () => {
   const {
@@ -22,8 +24,8 @@ export const HealthScreen = () => {
 
   if (isLoading) {
     return (
-      <View style={[styles.container, styles.center]}>
-        <ActivityIndicator testID="health-loading" size="large" color="#007AFF" />
+      <View className="flex-1 bg-background justify-center items-center">
+        <ActivityIndicator testID="health-loading" size="large" color="#8251EE" />
       </View>
     );
   }
@@ -32,101 +34,81 @@ export const HealthScreen = () => {
     weightHistory?.length > 0 ? weightHistory[weightHistory.length - 1].value : null;
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Twoje Zdrowie</Text>
+    <ScrollView className="flex-1 bg-background p-6">
+      <Animated.Text
+        entering={FadeInDown.springify()}
+        className="text-3xl font-bold text-foreground mb-8 mt-2"
+      >
+        Twoje Zdrowie
+      </Animated.Text>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Ogólny Health Score: {healthScore}</Text>
-        {healthBreakdown && (
-          <View style={styles.breakdownRow}>
-            <Text style={styles.breakdownText}>Waga: {healthBreakdown.weight}</Text>
-            <Text style={styles.breakdownText}>Sen: {healthBreakdown.sleep}</Text>
-            <Text style={styles.breakdownText}>Aktywność: {healthBreakdown.activity}</Text>
-          </View>
-        )}
-      </View>
+      <Animated.View
+        entering={FadeInUp.delay(100).springify()}
+        className="mb-6 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={30} tint="dark" className="p-6">
+          <Text className="text-foreground font-semibold text-lg mb-4">
+            Ogólny Health Score: <Text className="text-brand font-bold">{healthScore}</Text>
+          </Text>
+          {healthBreakdown && (
+            <View className="flex-row justify-between mt-2 pt-4 border-t border-border">
+              <View className="items-center">
+                <Text className="text-xs text-muted-foreground mb-1 uppercase">Waga</Text>
+                <Text className="text-foreground font-medium">{healthBreakdown.weight}</Text>
+              </View>
+              <View className="items-center">
+                <Text className="text-xs text-muted-foreground mb-1 uppercase">Sen</Text>
+                <Text className="text-foreground font-medium">{healthBreakdown.sleep}</Text>
+              </View>
+              <View className="items-center">
+                <Text className="text-xs text-muted-foreground mb-1 uppercase">Aktywność</Text>
+                <Text className="text-foreground font-medium">{healthBreakdown.activity}</Text>
+              </View>
+            </View>
+          )}
+        </BlurView>
+      </Animated.View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Waga</Text>
-        {latestWeight ? (
-          <Text style={styles.cardValue}>Ostatni pomiar: {latestWeight} kg</Text>
-        ) : (
-          <Text style={styles.cardValue}>Brak danych</Text>
-        )}
-      </View>
+      <Animated.View
+        entering={FadeInUp.delay(200).springify()}
+        className="mb-6 overflow-hidden rounded-3xl border border-border"
+      >
+        <BlurView intensity={30} tint="dark" className="p-6">
+          <Text className="text-secondary-foreground font-medium mb-1 opacity-80 uppercase tracking-widest text-xs">
+            Waga
+          </Text>
+          {latestWeight ? (
+            <View className="flex-row items-end gap-2">
+              <Text className="text-4xl font-bold text-foreground">{latestWeight}</Text>
+              <Text className="text-brand text-xl font-medium mb-1">kg</Text>
+            </View>
+          ) : (
+            <Text className="text-muted-foreground italic">Brak danych</Text>
+          )}
+        </BlurView>
+      </Animated.View>
 
       {anomalies && anomalies.length > 0 && (
-        <View style={[styles.card, styles.anomalyCard]}>
-          <Text style={[styles.cardTitle, styles.anomalyTitle]}>Wykryto Anomalie</Text>
-          {anomalies.map((anom: Anomaly) => (
-            <Text key={anom.id} style={styles.anomalyText}>
-              {`• ${anom.message}`}
+        <Animated.View
+          entering={FadeInUp.delay(300).springify()}
+          className="mb-8 overflow-hidden rounded-3xl border border-red-500/50 bg-red-500/10"
+        >
+          <BlurView intensity={40} tint="dark" className="p-6">
+            <Text className="text-red-400 font-bold mb-3 flex-row items-center flex">
+              ⚠️ Wykryto Anomalie
             </Text>
-          ))}
-        </View>
+            {anomalies.map((anom: Anomaly, idx: number) => (
+              <Animated.Text
+                entering={FadeInRight.delay(400 + idx * 100)}
+                key={anom.id}
+                className="text-foreground text-sm flex-row mb-2"
+              >
+                <Text className="text-red-400 font-bold">•</Text> {anom.message}
+              </Animated.Text>
+            ))}
+          </BlurView>
+        </Animated.View>
       )}
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FAF9F6',
-    padding: 20,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#1A1A1A',
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 10,
-  },
-  cardValue: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#007AFF',
-  },
-  breakdownRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
-  },
-  breakdownText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  anomalyCard: {
-    backgroundColor: '#FFF0F0',
-    borderColor: '#FFCCCC',
-    borderWidth: 1,
-  },
-  anomalyTitle: {
-    color: '#D32F2F',
-  },
-  anomalyText: {
-    fontSize: 14,
-    color: '#B71C1C',
-    marginTop: 5,
-  },
-});

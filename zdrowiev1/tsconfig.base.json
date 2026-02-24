@@ -47,6 +47,9 @@
             ],
             "@monorepo/diagnosis": [
                 "modules/diagnosis"
+            ],
+            "@monorepo/mcp-shared": [
+                "infrastructure/mcp-shared/src"
             ]
         }
     },
