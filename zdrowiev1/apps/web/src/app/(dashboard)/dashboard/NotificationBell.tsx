@@ -97,40 +97,40 @@ export function NotificationBell() {
             {open && (
                 <div
                     data-testid="notification-panel"
-                    className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden"
+                    className="absolute right-0 mt-2 w-80 bg-card rounded-xl shadow-glow border border-border z-50 overflow-hidden"
                 >
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                        <h3 className="font-bold text-slate-800 dark:text-white">Powiadomienia</h3>
+                    <div className="p-4 border-b border-border flex justify-between items-center">
+                        <h3 className="font-bold text-foreground">Powiadomienia</h3>
                         {unreadCount > 0 && (
-                            <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                            <span className="text-xs bg-brand/10 text-brand px-2 py-1 rounded-full font-medium">
                                 {unreadCount} nowe
                             </span>
                         )}
                     </div>
                     <div className="max-h-96 overflow-y-auto">
                         {notifications.length === 0 ? (
-                            <div className="p-8 text-center text-slate-400 text-sm">Brak powiadomień</div>
+                            <div className="p-8 text-center text-muted-foreground text-sm">Brak powiadomień</div>
                         ) : (
                             notifications.map((n) => (
                                 <div
                                     key={n.id}
                                     onClick={() => !n.isRead && markAsRead(n.id)}
-                                    className={`p-4 border-b border-slate-50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/30 cursor-pointer transition ${!n.isRead ? 'bg-blue-50/30 dark:bg-blue-900/10' : ''
+                                    className={`p-4 border-b border-border hover:bg-neutral-bg3 cursor-pointer transition-colors ${!n.isRead ? 'bg-brand/5' : ''
                                         }`}
                                 >
                                     <div className="flex gap-3">
                                         <div
-                                            className={`h-2 w-2 rounded-full mt-2 shrink-0 ${n.type === 'ANOMALY' ? 'bg-red-500' : 'bg-blue-500'
+                                            className={`h-2 w-2 rounded-full mt-2 shrink-0 ${n.type === 'ANOMALY' ? 'bg-destructive' : 'bg-brand'
                                                 } ${n.isRead ? 'opacity-0' : 'opacity-100'}`}
                                         />
                                         <div>
-                                            <p className="text-sm font-semibold text-slate-800 dark:text-white">
+                                            <p className="text-sm font-medium text-foreground">
                                                 {n.title}
                                             </p>
-                                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                            <p className="text-xs text-muted-foreground mt-1">
                                                 {n.message}
                                             </p>
-                                            <p className="text-[10px] text-slate-400 mt-2">
+                                            <p className="text-[10px] text-muted-foreground/60 mt-2">
                                                 {new Date(n.createdAt).toLocaleString('pl-PL')}
                                             </p>
                                         </div>
@@ -139,8 +139,8 @@ export function NotificationBell() {
                             ))
                         )}
                     </div>
-                    <div className="p-3 bg-slate-50 dark:bg-slate-700/50 text-center">
-                        <button className="text-xs text-blue-600 hover:text-blue-700 font-medium">
+                    <div className="p-3 bg-neutral-bg2 hover:bg-neutral-bg3 text-center border-t border-border transition-colors cursor-pointer">
+                        <button className="text-xs text-brand hover:text-brand-light font-medium">
                             Zobacz wszystkie
                         </button>
                     </div>

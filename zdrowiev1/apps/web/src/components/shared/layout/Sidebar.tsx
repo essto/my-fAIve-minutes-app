@@ -4,7 +4,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from './Sidebar.module.css';
 import { ThemeToggle } from '../ui/ThemeToggle/ThemeToggle';
 
 const navItems = [
@@ -56,33 +55,36 @@ export function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className={styles.sidebar}>
-            <div className={styles.logo}>
-                <div className={styles.logoIcon}>
+        <aside className="fixed left-0 top-0 w-[260px] h-screen flex-col p-6 border-r border-border bg-card z-50 hidden md:flex">
+            <div className="flex items-center gap-3 mb-12">
+                <div className="w-10 h-10 bg-brand rounded-lg flex items-center justify-center text-white text-xl shadow-md">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
                 </div>
-                <h2>Zdrowie App</h2>
+                <h2 className="text-xl font-bold m-0 text-foreground tracking-tight">Zdrowie App</h2>
             </div>
 
-            <nav className={styles.nav}>
+            <nav className="flex flex-col gap-2 flex-1">
                 {navItems.map((item) => {
                     const isActive = pathname.startsWith(item.href);
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
-                            className={`${styles.navItem} ${isActive ? styles.active : ''}`.trim()}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${isActive
+                                    ? 'bg-brand text-white shadow-glow'
+                                    : 'text-muted-foreground hover:bg-neutral-bg2 hover:text-foreground'
+                                }`}
                         >
-                            <span className={styles.icon}>{item.icon}</span>
+                            <span className="flex items-center justify-center">{item.icon}</span>
                             <span>{item.name}</span>
                         </Link>
                     );
                 })}
             </nav>
 
-            <div className={styles.footer}>
+            <div className="mt-auto flex flex-col gap-4 pt-6 border-t border-border">
                 <ThemeToggle />
-                <button className={styles.logoutBtn}>
+                <button className="flex items-center gap-3 px-4 py-3 bg-transparent border-none cursor-pointer text-muted-foreground font-medium rounded-lg transition-all duration-200 w-full hover:bg-destructive/20 hover:text-destructive">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
                     <span>Wyloguj</span>
                 </button>

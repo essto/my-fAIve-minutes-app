@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { z } from 'zod';
 import Link from 'next/link';
-import styles from '../../../styles/Auth.module.css';
+import { motion } from 'framer-motion';
 
 const schema = z.object({
     email: z.string({ required_error: 'Email jest wymagany' }).min(1, 'Email jest wymagany').email('Nieprawidłowy email'),
@@ -51,18 +51,34 @@ export default function Login() {
     };
 
     return (
-        <div className={styles.authContainer}>
-            <div className={`${styles.authCard} ${styles.glass}`}>
-                <h1 className={styles.title}>Witaj ponownie</h1>
-                <p className={styles.subtitle}>Zaloguj się, aby kontynuować</p>
+        <div className="min-h-screen flex items-center justify-center p-4 bg-background w-full">
+            <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="w-full max-w-md glass-card p-8 md:p-10 relative overflow-hidden"
+            >
+                {/* Decorative Premium Top Border */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-light"></div>
 
-                <form onSubmit={handleSubmit} noValidate>
+                <div className="mb-8 text-center mt-2">
+                    <h1 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2">Witaj ponownie</h1>
+                    <p className="text-muted-foreground text-sm">Zaloguj się, aby kontynuować</p>
+                </div>
+
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
                     {errors.general && (
-                        <div className={styles.generalError}>{errors.general}</div>
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm text-center font-medium"
+                        >
+                            {errors.general}
+                        </motion.div>
                     )}
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="email" className={styles.label}>Email</label>
+                    <div className="space-y-1.5">
+                        <label htmlFor="email" className="text-sm font-medium text-foreground ml-1">Email</label>
                         <input
                             id="email"
                             type="email"
@@ -70,14 +86,14 @@ export default function Login() {
                             autoComplete="email"
                             value={form.email}
                             onChange={(e) => setForm({ ...form, email: e.target.value })}
-                            className={styles.input}
+                            className="w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"
                             disabled={isLoading}
                         />
-                        {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+                        {errors.email && <span className="text-xs text-destructive ml-1">{errors.email}</span>}
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="password" className={styles.label}>Hasło</label>
+                    <div className="space-y-1.5">
+                        <label htmlFor="password" className="text-sm font-medium text-foreground ml-1">Hasło</label>
                         <input
                             id="password"
                             type="password"
@@ -85,25 +101,28 @@ export default function Login() {
                             autoComplete="current-password"
                             value={form.password}
                             onChange={(e) => setForm({ ...form, password: e.target.value })}
-                            className={styles.input}
+                            className="w-full bg-neutral-bg3 border border-border rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all disabled:opacity-50"
                             disabled={isLoading}
                         />
-                        {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+                        {errors.password && <span className="text-xs text-destructive ml-1">{errors.password}</span>}
                     </div>
 
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className={styles.button}
+                        className="w-full mt-4 bg-brand hover:bg-brand-hover text-white font-semibold py-3.5 rounded-xl transition-all shadow-glow focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"
                     >
                         {isLoading ? 'Logowanie...' : 'Zaloguj się'}
                     </button>
                 </form>
 
-                <div className={styles.linkContainer}>
-                    Nie masz konta? <Link href="/register" className={styles.link}>Zarejestruj się</Link>
+                <div className="mt-8 text-center text-sm text-muted-foreground">
+                    Nie masz konta?{' '}
+                    <Link href="/register" className="text-brand hover:text-brand-light font-semibold transition-colors">
+                        Zarejestruj się
+                    </Link>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }

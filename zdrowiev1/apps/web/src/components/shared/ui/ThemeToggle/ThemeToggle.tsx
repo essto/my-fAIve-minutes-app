@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { useTheme } from '../../../../providers/ThemeProvider';
-import styles from './ThemeToggle.module.css';
+import { Moon, Sun } from 'lucide-react';
 
 export function ThemeToggle() {
     const { theme, toggleTheme } = useTheme();
@@ -11,10 +11,10 @@ export function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className={styles.toggle}
+            className="flex items-center justify-center p-2 rounded-lg bg-neutral-bg2 hover:bg-neutral-bg3 border border-border text-foreground transition-all duration-200"
             title={theme === 'light' ? 'Przełącz na ciemny motyw' : 'Przełącz na jasny motyw'}
         >
-            {theme === 'light' ? '🌙' : '☀️'}
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </button>
     );
 }
