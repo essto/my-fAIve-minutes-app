@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { HealthChart } from '@/components/shared/charts/HealthChart';
+import { HealthChart, type ChartConfig } from '@/components/shared/charts/HealthChart';
 import { NotificationBell } from './NotificationBell';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/shared/ui/Card/Card';
 import { SkeletonLoader } from '@/components/shared/ui/SkeletonLoader/SkeletonLoader';
 import { motion, Variants } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from '@/i18n/routing';
 
 interface Anomaly {
     metric: string;
@@ -16,13 +16,7 @@ interface Anomaly {
     message: string;
 }
 
-interface ChartConfig {
-    type: 'line' | 'area' | 'bar' | 'radar' | 'gauge' | 'heatmap' | 'scatter' | 'progress_ring' | 'sparkline' | 'candlestick';
-    data: any[];
-    keys: string[];
-    colors: string[];
-    indexBy?: string;
-}
+
 
 interface DashboardData {
     healthScore: number;
@@ -50,6 +44,7 @@ const itemVariants: Variants = {
 export default function Dashboard() {
     const router = useRouter();
     const t = useTranslations('Dashboard');
+    const locale = useLocale();
     const [data, setData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -58,19 +53,29 @@ export default function Dashboard() {
         if (typeof window !== 'undefined') {
             const hasCompleted = localStorage.getItem('onboarding_completed');
             if (!hasCompleted) {
-                router.replace('/onboarding');
-                return;
+                // Auto-complete onboarding for demo users with existing token
+                const token = localStorage.getItem('token');
+                if (token) {
+                    localStorage.setItem('onboarding_completed', 'true');
+                } else {
+                    router.replace('/onboarding');
+                    return;
+                }
             }
         }
 
         const fetchDashboardData = async () => {
             try {
-                const response = await fetch('/api/dashboard');
+                const response = await fetch('/api/visualization/dashboard');
                 if (!response.ok) throw new Error(t('error_loading'));
                 const result = await response.json();
                 setData(result);
-            } catch (err: any) {
-                setError(err.message || 'Error');
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError(err.message || 'Error');
+                } else {
+                    setError('Unknown error');
+                }
             } finally {
                 setLoading(false);
             }
