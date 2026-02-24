@@ -50,6 +50,8 @@ describe('WeightRepository (Drizzle) Contract Test', () => {
                 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                 user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                 value DOUBLE PRECISION NOT NULL,
+                unit VARCHAR(10) DEFAULT 'kg',
+                source VARCHAR(50),
                 timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );

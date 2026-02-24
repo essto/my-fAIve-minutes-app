@@ -50,7 +50,9 @@ export class WeightService {
       sumX2 += x * x;
     }
 
-    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    const divisor = n * sumX2 - sumX * sumX;
+    const slope = divisor === 0 ? 0 : (n * sumXY - sumX * sumY) / divisor;
+
     return { slope };
   }
 }

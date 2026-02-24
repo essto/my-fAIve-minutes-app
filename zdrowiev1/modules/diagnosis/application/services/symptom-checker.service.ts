@@ -3,6 +3,8 @@ import { Symptom, SymptomReport, TriageResult } from '../../domain/entities/symp
 import { TriageEngine } from '../../domain/services/triage-engine';
 import { ReportGeneratorService } from '../../domain/services/report-generator.service';
 
+import { randomUUID } from 'crypto';
+
 export class SymptomCheckerService {
   private readonly triageEngine = new TriageEngine();
   private readonly reportGenerator = new ReportGeneratorService();
@@ -12,10 +14,11 @@ export class SymptomCheckerService {
   async reportSymptoms(
     userId: string,
     symptoms: Symptom[],
-    aiHeuristic?: (symptoms: Symptom[]) => any,
+    locale: 'pl' | 'en' = 'pl',
+    aiHeuristic?: (symptoms: Symptom[]) => 'LOW' | 'MEDIUM' | 'HIGH' | undefined,
   ): Promise<{ report: SymptomReport; triage: TriageResult; pdf?: Buffer }> {
     const report: SymptomReport = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       userId,
       createdAt: new Date(),
       symptoms,
@@ -26,7 +29,7 @@ export class SymptomCheckerService {
     const evaluation = this.triageEngine.evaluate(symptoms, aiHeuristic);
 
     const triage: TriageResult = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       reportId: savedReport.id,
       riskLevel: evaluation.riskLevel,
       recommendation: evaluation.recommendation,
@@ -41,7 +44,7 @@ export class SymptomCheckerService {
       symptoms,
       triageResult: evaluation.riskLevel,
       healthHistory: [], // Would fetch from health module in full implementation
-      locale: 'pl',
+      locale,
     });
 
     return {

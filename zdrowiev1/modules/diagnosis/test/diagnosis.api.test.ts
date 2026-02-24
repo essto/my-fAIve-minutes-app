@@ -10,14 +10,14 @@ describe('DiagnosisController (API)', () => {
   let app: INestApplication;
   const mockService = {
     reportSymptoms: vi.fn(),
-    getHistory: vi.fn(),
+    getUserReports: vi.fn(),
   };
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [DiagnosisModule],
     })
-      .overrideProvider('DIAGNOSIS_SERVICE')
+      .overrideProvider('SYMPTOM_SERVICE')
       .useValue(mockService)
       .compile();
 
@@ -36,15 +36,17 @@ describe('DiagnosisController (API)', () => {
   });
 
   it('POST /diagnosis/report - Validation Error', async () => {
-    const payload = { severity: 11 }; // Invalid severity > 10
+    // If validation fails, controller isn't hit, but if it is, maybe mock resolved value is needed
+    // Let's just pass invalid body
+    const payload = { symptoms: [{ name: 'Headache', severity: 11, durationHours: 2 }] }; // severity > 10
 
     const response = await request(app.getHttpServer()).post('/diagnosis/report').send(payload);
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(400); // Expect ZodValidationPipe to return 400
   });
 
   it('GET /diagnosis/history - Success', async () => {
-    mockService.getHistory.mockResolvedValue([
+    mockService.getUserReports.mockResolvedValue([
       { id: '1', description: 'Headache', severity: 4, userId: 'u1' },
     ]);
 

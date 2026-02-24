@@ -11,12 +11,12 @@ export class ScannerService {
     return true;
   }
 
-  async preprocessImage(image: any): Promise<any> {
-    // In a real implementation, this would use sharp tograyscale/denoise
+  async preprocessImage(image: Buffer): Promise<Buffer> {
+    // In a real implementation, this would use sharp to grayscale/denoise
     return image;
   }
 
-  async deskewImage(image: any): Promise<any> {
+  async deskewImage(image: Buffer): Promise<Buffer> {
     // Placeholder for deskew logic
     // For TDD, we just need it to not throw 'Not implemented' if we want to pass a test
     // or keep it throwing if we haven't written the 'pass' logic yet.

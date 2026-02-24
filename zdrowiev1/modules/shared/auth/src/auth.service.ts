@@ -14,7 +14,10 @@ export class AuthService {
   ) {}
 
   async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, 12);
+    const saltRounds = process.env.BCRYPT_SALT_ROUNDS
+      ? parseInt(process.env.BCRYPT_SALT_ROUNDS, 10)
+      : 12;
+    return bcrypt.hash(password, saltRounds);
   }
 
   async comparePassword(password: string, hash: string): Promise<boolean> {
@@ -37,8 +40,8 @@ export class AuthService {
     };
   }
 
-  async register(data: any) {
-    const hashedPassword = await this.hashPassword(data.password);
+  async register(data: Omit<User, 'id' | 'createdAt'>) {
+    const hashedPassword = await this.hashPassword(data.password as string);
     return this.userService.create({
       ...data,
       password: hashedPassword,

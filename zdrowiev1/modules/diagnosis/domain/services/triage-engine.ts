@@ -21,12 +21,17 @@ export class TriageEngine {
     for (const symptom of symptoms) {
       if (symptom.severity >= 8 || this.isEmergency(symptom)) {
         maxRisk = 'HIGH';
-        recommendations.push('NATYCHMIAST skontaktuj się z SOR lub zadzwoń pod 112.');
+        recommendations = ['NATYCHMIAST skontaktuj się z SOR lub zadzwoń pod 112.'];
+        break; // Zatrzymujemy analizę, mamy stan zagrożenia życia
       } else if (symptom.severity >= 5 || (symptom.severity >= 3 && symptom.durationHours > 24)) {
-        if (maxRisk !== 'HIGH') maxRisk = 'MEDIUM';
-        recommendations.push('Zalecana konsultacja z lekarzem pierwszego kontaktu w ciągu 24h.');
+        if (maxRisk !== 'HIGH') {
+          maxRisk = 'MEDIUM';
+          recommendations.push('Zalecana konsultacja z lekarzem pierwszego kontaktu w ciągu 24h.');
+        }
       } else {
-        recommendations.push('Odpoczynek i monitorowanie stanu zdrowia. Pij dużo płynów.');
+        if (maxRisk === 'LOW') {
+          recommendations.push('Odpoczynek i monitorowanie stanu zdrowia. Pij dużo płynów.');
+        }
       }
     }
 
