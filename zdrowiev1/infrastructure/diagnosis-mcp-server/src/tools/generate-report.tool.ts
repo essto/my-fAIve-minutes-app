@@ -9,7 +9,7 @@ export async function handleGenerateReport(
   try {
     // We send format as a query param
     const data = await apiClient.get<any>(
-      `/api/diagnosis/report/${params.report_id}?format=${params.format}`,
+      `/api/diagnosis/report/${encodeURIComponent(params.report_id)}?format=${encodeURIComponent(params.format)}`,
     );
 
     const textContent =

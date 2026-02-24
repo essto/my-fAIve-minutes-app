@@ -2,13 +2,20 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axios, { AxiosError, AxiosHeaders } from 'axios';
 import { McpApiClient, handleMcpError, formatMarkdownTable } from '../src/api-client';
 
+const { mockGet, mockPost } = vi.hoisted(() => ({
+  mockGet: vi.fn(),
+  mockPost: vi.fn(),
+}));
+
 vi.mock('axios', async (importOriginal) => {
   const actual = await importOriginal<typeof import('axios')>();
   return {
     ...actual,
     default: {
-      get: vi.fn(),
-      post: vi.fn(),
+      create: vi.fn(() => ({
+        get: mockGet,
+        post: mockPost,
+      })),
     },
   };
 });
@@ -23,13 +30,13 @@ describe('mcp-shared utilities', () => {
     });
 
     it('get() calls axios.get with correct url and params', async () => {
-      vi.mocked(axios.get).mockResolvedValue({ data: { success: true } });
+      mockGet.mockResolvedValue({ data: { success: true } });
 
       const result = await client.get('/test', { foo: 'bar' });
 
       expect(result).toEqual({ success: true });
-      expect(axios.get).toHaveBeenCalledWith(
-        'http://test-api/test',
+      expect(mockGet).toHaveBeenCalledWith(
+        '/test',
         expect.objectContaining({
           params: { foo: 'bar' },
         }),
@@ -37,15 +44,14 @@ describe('mcp-shared utilities', () => {
     });
 
     it('post() calls axios.post with correct url and body', async () => {
-      vi.mocked(axios.post).mockResolvedValue({ data: { created: true } });
+      mockPost.mockResolvedValue({ data: { created: true } });
 
       const result = await client.post('/test', { body: 'data' });
 
       expect(result).toEqual({ created: true });
-      expect(axios.post).toHaveBeenCalledWith(
-        'http://test-api/test',
+      expect(mockPost).toHaveBeenCalledWith(
+        '/test',
         { body: 'data' },
-        expect.any(Object),
       );
     });
   });

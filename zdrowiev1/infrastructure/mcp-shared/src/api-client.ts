@@ -1,43 +1,30 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
 export const CHARACTER_LIMIT = 25000;
 export const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:3001';
 
 export class McpApiClient {
-  private baseUrl: string;
+  private client: AxiosInstance;
 
   constructor(baseUrl: string = API_BASE_URL) {
-    this.baseUrl = baseUrl;
+    this.client = axios.create({
+      baseURL: baseUrl,
+      timeout: 30000,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   async get<T>(path: string, params?: Record<string, any>): Promise<T> {
-    try {
-      const response = await axios.get<T>(`${this.baseUrl}${path}`, {
-        params,
-        timeout: 30000,
-        headers: {
-          Accept: 'application/json',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await this.client.get<T>(path, { params });
+    return response.data;
   }
 
   async post<T>(path: string, data?: any): Promise<T> {
-    try {
-      const response = await axios.post<T>(`${this.baseUrl}${path}`, data, {
-        timeout: 30000,
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await this.client.post<T>(path, data);
+    return response.data;
   }
 }
 
