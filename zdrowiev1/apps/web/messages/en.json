@@ -1,0 +1,64 @@
+{
+    "Home": {
+        "title": "Zdrowie App - Your Health Dashboard"
+    },
+    "Auth": {
+        "login": "Log in",
+        "email": "Email",
+        "password": "Password",
+        "invalid_email": "Invalid email"
+    },
+    "Dashboard": {
+        "welcome": "Welcome back! 👋",
+        "welcome_subtitle": "Here is your health summary for today",
+        "health_score": "Your Health Score",
+        "health_score_desc": "You are in the top 20% for your age group.",
+        "needs_attention": "Needs attention",
+        "all_good": "All metrics are normal!",
+        "health_trends": "Health Trends (30 days)",
+        "activity_and_recovery": "Activity and Recovery",
+        "error_loading": "Failed to load data"
+    },
+    "Symptoms": {
+        "description": "Symptom Description"
+    },
+    "Settings": {
+        "title": "Settings",
+        "subtitle": "Manage your account, preferences, and connected devices.",
+        "profile_section": "Profile",
+        "name": "Name",
+        "email": "Email",
+        "edit_profile": "Edit Profile",
+        "theme_section": "Theme",
+        "language_section": "Language",
+        "notifications_section": "Notifications",
+        "push_notifications": "Push Notifications",
+        "push_notifications_desc": "Receive daily health insights on your phone.",
+        "email_notifications": "Email Notifications",
+        "email_notifications_desc": "Get weekly reports and important alerts.",
+        "devices_section": "Connected Devices",
+        "connected": "Connected",
+        "manage": "Manage"
+    },
+    "Onboarding": {
+        "step_1_title": "Let's get to know you",
+        "step_1_desc": "A few basic details to personalize your experience.",
+        "name": "Name",
+        "age": "Age",
+        "height": "Height",
+        "weight": "Weight",
+        "next": "Next",
+        "back": "Back",
+        "finish": "Finish",
+        "step_2_title": "Your Goal",
+        "step_2_desc": "What do you want to achieve with our app?",
+        "lose_weight": "Lose Weight",
+        "lose_weight_desc": "Reduce body fat and lose weight",
+        "maintain_weight": "Maintain Weight",
+        "maintain_weight_desc": "Healthy daily habits",
+        "gain_weight": "Gain Weight",
+        "gain_weight_desc": "Build muscle mass",
+        "step_3_title": "Connect Devices",
+        "step_3_desc": "Integrate health data from popular apps and wearables."
+    }
+}

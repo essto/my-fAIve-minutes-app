@@ -26,15 +26,27 @@ export function AppShell({ children }: AppShellProps) {
         <div className="flex min-h-screen bg-background">
             <Sidebar />
 
-            <main className="flex-1 md:ml-[260px] p-4 md:p-8 pt-20 md:pt-8 pb-24 md:pb-8 transition-all duration-300">
+            <main className="flex-1 md:ml-[260px] p-4 md:p-8 pt-20 md:pt-8 pb-24 md:pb-8 transition-all duration-300 flex flex-col min-h-screen">
                 <motion.div
                     key={pathname}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
+                    className="flex-1"
                 >
                     {children}
                 </motion.div>
+                <footer className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+                    <p>&copy; {new Date().getFullYear()} Zdrowie App. Wszelkie prawa zastrzeżone.</p>
+                    <div className="flex items-center gap-4">
+                        <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
+                            Polityka Prywatności
+                        </Link>
+                        <Link href="/terms" className="hover:text-foreground transition-colors">
+                            Regulamin
+                        </Link>
+                    </div>
+                </footer>
             </main>
 
             {/* Mobile Top Header (Glassmorphism) */}

@@ -1,0 +1,64 @@
+{
+    "Home": {
+        "title": "Zdrowie App - Twój Panel Zdrowia"
+    },
+    "Auth": {
+        "login": "Zaloguj",
+        "email": "Email",
+        "password": "Hasło",
+        "invalid_email": "Nieprawidłowy email"
+    },
+    "Dashboard": {
+        "welcome": "Witaj ponownie! 👋",
+        "welcome_subtitle": "Oto podsumowanie Twojego zdrowia na dziś",
+        "health_score": "Twój wynik zdrowia",
+        "health_score_desc": "Utrzymujesz się w górnych 20% w swojej grupie wiekowej.",
+        "needs_attention": "Wymaga uwagi",
+        "all_good": "Wszystkie wskaźniki w normie!",
+        "health_trends": "Trendy zdrowotne (30 dni)",
+        "activity_and_recovery": "Aktywność i regeneracja",
+        "error_loading": "Błąd pobierania danych"
+    },
+    "Symptoms": {
+        "description": "Opis objawów"
+    },
+    "Settings": {
+        "title": "Ustawienia",
+        "subtitle": "Zarządzaj kontem, preferencjami i urządzeniami.",
+        "profile_section": "Profil",
+        "name": "Imię",
+        "email": "Email",
+        "edit_profile": "Edytuj profil",
+        "theme_section": "Motyw",
+        "language_section": "Język",
+        "notifications_section": "Powiadomienia",
+        "push_notifications": "Powiadomienia Push",
+        "push_notifications_desc": "Otrzymuj codzienne wskazówki na telefon.",
+        "email_notifications": "Powiadomienia Email",
+        "email_notifications_desc": "Dostawaj cotygodniowe raporty i alerty.",
+        "devices_section": "Urządzenia",
+        "connected": "Połączono",
+        "manage": "Zarządzaj"
+    },
+    "Onboarding": {
+        "step_1_title": "Poznajmy się",
+        "step_1_desc": "Kilka podstawowych informacji, by spersonalizować Twoje doświadczenie.",
+        "name": "Imię",
+        "age": "Wiek",
+        "height": "Wzrost",
+        "weight": "Waga",
+        "next": "Dalej",
+        "back": "Wstecz",
+        "finish": "Zakończ",
+        "step_2_title": "Twój cel",
+        "step_2_desc": "Co chcesz osiągnąć z naszą aplikacją?",
+        "lose_weight": "Schudnąć",
+        "lose_weight_desc": "Redukcja tkanki tłuszczowej i wagi",
+        "maintain_weight": "Utrzymać wagę",
+        "maintain_weight_desc": "Zdrowe nawyki na co dzień",
+        "gain_weight": "Przybrać na masie",
+        "gain_weight_desc": "Zbudować masę mięśniową",
+        "step_3_title": "Połącz urządzenia",
+        "step_3_desc": "Zintegruj dane zdrowotne z popularnych aplikacji i urządzeń."
+    }
+}

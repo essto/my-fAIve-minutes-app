@@ -1,0 +1,60 @@
+﻿
+Running 3 tests using 1 worker
+
+  Ôťś  1 tests\e2e\legal.spec.ts:4:9 ÔÇ║ Legal Pages ÔÇ║ privacy policy renders with GDPR sections (432ms)
+  Ôťś  2 tests\e2e\legal.spec.ts:10:9 ÔÇ║ Legal Pages ÔÇ║ terms of service renders (404ms)
+  Ôťś  3 tests\e2e\legal.spec.ts:15:9 ÔÇ║ Legal Pages ÔÇ║ footer has legal links (396ms)
+
+
+  1) tests\e2e\legal.spec.ts:4:9 ÔÇ║ Legal Pages ÔÇ║ privacy policy renders with GDPR sections ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    Call log:
+    [2m  - navigating to "/privacy-policy", waiting until "load"[22m
+
+
+      3 | test.describe('Legal Pages', () => {
+      4 |     test('privacy policy renders with GDPR sections', async ({ page }) => {
+    > 5 |         await page.goto('/privacy-policy');
+        |                    ^
+      6 |         await expect(page.getByRole('heading', { name: /polityka prywatno┼Ťci|privacy/i })).toBeVisible();
+      7 |         await expect(page.getByText(/dane osobowe|RODO/i)).toBeVisible();
+      8 |     });
+        at C:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\tests\e2e\legal.spec.ts:5:20
+
+  2) tests\e2e\legal.spec.ts:10:9 ÔÇ║ Legal Pages ÔÇ║ terms of service renders ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    Call log:
+    [2m  - navigating to "/terms", waiting until "load"[22m
+
+
+       9 |
+      10 |     test('terms of service renders', async ({ page }) => {
+    > 11 |         await page.goto('/terms');
+         |                    ^
+      12 |         await expect(page.getByRole('heading', { name: /regulamin|terms/i })).toBeVisible();
+      13 |     });
+      14 |
+        at C:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\tests\e2e\legal.spec.ts:11:20
+
+  3) tests\e2e\legal.spec.ts:15:9 ÔÇ║ Legal Pages ÔÇ║ footer has legal links ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    Call log:
+    [2m  - navigating to "/dashboard", waiting until "load"[22m
+
+
+      14 |
+      15 |     test('footer has legal links', async ({ page }) => {
+    > 16 |         await page.goto('/dashboard');
+         |                    ^
+      17 |         await expect(page.getByRole('link', { name: /prywatno┼Ťc|privacy|polityka/i })).toBeVisible();
+      18 |         await expect(page.getByRole('link', { name: /regulamin|terms/i })).toBeVisible();
+      19 |     });
+        at C:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\web\tests\e2e\legal.spec.ts:16:20
+
+  3 failed
+    tests\e2e\legal.spec.ts:4:9 ÔÇ║ Legal Pages ÔÇ║ privacy policy renders with GDPR sections ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+    tests\e2e\legal.spec.ts:10:9 ÔÇ║ Legal Pages ÔÇ║ terms of service renders ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+    tests\e2e\legal.spec.ts:15:9 ÔÇ║ Legal Pages ÔÇ║ footer has legal links ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ

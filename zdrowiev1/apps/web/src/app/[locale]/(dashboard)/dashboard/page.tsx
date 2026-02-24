@@ -6,6 +6,8 @@ import { NotificationBell } from './NotificationBell';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/shared/ui/Card/Card';
 import { SkeletonLoader } from '@/components/shared/ui/SkeletonLoader/SkeletonLoader';
 import { motion, Variants } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 interface Anomaly {
     metric: string;
@@ -46,26 +48,36 @@ const itemVariants: Variants = {
 };
 
 export default function Dashboard() {
+    const router = useRouter();
+    const t = useTranslations('Dashboard');
     const [data, setData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const hasCompleted = localStorage.getItem('onboarding_completed');
+            if (!hasCompleted) {
+                router.replace('/onboarding');
+                return;
+            }
+        }
+
         const fetchDashboardData = async () => {
             try {
                 const response = await fetch('/api/dashboard');
-                if (!response.ok) throw new Error('Błąd pobierania danych');
+                if (!response.ok) throw new Error(t('error_loading'));
                 const result = await response.json();
                 setData(result);
             } catch (err: any) {
-                setError(err.message || 'Wystąpił błąd');
+                setError(err.message || 'Error');
             } finally {
                 setLoading(false);
             }
         };
 
         fetchDashboardData();
-    }, []);
+    }, [router, t]);
 
     if (loading) {
         return (
@@ -112,8 +124,8 @@ export default function Dashboard() {
         <div className="flex flex-col gap-6">
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground">Witaj ponownie! 👋</h1>
-                    <p className="text-muted-foreground mt-1 text-sm md:text-base">Oto podsumowanie Twojego zdrowia na dziś</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground">{t('welcome')}</h1>
+                    <p className="text-muted-foreground mt-1 text-sm md:text-base">{t('welcome_subtitle')}</p>
                 </div>
                 <div className="flex items-center">
                     <NotificationBell />
@@ -149,8 +161,8 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div className="text-center">
-                                <h3 className="text-lg font-semibold text-foreground">Twój wynik zdrowia</h3>
-                                <p className="text-sm text-muted-foreground mt-1 px-4">Utrzymujesz się w górnych 20% w swojej grupie wiekowej.</p>
+                                <h3 className="text-lg font-semibold text-foreground">{t('health_score')}</h3>
+                                <p className="text-sm text-muted-foreground mt-1 px-4">{t('health_score_desc')}</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -162,7 +174,7 @@ export default function Dashboard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-status-warning"></span>
-                                Wymaga uwagi
+                                {t('needs_attention')}
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -188,7 +200,7 @@ export default function Dashboard() {
                                     <div className="w-12 h-12 rounded-full bg-status-success/20 text-status-success flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="m9 11 3 3L22 4" /></svg>
                                     </div>
-                                    <p className="text-muted-foreground font-medium">Wszystkie wskaźniki w normie!</p>
+                                    <p className="text-muted-foreground font-medium">{t('all_good')}</p>
                                 </div>
                             )}
                         </CardContent>
@@ -199,7 +211,7 @@ export default function Dashboard() {
                 <motion.div variants={itemVariants} className="col-span-1 lg:col-span-2">
                     <Card className="glass-card">
                         <CardHeader>
-                            <CardTitle>Trendy zdrowotne (30 dni)</CardTitle>
+                            <CardTitle>{t('health_trends')}</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="h-[250px] w-full" data-testid="weight-chart">
@@ -213,7 +225,7 @@ export default function Dashboard() {
                 <motion.div variants={itemVariants} className="col-span-1">
                     <Card className="glass-card h-full">
                         <CardHeader>
-                            <CardTitle>Aktywność i regeneracja</CardTitle>
+                            <CardTitle>{t('activity_and_recovery')}</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="h-[250px] w-full" data-testid="activity-rings">

@@ -95,7 +95,10 @@ export default function OCRPage() {
                                 <div className="flex flex-col items-center gap-6 pt-4">
                                     <div className="w-full max-w-lg bg-color-gray-50 dark:bg-color-gray-900 p-4 rounded-xl border border-border">
                                         {file?.type.startsWith('image/') ? (
-                                            <img src={preview} alt="Preview" className="w-full h-auto rounded-lg shadow-sm" data-testid="file-preview" />
+                                            <div className="relative w-full h-auto min-h-[300px]">
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img src={preview} alt="Preview" className="w-full h-auto rounded-lg shadow-sm" data-testid="file-preview" />
+                                            </div>
                                         ) : (
                                             <div className="flex flex-col items-center p-10" data-testid="file-preview">
                                                 <span className="text-6xl mb-4">📑</span>
