@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 58c3476718af7e5b19499fce713ffdc35c1f2962 Piotr Sz <cwptyche@gmail.com> 1771934041 +0100	commit (initial): feat(infra): refactor MCP server and CI/CD pipeline, add shared unit tests
+58c3476718af7e5b19499fce713ffdc35c1f2962 c2e6cbdefd30f52c056f0a19d78472253b6941a2 Piotr Sz <cwptyche@gmail.com> 1771937465 +0100	commit: feat(security): implement Stage 11 Security Hardening

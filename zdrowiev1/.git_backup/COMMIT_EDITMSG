@@ -1,0 +1,11 @@
+feat(security): implement Stage 11 Security Hardening
+
+- Add Helmet, CORS, Rate Limiting
+
+- Add Input Validation (DTOs)
+
+- JWT Hardening (15m expiry, env secrets)
+
+- Row-Level Security isolation
+
+- Dependency audit fixes

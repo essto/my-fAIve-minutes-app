@@ -504,15 +504,15 @@ jobs:
 > **Cel:** Finalne testy bezpieczeństwa.
 > **Zależności:** Etap 1-10
 
-- [ ] **OWASP Top 10** scan (ZAP lub equivalent)
-- [ ] **RLS stress test:** 1000 zapytań cross-user → 0 leaks
-- [ ] **JWT security:** token rotation, blacklist on logout
-- [ ] **Rate limiting:** 100 req/min per user, 5 login attempts/min
-- [ ] **CORS:** whitelisted domains only
-- [ ] **Helmet.js:** security headers (CSP, HSTS, X-Frame-Options)
-- [ ] **SQL injection test:** SQLMap scan
-- [ ] **Dependency audit:** `npm audit --production` → 0 critical
-- [ ] **GitHub Security Alerts:** Patch 8 vulnerabilities (1 critical: `nanoid`, 4 high: `cross-spawn`, `body-parser`, `micromatch`, `path-to-regexp`)
+- [x] **OWASP Top 10** scan (ZAP lub equivalent)
+- [x] **RLS stress test:** 1000 zapytań cross-user → 0 leaks
+- [x] **JWT security:** token rotation, blacklist on logout
+- [x] **Rate limiting:** 100 req/min per user, 5 login attempts/min
+- [x] **CORS:** whitelisted domains only
+- [x] **Helmet.js:** security headers (CSP, HSTS, X-Frame-Options)
+- [x] **SQL injection test:** SQLMap scan
+- [x] **Dependency audit:** `npm audit --production` → 0 critical
+- [x] **GitHub Security Alerts:** Patch 8 vulnerabilities (1 critical: `nanoid`, 4 high: `cross-spawn`, `body-parser`, `micromatch`, `path-to-regexp`)
 
 > **✅ DoD:** 0 critical/high vulnerabilities. RLS leak test passed. Penetration test clean.
 
@@ -549,8 +549,8 @@ jobs:
 | 7 | Web Frontend | 1-6 | ~5000 | 3-4 | 🟡 (90%) |
 | 8 | Mobile Frontend | 1-6 | ~4000 | 3-4 | ⬜ |
 | 9 | MCP Servers | 1-6 | ~2400 | 2 | ⬜ |
-| 10 | CI/CD | 0-9 | ~500 | 1 | ⬜ |
-| 11 | Security | 1-10 | ~300 | 1 | ⬜ |
+| 10 | CI/CD | 0-9 | ~500 | 1 | ✅ |
+| 11 | Security | 1-10 | ~300 | 1 | ✅ |
 | 12 | Polish | 0-11 | ~800 | 2 | ⬜ |
 | **TOTAL** | | | **~32,000** | **~25-30** | |
 

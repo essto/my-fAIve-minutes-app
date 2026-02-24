@@ -1,0 +1,13 @@
+node_modules
+.next
+dist
+.git
+*.md
+test-results
+coverage
+pacts
+.env
+.env.local
+.DS_Store
+.github
+*.log

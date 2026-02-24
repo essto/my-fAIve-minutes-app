@@ -7,6 +7,7 @@ export const weightReadings = pgTable('weight_readings', {
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
   value: doublePrecision('value').notNull(),
+  unit: text('unit').default('kg').notNull(),
   timestamp: timestamp('timestamp').defaultNow().notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });

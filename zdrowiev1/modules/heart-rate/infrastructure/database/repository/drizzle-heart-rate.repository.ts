@@ -10,18 +10,18 @@ export class DrizzleHeartRateRepository implements HeartRateRepository {
       .insert(heartRateReadings)
       .values({
         userId: data.userId!,
-        bpm: data.bpm!,
+        value: data.value!,
         isResting: data.isResting,
-        measuredAt: data.measuredAt,
+        timestamp: data.timestamp,
       })
       .returning();
 
     return {
       id: inserted.id,
       userId: inserted.userId,
-      bpm: inserted.bpm,
+      value: inserted.value,
       isResting: inserted.isResting ?? false,
-      measuredAt: inserted.measuredAt ?? new Date(),
+      timestamp: inserted.timestamp ?? new Date(),
     };
   }
 
@@ -34,9 +34,9 @@ export class DrizzleHeartRateRepository implements HeartRateRepository {
     return results.map((row) => ({
       id: row.id,
       userId: row.userId,
-      bpm: row.bpm,
+      value: row.value,
       isResting: row.isResting ?? false,
-      measuredAt: row.measuredAt ?? new Date(),
+      timestamp: row.timestamp ?? new Date(),
     }));
   }
 }

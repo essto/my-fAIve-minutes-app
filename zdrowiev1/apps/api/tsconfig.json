@@ -4,20 +4,27 @@
         "outDir": "../../dist/apps/api",
         "rootDir": "../../",
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*",
-        "../../modules/**/*",
-        "../../packages/**/*"
+        "../../modules/*/domain/**/*",
+        "../../modules/*/application/**/*",
+        "../../modules/*/infrastructure/**/*",
+        "../../modules/*/ports/**/*",
+        "../../modules/*/adapters/**/*",
+        "../../modules/*/src/**/*",
+        "../../modules/shared/*/src/**/*",
+        "../../modules/notifications/*.ts",
+        "../../packages/*/src/**/*"
     ],
     "exclude": [
         "node_modules",
         "dist",
         "test",
-        "../../modules/**/*.test.ts",
-        "../../modules/**/*.unit.test.ts",
-        "../../modules/**/*.spec.ts",
-        "../../modules/**/*.integration.test.ts"
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "**/__tests__/**"
     ]
 }

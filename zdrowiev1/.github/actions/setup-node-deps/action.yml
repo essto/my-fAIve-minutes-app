@@ -1,0 +1,11 @@
+name: 'Setup Node and Install Dependencies'
+description: 'Standardized Node.js setup with dependency caching and installation'
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'npm'
+    - run: npm ci
+      shell: bash

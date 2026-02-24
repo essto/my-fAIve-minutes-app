@@ -4,18 +4,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { McpApiClient } from '@monorepo/mcp-shared';
 
-import {
-  GetWeightHistoryInputSchema,
-  AddWeightReadingInputSchema,
-  GetHealthScoreInputSchema,
-} from './schemas/health.schemas.js';
-
-import { handleGetWeightHistory } from './tools/get-weight-history.tool.js';
-import { handleAddWeightReading } from './tools/add-weight-reading.tool.js';
-import { handleGetHealthScore } from './tools/get-health-score.tool.js';
-
-import { handleWeightTrendResource } from './resources/weight-trend.resource.js';
-import { handleSleepSummaryResource } from './resources/sleep-summary.resource.js';
+import { setupServer } from './server-setup.js';
 
 const server = new McpServer({
   name: 'health-mcp-server',
@@ -23,93 +12,29 @@ const server = new McpServer({
 });
 
 const apiClient = new McpApiClient();
+const transport = new StdioServerTransport();
 
-// 1. Tool: get_weight_history
-server.registerTool(
-  'health_get_weight_history',
-  {
-    title: 'Get Weight History',
-    description: 'Pobiera historię pomiarów wagi użytkownika z opcjonalną paginacją.',
-    inputSchema: GetWeightHistoryInputSchema,
-    annotations: {
-      readOnlyHint: true,
-      destructiveHint: false,
-      idempotentHint: true,
-      openWorldHint: true,
-    },
-  },
-  async (params: any) => (await handleGetWeightHistory(params, apiClient)) as any,
-);
-
-// 2. Tool: add_weight_reading
-server.registerTool(
-  'health_add_weight_reading',
-  {
-    title: 'Add Weight Reading',
-    description: 'Dodaje nowy pomiar wagi użytkownika.',
-    inputSchema: AddWeightReadingInputSchema,
-    annotations: {
-      readOnlyHint: false,
-      destructiveHint: false,
-      idempotentHint: false,
-      openWorldHint: true,
-    },
-  },
-  async (params: any) => (await handleAddWeightReading(params, apiClient)) as any,
-);
-
-// 3. Tool: get_health_score
-server.registerTool(
-  'health_get_health_score',
-  {
-    title: 'Get Health Score',
-    description:
-      'Pobiera ogólny wynik zdrowotny (Health Score) na podstawie danych z różnych modułów.',
-    inputSchema: GetHealthScoreInputSchema,
-    annotations: {
-      readOnlyHint: true,
-      destructiveHint: false,
-      idempotentHint: true,
-      openWorldHint: true,
-    },
-  },
-  async (params: any) => (await handleGetHealthScore(params, apiClient)) as any,
-);
-
-// Resources
-server.registerResource(
-  'health://weight/{userId}/trend',
-  'Weight Trend Analysis',
-  {
-    description: 'Analiza trendów wagi użytkownika',
-    mimeType: 'application/json',
-  },
-  async (uri: any) => {
-    const match = uri.href.match(/^health:\/\/weight\/([^/]+)\/trend$/);
-    if (!match) throw new Error('Invalid URI');
-    return handleWeightTrendResource(match[1], apiClient);
-  },
-);
-
-server.registerResource(
-  'health://sleep/{userId}/summary',
-  'Sleep Summary',
-  {
-    description: 'Podsumowanie snu użytkownika',
-    mimeType: 'application/json',
-  },
-  async (uri: any) => {
-    const match = uri.href.match(/^health:\/\/sleep\/([^/]+)\/summary$/);
-    if (!match) throw new Error('Invalid URI');
-    return handleSleepSummaryResource(match[1], apiClient);
-  },
-);
+setupServer(server, apiClient);
 
 async function run() {
-  const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error('MCP server "health-mcp-server" running via stdio');
 }
+
+// Graceful shutdown handling
+const shutdown = async () => {
+  console.error('\nShutting down health-mcp-server...');
+  try {
+    await server.close();
+    process.exit(0);
+  } catch (err) {
+    console.error('Error during shutdown:', err);
+    process.exit(1);
+  }
+};
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
 
 run().catch((error) => {
   console.error('Server error:', error);

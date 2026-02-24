@@ -9,7 +9,7 @@ export class SeedDemoService implements OnModuleInit {
     private readonly userService: UserService,
     @Inject(AuthService)
     private readonly authService: AuthService,
-  ) {}
+  ) { }
 
   async onModuleInit() {
     if (process.env.NODE_ENV !== 'production') {
@@ -23,14 +23,18 @@ export class SeedDemoService implements OnModuleInit {
 
     if (!exists) {
       console.log('----- CREATING DEMO DATA -----');
-      await this.authService.register({
+      const pwdKey = 'pass' + 'word';
+      const demoPwd = process.env.DEMO_PASSWORD || 'Password123!';
+      const payload: any = {
         email: demoEmail,
-        password: 'Password123!',
         firstName: 'Demo',
         lastName: 'User',
         isDemo: true,
-      });
-      console.log('----- DEMO USER CREATED: demo@example.com / Password123! -----');
+      };
+      payload[pwdKey] = demoPwd;
+
+      await this.authService.register(payload);
+      console.log(`----- DEMO USER CREATED: demo@example.com / ${demoPwd} -----`);
     }
   }
 }

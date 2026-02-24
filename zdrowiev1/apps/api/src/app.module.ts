@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 import { WeightModule } from '../../../modules/weight/weight.module';
 import { HeartRateModule } from '../../../modules/heart-rate/heart-rate.module';
 import { SleepModule } from '../../../modules/sleep/sleep.module';
@@ -12,6 +14,11 @@ import { ActivityModule } from '../../../modules/activity/src/infrastructure/act
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot([
+      { name: 'short', ttl: 1000, limit: 3 },   // 3 req/s
+      { name: 'medium', ttl: 10000, limit: 20 }, // 20 req/10s
+      { name: 'long', ttl: 60000, limit: 100 },  // 100 req/min
+    ]),
     AuthModule,
     UserModule,
     SeedModule,
@@ -24,6 +31,8 @@ import { ActivityModule } from '../../../modules/activity/src/infrastructure/act
     DiagnosisModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+  ],
 })
-export class AppModule {}
+export class AppModule { }
