@@ -1,0 +1,24 @@
+appId: com.zdrowie.app
+tags:
+  - navigation
+---
+# Prerequisite: zaloguj się
+- runFlow: login.yaml
+
+# Tab: Health
+- tapOn: "Health"
+- assertVisible: "Twoje zdrowie"
+
+# Tab: Diet
+- tapOn: "Diet"
+- assertVisible: "Twój jadłospis"
+
+# Tab: OCR
+- tapOn: "Skaner"
+- assertVisible: "Analiza Badań i Etykiet"
+
+# Tab: Scale
+- tapOn: "Waga"
+- assertVisible: "Waga Bluetooth"
+
+- takeScreenshot: "all-tabs-navigated"

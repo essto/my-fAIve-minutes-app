@@ -1,0 +1,10 @@
+appId: com.zdrowie.app
+tags:
+  - dashboard
+  - smoke
+---
+- runFlow: login.yaml
+
+- assertVisible:
+    id: "health-score-ring"
+- takeScreenshot: "dashboard-loaded"

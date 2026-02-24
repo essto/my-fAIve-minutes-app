@@ -1,0 +1,17 @@
+appId: com.zdrowie.app
+tags:
+  - login
+  - negative
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: "email-input"
+- inputText: "wrong@email.com"
+- tapOn:
+    id: "password-input"
+- inputText: "bad"
+- tapOn:
+    id: "login-button"
+- assertVisible: "Invalid credentials"
+- takeScreenshot: "login-failure"
