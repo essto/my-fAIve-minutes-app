@@ -8,9 +8,21 @@ export class DrizzleHeartRateRepository implements HeartRateRepository {
   async save(data: Partial<HeartRateReading>): Promise<HeartRateReading> {
     const [inserted] = await db
       .insert(heartRateReadings)
-      .values(data as any)
+      .values({
+        userId: data.userId!,
+        bpm: data.bpm!,
+        isResting: data.isResting,
+        measuredAt: data.measuredAt,
+      })
       .returning();
-    return inserted as unknown as HeartRateReading;
+
+    return {
+      id: inserted.id,
+      userId: inserted.userId,
+      bpm: inserted.bpm,
+      isResting: inserted.isResting ?? false,
+      measuredAt: inserted.measuredAt ?? new Date(),
+    };
   }
 
   async findByUserId(userId: string): Promise<HeartRateReading[]> {
@@ -18,6 +30,13 @@ export class DrizzleHeartRateRepository implements HeartRateRepository {
       .select()
       .from(heartRateReadings)
       .where(eq(heartRateReadings.userId, userId));
-    return results as unknown as HeartRateReading[];
+
+    return results.map((row) => ({
+      id: row.id,
+      userId: row.userId,
+      bpm: row.bpm,
+      isResting: row.isResting ?? false,
+      measuredAt: row.measuredAt ?? new Date(),
+    }));
   }
 }

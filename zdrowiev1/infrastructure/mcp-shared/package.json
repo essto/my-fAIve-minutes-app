@@ -17,5 +17,12 @@
         "vitest": "^4.0.18",
         "typescript": "^5.9.3",
         "@types/node": "^20.0.0"
-    }
+    },
+    "description": "",
+    "directories": {
+        "test": "test"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }

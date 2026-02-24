@@ -2,7 +2,7 @@ import { db } from '@monorepo/database';
 import { meals, mealProducts } from '../../../../shared/database/src/drizzle/schema';
 import { MealRepository } from '../../../domain/ports/diet.repository';
 import { Meal } from '../../../domain/entities/meal.entity';
-import { eq, and, gte } from 'drizzle-orm';
+import { eq, and, gte, inArray } from 'drizzle-orm';
 
 export class DrizzleMealRepository implements MealRepository {
   async save(meal: Meal): Promise<Meal> {
@@ -76,23 +76,36 @@ export class DrizzleMealRepository implements MealRepository {
     }
 
     const results = await query;
-    const mealsWithProducts = await Promise.all(
-      results.map(async (meal) => {
-        const products = await db
-          .select()
-          .from(mealProducts)
-          .where(eq(mealProducts.mealId, meal.id));
-        return {
-          ...meal,
-          products: products.map((p) => ({
-            ...p,
-            productId: p.productId ?? undefined,
-            barcode: p.barcode ?? undefined,
-          })),
-        };
-      }),
+
+    if (results.length === 0) {
+      return [];
+    }
+
+    // Fix N+1 Query: Fetch all products for these meals in a single query
+    const mealIds = results.map((m) => m.id);
+    const allProducts = await db
+      .select()
+      .from(mealProducts)
+      // @ts-ignore - inArray imported locally below until global refactor
+      .where(inArray(mealProducts.mealId, mealIds));
+
+    // Group products by mealId
+    const productsByMealId = allProducts.reduce(
+      (acc, p) => {
+        if (!acc[p.mealId]) acc[p.mealId] = [];
+        acc[p.mealId].push({
+          ...p,
+          productId: p.productId ?? undefined,
+          barcode: p.barcode ?? undefined,
+        });
+        return acc;
+      },
+      {} as Record<string, any[]>,
     );
 
-    return mealsWithProducts;
+    return results.map((meal) => ({
+      ...meal,
+      products: productsByMealId[meal.id] || [],
+    }));
   }
 }

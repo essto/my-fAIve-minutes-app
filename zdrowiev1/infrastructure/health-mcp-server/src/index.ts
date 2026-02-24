@@ -38,7 +38,7 @@ server.registerTool(
       openWorldHint: true,
     },
   },
-  async (params) => handleGetWeightHistory(params, apiClient),
+  async (params: any) => (await handleGetWeightHistory(params, apiClient)) as any,
 );
 
 // 2. Tool: add_weight_reading
@@ -55,7 +55,7 @@ server.registerTool(
       openWorldHint: true,
     },
   },
-  async (params) => handleAddWeightReading(params, apiClient),
+  async (params: any) => (await handleAddWeightReading(params, apiClient)) as any,
 );
 
 // 3. Tool: get_health_score
@@ -73,33 +73,33 @@ server.registerTool(
       openWorldHint: true,
     },
   },
-  async (params) => handleGetHealthScore(params, apiClient),
+  async (params: any) => (await handleGetHealthScore(params, apiClient)) as any,
 );
 
 // Resources
 server.registerResource(
+  'health://weight/{userId}/trend',
+  'Weight Trend Analysis',
   {
-    uri: 'health://weight/{userId}/trend',
-    name: 'Weight Trend Analysis',
     description: 'Analiza trendów wagi użytkownika',
     mimeType: 'application/json',
   },
-  async (uri) => {
-    const match = uri.match(/^health:\/\/weight\/([^/]+)\/trend$/);
+  async (uri: any) => {
+    const match = uri.href.match(/^health:\/\/weight\/([^/]+)\/trend$/);
     if (!match) throw new Error('Invalid URI');
     return handleWeightTrendResource(match[1], apiClient);
   },
 );
 
 server.registerResource(
+  'health://sleep/{userId}/summary',
+  'Sleep Summary',
   {
-    uri: 'health://sleep/{userId}/summary',
-    name: 'Sleep Summary',
     description: 'Podsumowanie snu użytkownika',
     mimeType: 'application/json',
   },
-  async (uri) => {
-    const match = uri.match(/^health:\/\/sleep\/([^/]+)\/summary$/);
+  async (uri: any) => {
+    const match = uri.href.match(/^health:\/\/sleep\/([^/]+)\/summary$/);
     if (!match) throw new Error('Invalid URI');
     return handleSleepSummaryResource(match[1], apiClient);
   },
