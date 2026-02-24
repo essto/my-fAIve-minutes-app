@@ -6,6 +6,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 
 import { useAuth } from '../hooks/useAuth';
 import { LoginScreen } from '../screens/LoginScreen';
+import { OcrScreen } from '../screens/OcrScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,10 +29,11 @@ const DietScreen = () => (
 );
 
 export const TabNavigator = () => (
-  <Tab.Navigator>
+  <Tab.Navigator screenOptions={{ headerShown: true }}>
     <Tab.Screen name="Home" component={HomeScreen} />
     <Tab.Screen name="Health" component={HealthScreen} />
     <Tab.Screen name="Diet" component={DietScreen} />
+    <Tab.Screen name="Skaner" component={OcrScreen} />
   </Tab.Navigator>
 );
 
