@@ -33,12 +33,24 @@ Dokument zawiera spis User Stories (historii użytkownika), które definiują fu
   - *Jako:* Użytkownik
   - *Chcę:* Widzieć interaktywne wykresy moich faz snu oraz tętna spoczynkowego
   - *Aby:* Monitorować jakość regeneracji i wydolność organizmu.
+- **US6.1: Monitorowanie Aktywności (Activity Rings)**
+  - *Jako:* Użytkownik
+  - *Chcę:* Śledzić codzienną liczbę kroków i spalone kalorie w formie zamykających się "pierścieni" oraz wykresów typu Heatmap
+  - *Aby:* Motywować się wizualnie do spełniania moich dziennych celów ruchowych.
 
 ### 5. Dieta i Odżywianie
 - **US7: Logowanie Posiłków**
   - *Jako:* Użytkownik
   - *Chcę:* Dodawać zjedzone posiłki wraz z ich kalorycznością i makroskładnikami
   - *Aby:* Świadomie zarządzać swoją dietą i bilansem energetycznym.
+- **US7.1: Skanowanie Kodów Kreskowych (Barcode Scanner)**
+  - *Jako:* Zalogowany użytkownik
+  - *Chcę:* Użyć aparatu do zeskanowania kodu kreskowego produktu (pobieranego z bazy Open Food Facts)
+  - *Aby:* Błyskawicznie dodać produkt i jego makroskładniki bezpośrednio do mojego dziennika bez ręcznego przepisywania.
+- **US7.2: Kalkulator Deficytów (Nutrition Alerts)**
+  - *Jako:* Osoba na diecie
+  - *Chcę:* Otrzymywać ostrzeżenie, jeśli dzienne logi wykażą braki (np. za mało białka w stosunku do mojego ustalonego celu)
+  - *Aby:* Wiedzieć, co jeszcze zjeść w celu "domknięcia" odpowiednich makroskładników.
 
 ### 6. Diagnostyka i AI
 - **US8: Symptom Checker (Triage)**
@@ -77,6 +89,20 @@ Dokument zawiera spis User Stories (historii użytkownika), które definiują fu
   - *Jako:* Użytkownik dbający o bezpieczeństwo własnych danych wrażliwych (medycznych)
   - *Chcę:* Mieć klarowny podgląd Polityki Prywatności, zasad przetwarzania danych zgodnie z RODO i pełnego Regulaminu Usługi
   - *Aby:* Wiedzieć, komu i w jakim celu udostępniam historię parametrów życiowych.
+- **US15: Rejestr Dostępów (Audit Logs)**
+  - *Jako:* Użytkownik dbający o bezpieczeństwo wrażliwych danych medycznych
+  - *Chcę:* Posiadać pełny wgląd w rejestr zdarzeń pokazujący, co i kiedy uzyskiwało dostęp do moich informacji
+  - *Aby:* Ufać aplikacji, że posiada nadzór i pełną trasowalność poczynań.
+- **US16: Zarządzanie Zgodami (Consent Management)**
+  - *Jako:* Właściciel konta
+  - *Chcę:* Móc w każdej chwili wejść w ustawienia profilu i samodzielnie zarządzać (wycofywać/dodawać) zgodami
+  - *Aby:* Decydować, z czym moje dane zdrowotne mogą się synchronizować lub w jakim zakresie mogą być profilowane.
+
+### 11. Udostępnianie
+- **US17: Udostępnianie Bezpiecznego Linku (Share Link)**
+  - *Jako:* Pacjent komunikujący się ze specjalistą online
+  - *Chcę:* Generować bezpieczny, tymczasowy link do moich statystyk
+  - *Aby:* Szybko przekazać lekarzowi dostęp do wykresów przed wizytą drogą elektroniczną.
 
 ---
 
