@@ -56,6 +56,28 @@ Dokument zawiera spis User Stories (historii użytkownika), które definiują fu
   - *Chcę:* Wygenerować estetyczny raport PDF z moimi danymi i wykresami
   - *Aby:* Przedstawić lekarzowi kompletny obraz mojego stanu zdrowia z ostatniego okresu.
 
+### 8. Personalizacja i Ustawienia (Onboarding & i18n)
+- **US11: Kreator Powitalny (Onboarding)**
+  - *Jako:* Nowo zarejestrowany użytkownik
+  - *Chcę:* Przejść przez krokowy proces uzupełniania profilu (wiek, wzrost, początkowa waga, urządzenie, cele)
+  - *Aby:* Aplikacja mogła lepiej dopasować dla mnie rekomendacje bez samodzielnego szukania ustawień.
+- **US12: Internacjonalizacja (i18n)**
+  - *Jako:* Użytkownik preferujący język angielski
+  - *Chcę:* Zmienić język interfejsu aplikacji za pomocą zintegrowanego przełącznika
+  - *Aby:* Swobodnie korzystać z systemu w języku, który jest dla mnie w pełni zrozumiały.
+
+### 9. Integracje i Urządzenia
+- **US13: Automatyczny odczyt parametrów z wagi (BLE)**
+  - *Jako:* Użytkownik posiadający zewnętrzną wagę Bluetooth
+  - *Chcę:* Zeskanować dostępne urządzenia, połączyć się z wagą za pomocą modułu BLE mobilnej aplikacji i pobrać aktualny wynik pomiaru masy
+  - *Aby:* Oszczędzić czas i uniknąć literówek przy ręcznym wprowadzaniu danych.
+
+### 10. Aspekty Prawne i Ochrona Danych
+- **US14: Regulaminy i RODO (Privacy & Terms)**
+  - *Jako:* Użytkownik dbający o bezpieczeństwo własnych danych wrażliwych (medycznych)
+  - *Chcę:* Mieć klarowny podgląd Polityki Prywatności, zasad przetwarzania danych zgodnie z RODO i pełnego Regulaminu Usługi
+  - *Aby:* Wiedzieć, komu i w jakim celu udostępniam historię parametrów życiowych.
+
 ---
 
-*Uwaga: Powyższe historie są zintegrowane z testami E2E w `apps/web/tests/e2e/`.*
+*Uwaga: Powyższe historie są zintegrowane z testami E2E w `apps/web/tests/e2e/` (m.in.: uwierzytelnianie, onboarding, i18n, strony prawne) oraz z logiką domenową w odpowiednich modułach.*
