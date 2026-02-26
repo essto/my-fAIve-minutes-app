@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
-import { useHealthData, Anomaly, WeightReading } from '../hooks/useHealthData';
-import Animated, { FadeInDown, FadeInUp, FadeInRight } from 'react-native-reanimated';
-import { BlurView } from 'expo-blur';
+import { View, Text, ScrollView } from 'react-native';
+import { useHealthData, Anomaly } from '../hooks/useHealthData';
+import { FadeInUp, FadeInRight } from 'react-native-reanimated';
+import { GlassCard } from '../components/GlassCard';
+import { MetricCard } from '../components/MetricCard';
+import { ScreenHeader } from '../components/ScreenHeader';
+import { LoadingScreen } from '../components/LoadingScreen';
 
 export const HealthScreen = () => {
   const {
@@ -23,11 +26,7 @@ export const HealthScreen = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <View className="flex-1 bg-background justify-center items-center">
-        <ActivityIndicator testID="health-loading" size="large" color="#8251EE" />
-      </View>
-    );
+    return <LoadingScreen testID="health-loading" />;
   }
 
   const latestWeight =
@@ -35,79 +34,48 @@ export const HealthScreen = () => {
 
   return (
     <ScrollView className="flex-1 bg-background p-6">
-      <Animated.Text
-        entering={FadeInDown.springify()}
-        className="text-3xl font-bold text-foreground mb-8 mt-2"
-      >
-        Twoje Zdrowie
-      </Animated.Text>
+      <ScreenHeader title="Twoje Zdrowie" />
 
-      <Animated.View
-        entering={FadeInUp.delay(100).springify()}
-        className="mb-6 overflow-hidden rounded-3xl border border-border"
-      >
-        <BlurView intensity={30} tint="dark" className="p-6">
-          <Text className="text-foreground font-semibold text-lg mb-4">
-            Ogólny Health Score: <Text className="text-brand font-bold">{healthScore}</Text>
-          </Text>
-          {healthBreakdown && (
-            <View className="flex-row justify-between mt-2 pt-4 border-t border-border">
-              <View className="items-center">
-                <Text className="text-xs text-muted-foreground mb-1 uppercase">Waga</Text>
-                <Text className="text-foreground font-medium">{healthBreakdown.weight}</Text>
-              </View>
-              <View className="items-center">
-                <Text className="text-xs text-muted-foreground mb-1 uppercase">Sen</Text>
-                <Text className="text-foreground font-medium">{healthBreakdown.sleep}</Text>
-              </View>
-              <View className="items-center">
-                <Text className="text-xs text-muted-foreground mb-1 uppercase">Aktywność</Text>
-                <Text className="text-foreground font-medium">{healthBreakdown.activity}</Text>
-              </View>
+      <GlassCard entering={FadeInUp.delay(100).springify()}>
+        <Text className="text-foreground font-semibold text-lg mb-4">
+          Ogólny Health Score: <Text className="text-brand font-bold">{healthScore}</Text>
+        </Text>
+        {healthBreakdown && (
+          <View className="flex-row justify-between mt-2 pt-4 border-t border-border">
+            <View className="items-center">
+              <Text className="text-xs text-muted-foreground mb-1 uppercase">Waga</Text>
+              <Text className="text-foreground font-medium">{healthBreakdown.weight}</Text>
             </View>
-          )}
-        </BlurView>
-      </Animated.View>
+            <View className="items-center">
+              <Text className="text-xs text-muted-foreground mb-1 uppercase">Sen</Text>
+              <Text className="text-foreground font-medium">{healthBreakdown.sleep}</Text>
+            </View>
+            <View className="items-center">
+              <Text className="text-xs text-muted-foreground mb-1 uppercase">Aktywność</Text>
+              <Text className="text-foreground font-medium">{healthBreakdown.activity}</Text>
+            </View>
+          </View>
+        )}
+      </GlassCard>
 
-      <Animated.View
-        entering={FadeInUp.delay(200).springify()}
-        className="mb-6 overflow-hidden rounded-3xl border border-border"
-      >
-        <BlurView intensity={30} tint="dark" className="p-6">
-          <Text className="text-secondary-foreground font-medium mb-1 opacity-80 uppercase tracking-widest text-xs">
-            Waga
-          </Text>
-          {latestWeight ? (
-            <View className="flex-row items-end gap-2">
-              <Text className="text-4xl font-bold text-foreground">{latestWeight}</Text>
-              <Text className="text-brand text-xl font-medium mb-1">kg</Text>
-            </View>
-          ) : (
-            <Text className="text-muted-foreground italic">Brak danych</Text>
-          )}
-        </BlurView>
-      </Animated.View>
+      <GlassCard entering={FadeInUp.delay(200).springify()}>
+        <MetricCard label="Waga" value={latestWeight ?? '-'} unit="kg" />
+        {!latestWeight && <Text className="text-muted-foreground italic">Brak danych</Text>}
+      </GlassCard>
 
       {anomalies && anomalies.length > 0 && (
-        <Animated.View
+        <GlassCard
           entering={FadeInUp.delay(300).springify()}
-          className="mb-8 overflow-hidden rounded-3xl border border-red-500/50 bg-red-500/10"
+          className="bg-red-500/10 border-red-500/50"
+          intensity={40}
         >
-          <BlurView intensity={40} tint="dark" className="p-6">
-            <Text className="text-red-400 font-bold mb-3 flex-row items-center flex">
-              ⚠️ Wykryto Anomalie
+          <Text className="text-red-400 font-bold mb-3">⚠️ Wykryto Anomalie</Text>
+          {anomalies.map((anom: Anomaly, idx: number) => (
+            <Text key={anom.id} className="text-foreground text-sm mb-2">
+              <Text className="text-red-400 font-bold">•</Text> {anom.message}
             </Text>
-            {anomalies.map((anom: Anomaly, idx: number) => (
-              <Animated.Text
-                entering={FadeInRight.delay(400 + idx * 100)}
-                key={anom.id}
-                className="text-foreground text-sm flex-row mb-2"
-              >
-                <Text className="text-red-400 font-bold">•</Text> {anom.message}
-              </Animated.Text>
-            ))}
-          </BlurView>
-        </Animated.View>
+          ))}
+        </GlassCard>
       )}
     </ScrollView>
   );

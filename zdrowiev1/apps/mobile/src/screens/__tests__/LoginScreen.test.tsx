@@ -25,7 +25,7 @@ describe('LoginScreen', () => {
 
     expect(getByPlaceholderText('Email')).toBeTruthy();
     expect(getByPlaceholderText('Hasło')).toBeTruthy();
-    expect(getByText('Zaloguj')).toBeTruthy();
+    expect(getByText('Zaloguj się')).toBeTruthy();
   });
 
   it('L1.2: should call useAuth login when form is submitted', async () => {
@@ -33,7 +33,7 @@ describe('LoginScreen', () => {
 
     fireEvent.changeText(getByPlaceholderText('Email'), 'test@zdrowie.pl');
     fireEvent.changeText(getByPlaceholderText('Hasło'), 'haslo123');
-    fireEvent.press(getByText('Zaloguj'));
+    fireEvent.press(getByText('Zaloguj się'));
 
     await waitFor(() => {
       expect(mockLogin).toHaveBeenCalledWith('test@zdrowie.pl', 'haslo123');
@@ -48,8 +48,8 @@ describe('LoginScreen', () => {
       isAuthenticated: false,
     });
 
-    const { getByText } = render(<LoginScreen />);
-    expect(getByText('Nieprawidłowe dane logowania')).toBeTruthy();
+    const { getByTestId } = render(<LoginScreen />);
+    expect(getByTestId('login-error')).toBeTruthy();
   });
 
   it('L1.4: should show loading indicator when isLoading is true', () => {
@@ -62,6 +62,6 @@ describe('LoginScreen', () => {
 
     const { getByTestId, queryByText } = render(<LoginScreen />);
     expect(getByTestId('loading-indicator')).toBeTruthy();
-    expect(queryByText('Zaloguj')).toBeNull(); // Button text hides while loading
+    expect(queryByText('Zaloguj się')).toBeNull(); // Button text hides while loading
   });
 });

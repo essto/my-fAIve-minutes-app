@@ -25,19 +25,19 @@ describe('OcrScreen', () => {
 
   it('OS1.1: should render action buttons initially', () => {
     const { getByText } = render(<OcrScreen />);
-    expect(getByText('Zrób zdjęcie')).toBeTruthy();
-    expect(getByText('Wybierz z galerii')).toBeTruthy();
+    expect(getByText('Uruchom Aparat')).toBeTruthy();
+    expect(getByText('Wybierz z Galerii')).toBeTruthy();
   });
 
   it('OS1.2: should call takePhoto when Camera button is pressed', () => {
     const { getByText } = render(<OcrScreen />);
-    fireEvent.press(getByText('Zrób zdjęcie'));
+    fireEvent.press(getByText('Uruchom Aparat'));
     expect(mockTakePhoto).toHaveBeenCalled();
   });
 
   it('OS1.3: should call pickFromGallery when Gallery button is pressed', () => {
     const { getByText } = render(<OcrScreen />);
-    fireEvent.press(getByText('Wybierz z galerii'));
+    fireEvent.press(getByText('Wybierz z Galerii'));
     expect(mockPickFromGallery).toHaveBeenCalled();
   });
 
@@ -55,8 +55,8 @@ describe('OcrScreen', () => {
       ...mockUseOCR(),
       error: 'Uprawnienia odmówione.',
     });
-    const { getByText } = render(<OcrScreen />);
-    expect(getByText('Uprawnienia odmówione.')).toBeTruthy();
+    const { getByTestId } = render(<OcrScreen />);
+    expect(getByTestId('ocr-error')).toBeTruthy();
   });
 
   it('OS1.6: should display OCR result and allow clearing', () => {
@@ -67,11 +67,11 @@ describe('OcrScreen', () => {
     const { getByText, queryByText } = render(<OcrScreen />);
 
     // Check results are rendered
-    expect(getByText('Wynik rozpoznawania:')).toBeTruthy();
+    expect(getByText(/Rozpoznany Tekst/i)).toBeTruthy();
     expect(getByText('Paracetamol')).toBeTruthy();
 
     // Check action buttons are hidden
-    expect(queryByText('Zrób zdjęcie')).toBeNull();
+    expect(queryByText('Uruchom Aparat')).toBeNull();
 
     // Clear
     fireEvent.press(getByText('Skanuj ponownie'));

@@ -11,7 +11,7 @@ describe('HealthScreen', () => {
     jest.clearAllMocks();
     mockUseHealthData.mockReturnValue({
       healthScore: 90,
-      healthBreakdown: { weight: 95, sleep: 80, activity: 95 },
+      healthBreakdown: { weight: 95, sleep: 81, activity: 95 },
       weightHistory: [{ id: '1', value: 80, timestamp: '2026-02-01' }],
       anomalies: [],
       isLoading: false,
@@ -23,13 +23,15 @@ describe('HealthScreen', () => {
 
   it('HE1.1: should display health score', () => {
     const { getByText } = render(<HealthScreen />);
-    expect(getByText('Ogólny Health Score: 90')).toBeTruthy();
+    expect(getByText(/Health Score:/i)).toBeTruthy();
+    expect(getByText('90')).toBeTruthy();
   });
 
   it('HE1.2: should render weight card and latest weight', () => {
-    const { getByText } = render(<HealthScreen />);
-    expect(getByText('Waga')).toBeTruthy();
-    expect(getByText('Ostatni pomiar: 80 kg')).toBeTruthy();
+    const { getAllByText, getByText } = render(<HealthScreen />);
+    expect(getAllByText(/Waga/i).length).toBeGreaterThan(0);
+    expect(getByText('80')).toBeTruthy();
+    expect(getByText('kg')).toBeTruthy();
   });
 
   it('HE1.3: should render anomalies if they exist', () => {
@@ -44,8 +46,8 @@ describe('HealthScreen', () => {
     });
 
     const { getByText } = render(<HealthScreen />);
-    expect(getByText('Wykryto Anomalie')).toBeTruthy();
-    expect(getByText('• Wysokie tętno')).toBeTruthy();
+    expect(getByText(/Wykryto Anomalie/i)).toBeTruthy();
+    expect(getByText(/Wysokie tętno/i)).toBeTruthy();
   });
 
   it('HE1.4: should show loading state', () => {

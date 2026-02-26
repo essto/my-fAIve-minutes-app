@@ -34,19 +34,22 @@ describe('HomeScreen', () => {
     });
   });
 
-  it('H1.1: should greet the user by email', () => {
+  it('H1.1: should greet the user by name', () => {
     const { getByText } = render(<HomeScreen />);
-    expect(getByText('Cześć, jan@test.pl')).toBeTruthy();
+    expect(getByText('Cześć, jan 👋')).toBeTruthy();
   });
 
   it('H1.2: should display health score from useHealthData', () => {
     const { getByText } = render(<HomeScreen />);
-    expect(getByText('Health Score: 85')).toBeTruthy();
+    expect(getByText('Puls Zdrowia')).toBeTruthy();
+    expect(getByText('85')).toBeTruthy();
   });
 
   it('H1.3: should display calories consumed from useDietData', () => {
     const { getByText } = render(<HomeScreen />);
-    expect(getByText('Spożyte kalorie: 1500 kcal')).toBeTruthy();
+    expect(getByText('Bilans Dzienny')).toBeTruthy();
+    expect(getByText('1500')).toBeTruthy();
+    expect(getByText('kcal')).toBeTruthy();
   });
 
   it('H1.4: should show loading indicator when data is loading', () => {

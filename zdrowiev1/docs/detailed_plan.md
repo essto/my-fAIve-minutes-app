@@ -1,4 +1,4 @@
-# 📋 Szczegółowy Plan Implementacji: Zdrowie App
+# 📋 Szczegółowy Plan Implementacji / Roadmap: Zdrowie App
 
 > **Cel:** Plan krok-po-kroku dla AI agenta, który będzie budował aplikację od zera. Każdy etap jest samodzielny i weryfikowalny. Moduły ≤1500 LOC.
 
@@ -376,7 +376,7 @@ Typy wykresów:
 | `/diagnosis` | Diagnoza | ✅ Formularz gotowy |
 | `/ocr` | Skanowanie | ✅ Upload + OCR + edycja |
 | `/reports` | Raporty | ✅ Zrobione |
-| `/settings` | Ustawienia | ⬜ Do zrobienia |
+| `/settings` | Ustawienia | ✅ Zrobione |
 
 ### 7.3 Kluczowe wymagania UI
 - [x] **Dark/Light mode** — przełącznik + system preference
@@ -420,13 +420,21 @@ Typy wykresów:
 - [ ] Pairing flow z wagi Bluetooth
 - [ ] Auto-sync weight reading po pomiarze
 
-### 8.4 Verify
+### 8.5 Zegarki Reaserch (Bluetooth Integration Strategy)
+Na podstawie raportu `zegarki_reaserch.md`:
+- [ ] **Strategia Hybrydowa:** 
+    - Real-time HR: Bezpośrednie połączenie BLE (Standard GATT `0x180D`)
+    - Dłuższe trendy (Sen/Kroki): Integracja z platformami natywnymi (Apple Health / Google Health Connect)
+- [ ] **Wspierane Urządzenia (Standard/Premium):** Apple Watch, Garmin, Samsung Galaxy Watch, Google Pixel Watch, Xiaomi Smart Band, Huawei Watch.
+- [ ] **Techniczne:** Obsługa subskrypcji charakterystyki `0x2A37` dla tętna oraz implementacja filtracji urządzeń po prefixach MAC.
+
+### 8.6 Verify
 ```bash
 # Detox E2E: Login → Home renders → Log meal → Verify
 # BLE mock test: simulated scale → weight recorded
 ```
 
-> **✅ DoD:** Ekrany renderują. BLE pairing flow działa. Barcode scanner działa.
+> **✅ DoD:** Ekrany renderują. BLE pairing flow działa. Barcode scanner działa. Strategia dla zegarków (Bluetooth) udokumentowana i gotowa do wdrożenia.
 
 ---
 
@@ -546,7 +554,7 @@ jobs:
 | 4 | Diagnosis Module | 1 | ~2600 | 2 | ✅ |
 | 5 | OCR Module | 1 | ~2800 | 2-3 | ✅ |
 | 6 | Visualization | 2,3,4 | ~3000 | 2-3 | ✅ |
-| 7 | Web Frontend | 1-6 | ~5000 | 3-4 | 🟡 (90%) |
+| 7 | Web Frontend | 1-6 | ~5000 | 3-4 | ✅ |
 | 8 | Mobile Frontend | 1-6 | ~4000 | 3-4 | ⬜ |
 | 9 | MCP Servers | 1-6 | ~2400 | 2 | ⬜ |
 | 10 | CI/CD | 0-9 | ~500 | 1 | ✅ |

@@ -9,9 +9,15 @@ global.__ExpoImportMetaRegistry = {
 };
 
 jest.mock('expo-image-picker', () => ({
+  launchCameraAsync: jest.fn(),
   launchImageLibraryAsync: jest.fn(),
   requestCameraPermissionsAsync: jest.fn(),
-  launchCameraAsync: jest.fn(),
+  requestMediaLibraryPermissionsAsync: jest.fn(),
+  PermissionStatus: {
+    GRANTED: 'granted',
+    DENIED: 'denied',
+    UNDETERMINED: 'undetermined',
+  },
   MediaTypeOptions: {
     Images: 'Images',
     Videos: 'Videos',

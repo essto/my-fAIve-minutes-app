@@ -27,7 +27,8 @@ describe('DietScreen', () => {
   it('D1.1: should render daily summary', () => {
     const { getByText } = render(<DietScreen />);
     expect(getByText('Podsumowanie Dnia')).toBeTruthy();
-    expect(getByText('Kalorie: 0 kcal')).toBeTruthy();
+    expect(getByText('0')).toBeTruthy();
+    expect(getByText('kcal')).toBeTruthy();
   });
 
   it('D1.2: should display meals list when available', () => {

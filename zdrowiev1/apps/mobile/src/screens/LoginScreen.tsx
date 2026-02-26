@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useAuth } from '../hooks/useAuth';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
-import { BlurView } from 'expo-blur';
+import { GlassCard } from '../components/GlassCard';
 
 export const LoginScreen = () => {
   const { login, isLoading, error } = useAuth();
@@ -19,49 +19,40 @@ export const LoginScreen = () => {
     <View className="flex-1 justify-center p-6 bg-background">
       <Animated.Text
         entering={FadeInDown.springify()}
-        className="text-4xl font-bold text-center mb-10 text-brand"
+        className="text-5xl font-bold text-center mb-10 text-brand"
+        style={{ letterSpacing: -2 }}
       >
         Zdrowie
       </Animated.Text>
 
       {error ? (
-        <Animated.Text entering={FadeInDown} className="text-red-500 font-medium text-center mb-6">
+        <Text testID="login-error" className="text-destructive font-medium text-center mb-6">
           {error}
-        </Animated.Text>
+        </Text>
       ) : null}
 
-      <Animated.View
-        entering={FadeInUp.delay(100).springify()}
-        className="mb-4 overflow-hidden rounded-2xl border border-border"
-      >
-        <BlurView intensity={20} tint="dark" className="p-4">
-          <TextInput
-            className="text-foreground text-base py-2"
-            placeholder="Email"
-            placeholderTextColor="#666"
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-            keyboardType="email-address"
-          />
-        </BlurView>
-      </Animated.View>
+      <GlassCard entering={FadeInUp.delay(100).springify()} intensity={20} className="mb-4">
+        <TextInput
+          className="text-foreground text-base py-2"
+          placeholder="Email"
+          placeholderTextColor="#666"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+      </GlassCard>
 
-      <Animated.View
-        entering={FadeInUp.delay(200).springify()}
-        className="mb-8 overflow-hidden rounded-2xl border border-border"
-      >
-        <BlurView intensity={20} tint="dark" className="p-4">
-          <TextInput
-            className="text-foreground text-base py-2"
-            placeholder="Hasło"
-            placeholderTextColor="#666"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-        </BlurView>
-      </Animated.View>
+      <GlassCard entering={FadeInUp.delay(200).springify()} intensity={20} className="mb-8">
+        <TextInput
+          className="text-foreground text-base py-2"
+          placeholder="Hasło"
+          placeholderTextColor="#666"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+      </GlassCard>
 
       <Animated.View entering={FadeInUp.delay(300).springify()}>
         <TouchableOpacity
@@ -72,10 +63,17 @@ export const LoginScreen = () => {
           {isLoading ? (
             <ActivityIndicator testID="loading-indicator" color="#fff" />
           ) : (
-            <Text className="text-white text-lg font-bold">Zaloguj</Text>
+            <Text className="text-white text-lg font-bold">Zaloguj się</Text>
           )}
         </TouchableOpacity>
       </Animated.View>
+
+      <Animated.Text
+        entering={FadeInDown.delay(500)}
+        className="text-muted-foreground text-center mt-10 text-sm"
+      >
+        v1.0.0 • AI-Powered Health
+      </Animated.Text>
     </View>
   );
 };

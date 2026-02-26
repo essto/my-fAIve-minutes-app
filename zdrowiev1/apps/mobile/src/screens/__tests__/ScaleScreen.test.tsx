@@ -30,7 +30,7 @@ describe('ScaleScreen', () => {
   it('SS1.1: should render empty state and scan button initially', () => {
     const { getByText } = render(<ScaleScreen />);
     expect(getByText('Wyszukaj urządzenie')).toBeTruthy();
-    expect(getByText('Brak urządzeń w pobliżu')).toBeTruthy();
+    expect(getByText('Brak urządzeń w zasięgu')).toBeTruthy();
   });
 
   it('SS1.2: should call startScan when button pressed', () => {
@@ -68,8 +68,10 @@ describe('ScaleScreen', () => {
       lastReading: 82.5,
     });
     const { getByText } = render(<ScaleScreen />);
-    expect(getByText('Połączono: Waga Xiaomi')).toBeTruthy();
-    expect(getByText('82.5 kg')).toBeTruthy();
+    expect(getByText(/Urządzenie:/i)).toBeTruthy();
+    expect(getByText('Waga Xiaomi')).toBeTruthy();
+    expect(getByText('82.5')).toBeTruthy();
+    expect(getByText('kg')).toBeTruthy();
     expect(getByText('Rozłącz')).toBeTruthy();
   });
 
