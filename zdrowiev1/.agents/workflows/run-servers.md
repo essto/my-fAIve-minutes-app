@@ -32,9 +32,11 @@ cd apps/api && npm run build
 This compiles TypeScript to `dist/` directory using NestJS CLI.
 
 ### 3. Start the NestJS API (port 3001)
-```bash
-cd apps/api && npm run start
+```powershell
+cd apps/api; $env:DOTENV_CONFIG_PATH="../../.env"; npx cross-env NODE_OPTIONS=--no-experimental-strip-types npx ts-node -r tsconfig-paths/register -r dotenv/config src/main.ts
 ```
+> **Why not `npm run start`?** The compiled JS build has ESM resolution issues with `drizzle-orm`, and `dotenv` can't find `.env` from the `apps/api/` subdirectory. Using `ts-node` with `tsconfig-paths/register` and explicit `DOTENV_CONFIG_PATH` resolves both issues.
+
 Wait for `Nest application successfully started` log.
 The API seeds a demo user on startup (`demo@example.com` / `Password123!`).
 

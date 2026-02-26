@@ -416,7 +416,7 @@ Typy wykresów:
 - [x] **Diet** — szybkie logowanie posiłku, podpięcie pod the UI
 - [x] **OCR** — skanowanie aparatem + gallery upload
 - [x] **Wejście / Autoryzacja** — LoginScreen obsługujący JWT i zapis
-- [ ] **Profile** — ustawienia (język, motyw), zarządzanie urządzeniami, zgody
+- [x] **Profile** — ustawienia (język, motyw), zarządzanie urządzeniami, zgody
 
 ### 8.3 BLE Integration & Skaner
 - [x] `react-native-ble-plx` — konfiguracja i skanowanie wag BLE (`useBLE`)
