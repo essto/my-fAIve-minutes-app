@@ -11,6 +11,7 @@ import { ScaleScreen } from '../screens/ScaleScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { HealthScreen } from '../screens/HealthScreen';
 import { DietScreen } from '../screens/DietScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,6 +44,7 @@ export const TabNavigator = () => (
     <Tab.Screen name="Diet" component={DietScreen} />
     <Tab.Screen name="Skaner" component={OcrScreen} />
     <Tab.Screen name="Waga" component={ScaleScreen} />
+    <Tab.Screen name="Profil" component={ProfileScreen} />
   </Tab.Navigator>
 );
 

@@ -404,29 +404,33 @@ Typy wykresów:
 > **Zależności:** Etap 1-6
 
 ### 8.1 Setup
-- [ ] React Native + Expo w `apps/mobile/`
-- [ ] Shared hooks i api-client z `packages/`
-- [ ] Navigation: React Navigation (bottom tabs + stack)
+- [x] React Native + Expo w `apps/mobile/`
+- [x] Shared hooks i api-client z `packages/`
+- [x] Navigation: React Navigation (bottom tabs + stack)
+- [x] Global State: Zustand setup (planowane użycie dla Bluetooth i offline)
+- [x] Reusable UI Components: `GlassCard`, `MetricCard`, `ScreenHeader` (TDD, wszystkie testy zielone)
 
 ### 8.2 Ekrany
-- [ ] **Home** — mini dashboard, Activity Rings, dzienny podgląd
-- [ ] **Health** — weight, heart, sleep cards z sparklinami
-- [ ] **Diet** — szybkie logowanie posiłku, barcode scanner (kamera)
-- [ ] **OCR** — skanowanie aparatem + gallery upload
-- [ ] **Profile** — ustawienia, urządzenia, zgody
+- [x] **Home** — mini dashboard, Activity Rings, dzienny podgląd
+- [x] **Health** — weight, heart, sleep cards z sparklinami
+- [x] **Diet** — szybkie logowanie posiłku, podpięcie pod the UI
+- [x] **OCR** — skanowanie aparatem + gallery upload
+- [x] **Wejście / Autoryzacja** — LoginScreen obsługujący JWT i zapis
+- [ ] **Profile** — ustawienia (język, motyw), zarządzanie urządzeniami, zgody
 
-### 8.3 BLE Integration
-- [ ] `react-native-ble-plx` — skanowanie wag BLE
-- [ ] Pairing flow z wagi Bluetooth
-- [ ] Auto-sync weight reading po pomiarze
+### 8.3 BLE Integration & Skaner
+- [x] `react-native-ble-plx` — konfiguracja i skanowanie wag BLE (`useBLE`)
+- [x] Pairing flow z wagi Bluetooth (`ScaleScreen`)
+- [x] Auto-sync weight reading po pomiarze (odczyty powiązane z hookiem)
+- [ ] **Barcode scanner** — pełne połącznie kamery z API przez nowo powstały ekran i hook `useBarcode`
 
 ### 8.5 Zegarki Reaserch (Bluetooth Integration Strategy)
 Na podstawie raportu `zegarki_reaserch.md`:
 - [ ] **Strategia Hybrydowa:** 
     - Real-time HR: Bezpośrednie połączenie BLE (Standard GATT `0x180D`)
     - Dłuższe trendy (Sen/Kroki): Integracja z platformami natywnymi (Apple Health / Google Health Connect)
-- [ ] **Wspierane Urządzenia (Standard/Premium):** Apple Watch, Garmin, Samsung Galaxy Watch, Google Pixel Watch, Xiaomi Smart Band, Huawei Watch.
-- [ ] **Techniczne:** Obsługa subskrypcji charakterystyki `0x2A37` dla tętna oraz implementacja filtracji urządzeń po prefixach MAC.
+- [ ] **Ekran Zegarków:** WatchScreen parowania urządzeń, wyświetlanie live BPM (puls) 
+- [ ] **Hooki:** `useWatchBLE` (odczyt tętna `0x2A37`) oraz `useHealthPlatform` (iOS/Android health integracja)
 
 ### 8.6 Verify
 ```bash

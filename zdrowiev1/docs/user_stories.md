@@ -104,6 +104,20 @@ Dokument zawiera spis User Stories (historii użytkownika), które definiują fu
   - *Chcę:* Generować bezpieczny, tymczasowy link do moich statystyk
   - *Aby:* Szybko przekazać lekarzowi dostęp do wykresów przed wizytą drogą elektroniczną.
 
+### 12. Aplikacja Mobilna & Zegarki (Smartwatches)
+- **US18: Integracja z Apple Health / Google Health Connect**
+  - *Jako:* Użytkownik mobilny
+  - *Chcę:* Połączyć aplikację z natywnym agregatorem zdrowia (HealthKit / Health Connect)
+  - *Aby:* Automatycznie ściągać historię kroków, snu i treningów bez potrzeby ręcznego wpisywania.
+- **US19: Odczyt tętna na żywo z Zegarka (HR BLE)**
+  - *Jako:* Użytkownik ze smartwatchem lub opaską sportową
+  - *Chcę:* Sparować moje urządzenie przez interfejs Bluetooth (BLE) bezpośrednio w aplikacji
+  - *Aby:* Mieć dostęp do interaktywnego, pulsującego licznika uderzeń serca (BPM) podczas treningu.
+- **US20: Mobilny Skaner Kodów Kreskowych**
+  - *Jako:* Użytkownik dbający o dietę
+  - *Chcę:* Użyć aparatu we własnym smartfonie do zeskanowania kodu kreskowego jedzenia
+  - *Aby:* Jeszcze szybciej odnaleźć i zalogować posiłek pobierając dane makroskładników w tle.
+
 ---
 
 *Uwaga: Powyższe historie są zintegrowane z testami E2E w `apps/web/tests/e2e/` (m.in.: uwierzytelnianie, onboarding, i18n, strony prawne) oraz z logiką domenową w odpowiednich modułach.*

@@ -1,0 +1,91 @@
+﻿node.exe : FAIL src/__tests__/App.test.tsx
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (FAIL src/__tests__/App.test.tsx:S 
+   tring) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  ÔŚĆ Test suite failed to run
+
+    ReferenceError: C:\od_zera_do_ai\Zdrowie_v1\zdrowiev1\apps\mobile\src\__tes
+ts__\App.test.tsx: The module factory of `jest.mock()` is not allowed to refere
+nce any out-of-scope variables.
+    Invalid variable access: _ReactNativeCSSInterop
+    Allowed objects: AbortController, AbortSignal, AggregateError, Array, Array
+Buffer, AsyncDisposableStack, Atomics, BigInt, BigInt64Array, BigUint64Array, B
+lob, Boolean, BroadcastChannel, Buffer, ByteLengthQueuingStrategy, CloseEvent, 
+CompressionStream, CountQueuingStrategy, Crypto, CryptoKey, CustomEvent, DOMExc
+eption, DataView, Date, DecompressionStream, DisposableStack, Error, EvalError,
+ Event, EventTarget, File, FinalizationRegistry, Float16Array, Float32Array, Fl
+oat64Array, FormData, Function, Generator, GeneratorFunction, Headers, Infinity
+, Int16Array, Int32Array, Int8Array, InternalError, Intl, Iterator, JSON, Map, 
+Math, MessageChannel, MessageEvent, MessagePort, NaN, Navigator, Number, Object
+, Performance, PerformanceEntry, PerformanceMark, PerformanceMeasure, Performan
+ceObserver, PerformanceObserverEntryList, PerformanceResourceTiming, Promise, P
+roxy, RangeError, ReadableByteStreamController, ReadableStream, ReadableStreamB
+YOBReader, ReadableStreamBYOBRequest, ReadableStreamDefaultController, Readable
+StreamDefaultReader, ReferenceError, Reflect, RegExp, Request, Response, Set, S
+haredArrayBuffer, String, SubtleCrypto, SuppressedError, Symbol, SyntaxError, T
+extDecoder, TextDecoderStream, TextEncoder, TextEncoderStream, TransformStream,
+ TransformStreamDefaultController, TypeError, URIError, URL, URLPattern, URLSea
+rchParams, Uint16Array, Uint32Array, Uint8Array, Uint8ClampedArray, WeakMap, We
+akRef, WeakSet, WebAssembly, WebSocket, WritableStream, WritableStreamDefaultCo
+ntroller, WritableStreamDefaultWriter, __dirname, __filename, arguments, atob, 
+btoa, clearImmediate, clearInterval, clearTimeout, console, crypto, decodeURI, 
+decodeURIComponent, encodeURI, encodeURIComponent, escape, eval, expect, export
+s, fetch, global, globalThis, isFinite, isNaN, jest, module, navigator, parseFl
+oat, parseInt, performance, process, queueMicrotask, require, setImmediate, set
+Interval, setTimeout, structuredClone, undefined, unescape.
+    Note: This is a precaution to guard against uninitialized mock variables. I
+f it is ensured that the mock is required lazily, variable names prefixed with 
+`mock` (case insensitive) are permitted.
+     (This is an error on an internal node. Probably an internal error.)
+
+      at File.buildCodeFrameError (../../node_modules/@babel/core/src/transform
+ation/file/file.ts:251:12)
+      at NodePath.buildError [as buildCodeFrameError] (../../node_modules/@babe
+l/traverse/src/path/index.ts:161:21)
+      at call (../../node_modules/@babel/traverse/src/visitors.ts:299:14)
+      at NodePath.call [as _call] (../../node_modules/@babel/traverse/src/path/
+context.ts:36:20)
+      at NodePath.call (../../node_modules/@babel/traverse/src/path/context.ts:
+21:18)
+      at NodePath.call [as visit] (../../node_modules/@babel/traverse/src/path/
+context.ts:97:31)
+      at TraversalContext.visit [as visitQueue] (../../node_modules/@babel/trav
+erse/src/context.ts:161:16)
+      at TraversalContext.visitQueue [as visitMultiple] (../../node_modules/@ba
+bel/traverse/src/context.ts:109:17)
+      at TraversalContext.visitMultiple [as visit] (../../node_modules/@babel/t
+raverse/src/context.ts:192:19)
+      at visit (../../node_modules/@babel/traverse/src/traverse-node.ts:208:17)
+      at NodePath.visit (../../node_modules/@babel/traverse/src/path/context.ts
+:104:33)
+      at TraversalContext.visit [as visitQueue] (../../node_modules/@babel/trav
+erse/src/context.ts:161:16)
+      at TraversalContext.visitQueue [as visitSingle] (../../node_modules/@babe
+l/traverse/src/context.ts:119:19)
+      at TraversalContext.visitSingle [as visit] (../../node_modules/@babel/tra
+verse/src/context.ts:194:19)
+      at visit (../../node_modules/@babel/traverse/src/traverse-node.ts:208:17)
+      at traverse (../../node_modules/@babel/traverse/src/index.ts:84:15)
+      at transformFile (../../node_modules/@babel/core/src/transformation/index
+.ts:120:15)
+          at transformFile.next (<anonymous>)
+      at transformFile (../../node_modules/@babel/core/src/transformation/index
+.ts:50:12)
+          at run.next (<anonymous>)
+      at transform (../../node_modules/@babel/core/src/transform.ts:29:20)
+          at transform.next (<anonymous>)
+      at evaluateSync (../../node_modules/gensync/index.js:251:28)
+      at sync (../../node_modules/gensync/index.js:89:14)
+      at fn (../../node_modules/@babel/core/src/errors/rewrite-stack-trace.ts:9
+9:14)
+      at transformSync (../../node_modules/@babel/core/src/transform.ts:66:52)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        3.493 s
+Ran all test suites matching src/__tests__/App.test.tsx.
