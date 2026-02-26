@@ -27,7 +27,7 @@ docker ps
 ### 2. Build the NestJS API
 // turbo
 ```bash
-cd apps/api && npm run build
+cd apps/api; npm run build
 ```
 This compiles TypeScript to `dist/` directory using NestJS CLI.
 
@@ -71,7 +71,7 @@ Should return an `access_token`. If yes, open `http://localhost:3000/login` in t
 ### API returns 500 on login
 - Check if Docker containers are running: `docker ps`
 - Check if NestJS is running on port 3001: `curl.exe http://localhost:3001/api`
-- Rebuild the API: `cd apps/api && npm run build && npm run start`
+- Rebuild and restart the API (follow Steps 2 and 3 above)
 
 ### Next.js proxy not reaching API
 - Verify `next.config.ts` rewrites destination points to `http://localhost:3001/api/:path*`

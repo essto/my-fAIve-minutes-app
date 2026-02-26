@@ -77,7 +77,7 @@ export default function HealthPage() {
             <header className={styles.header}>
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className={styles.title}>Moje Zdrowie</h1>
+                        <h1 className={styles.title}>Moje zdrowie</h1>
                         <p className={styles.subtitle}>Szczegółowa analiza Twoich parametrów życiowych i trendów.</p>
                     </div>
                     <Button variant="secondary" onClick={() => window.print()}>
@@ -91,31 +91,51 @@ export default function HealthPage() {
                     <CardContent className="pt-6">
                         <p className={styles.label}>Tętno spoczynkowe</p>
                         <p className="text-3xl font-black">{data.metrics.heartRate.current} <span className="text-sm font-normal text-color-gray-500">BPM</span></p>
-                        <div className="mt-4 flex flex-col gap-1 text-xs text-color-gray-500">
-                            <div className="flex justify-between"><span>Średnia (7 dni)</span><span className="font-bold">{data.metrics.heartRate.avg7d}</span></div>
-                            <div className="flex justify-between"><span>Min / Max</span><span className="font-bold">{data.metrics.heartRate.min} / {data.metrics.heartRate.max}</span></div>
+                        <div className="mt-4 flex flex-col text-sm text-color-gray-500 font-medium">
+                            <div className="flex justify-between items-center py-2 border-b border-border/10">
+                                <span>Średnia (7 dni)</span>
+                                <span className="font-bold text-foreground">{data.metrics.heartRate.avg7d}</span>
+                            </div>
+                            <div className="flex justify-between items-center py-2 border-b border-border/10 last:border-0">
+                                <span>Min / Max</span>
+                                <span className="font-bold text-foreground">{data.metrics.heartRate.min} / {data.metrics.heartRate.max}</span>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
 
                 <Card interactive>
                     <CardContent className="pt-6">
-                        <p className={styles.label}>Ostatni Sen</p>
+                        <p className={styles.label}>Ostatni sen</p>
                         <p className="text-3xl font-black">{data.metrics.sleep.lastNight}</p>
-                        <div className="mt-4 flex flex-col gap-1 text-xs text-color-gray-500">
-                            <div className="flex justify-between"><span>Średnia (7 dni)</span><span className="font-bold">{data.metrics.sleep.avg7d}</span></div>
-                            <div className="flex justify-between"><span>Jakość</span><span className="font-bold text-success">{data.metrics.sleep.quality}</span></div>
+                        <div className="mt-4 flex flex-col text-sm text-color-gray-500 font-medium">
+                            <div className="flex justify-between items-center py-2 border-b border-border/10">
+                                <span>Średnia (7 dni)</span>
+                                <span className="font-bold text-foreground">{data.metrics.sleep.avg7d}</span>
+                            </div>
+                            <div className="flex justify-between items-center py-2 border-b border-border/10 last:border-0">
+                                <span>Jakość</span>
+                                <span className="font-bold text-purple-400">{data.metrics.sleep.quality}</span>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
 
                 <Card interactive>
                     <CardContent className="pt-6">
-                        <p className={styles.label}>Aktualna Waga</p>
-                        <p className="text-3xl font-black">{data.metrics.weight.current} <span className="text-sm font-normal text-color-gray-500">kg</span></p>
-                        <div className="mt-4 flex flex-col gap-1 text-xs text-color-gray-500">
-                            <div className="flex justify-between"><span>Zmiana (30 dni)</span><span className={data.metrics.weight.change30d <= 0 ? 'text-success font-bold' : 'text-destructive font-bold'}>{data.metrics.weight.change30d} kg</span></div>
-                            <div className="flex justify-between"><span>BMI</span><span className="font-bold">{(data.metrics.weight.bmi).toFixed(1)}</span></div>
+                        <p className={styles.label}>Aktualna waga</p>
+                        <p className="text-3xl font-black">{Number(data.metrics.weight.current).toFixed(2)} <span className="text-sm font-normal text-color-gray-500">kg</span></p>
+                        <div className="mt-4 flex flex-col text-sm text-color-gray-500 font-medium">
+                            <div className="flex justify-between items-center py-2 border-b border-border/10">
+                                <span>Zmiana (30 dni)</span>
+                                <span className={data.metrics.weight.change30d <= 0 ? 'text-success font-bold' : 'text-destructive font-bold'}>
+                                    {data.metrics.weight.change30d > 0 ? '+' : ''}{data.metrics.weight.change30d} kg
+                                </span>
+                            </div>
+                            <div className="flex justify-between items-center py-2 border-b border-border/10 last:border-0">
+                                <span>BMI</span>
+                                <span className="font-bold text-foreground">{(data.metrics.weight.bmi).toFixed(1)}</span>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
@@ -124,7 +144,7 @@ export default function HealthPage() {
             <section className="space-y-8 mt-4">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Historia Tętna</CardTitle>
+                        <CardTitle>Historia tętna</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <HealthChart config={data.charts.heartRateHistory} height={350} />
@@ -133,7 +153,7 @@ export default function HealthPage() {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Trend Wagi (Ostatnie 3 miesiące)</CardTitle>
+                        <CardTitle>Trend wagi (ostatnie 3 miesiące)</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <HealthChart config={data.charts.weightHistory} height={350} />
@@ -142,7 +162,7 @@ export default function HealthPage() {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Analiza Snu (Godziny)</CardTitle>
+                        <CardTitle>Analiza snu (godziny)</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <HealthChart config={data.charts.sleepHistory} height={350} />

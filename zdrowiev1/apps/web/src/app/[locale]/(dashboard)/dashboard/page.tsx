@@ -145,7 +145,7 @@ export default function Dashboard() {
             >
                 {/* Główny wynik zdrowia */}
                 <motion.div variants={itemVariants} className="col-span-1">
-                    <Card className="glass-card relative overflow-hidden h-full flex flex-col justify-center border-brand/20 bg-gradient-to-br from-brand/5 to-transparent">
+                    <Card interactive className="glass-card relative overflow-hidden h-full flex flex-col justify-center border-brand/20 bg-gradient-to-br from-brand/5 to-transparent">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-light"></div>
                         <CardContent className="pt-6 flex flex-col items-center justify-center gap-6">
                             <div className="relative w-36 h-36 flex items-center justify-center">
@@ -175,7 +175,7 @@ export default function Dashboard() {
 
                 {/* Wykryte anomalia */}
                 <motion.div variants={itemVariants} className="col-span-1 lg:col-span-2">
-                    <Card className="glass-card h-full">
+                    <Card interactive className="glass-card h-full">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-status-warning"></span>
@@ -214,7 +214,7 @@ export default function Dashboard() {
 
                 {/* Trendy zdrowotne */}
                 <motion.div variants={itemVariants} className="col-span-1 lg:col-span-2">
-                    <Card className="glass-card">
+                    <Card interactive className="glass-card">
                         <CardHeader>
                             <CardTitle>{t('health_trends')}</CardTitle>
                         </CardHeader>
@@ -228,7 +228,7 @@ export default function Dashboard() {
 
                 {/* Aktywność i sen */}
                 <motion.div variants={itemVariants} className="col-span-1">
-                    <Card className="glass-card h-full">
+                    <Card interactive className="glass-card h-full">
                         <CardHeader>
                             <CardTitle>{t('activity_and_recovery')}</CardTitle>
                         </CardHeader>

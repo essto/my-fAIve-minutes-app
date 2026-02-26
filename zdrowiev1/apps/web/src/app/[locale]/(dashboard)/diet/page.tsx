@@ -96,17 +96,17 @@ export default function DietPage() {
         <div className={styles.container}>
             <header className={`${styles.header} flex justify-between items-center`}>
                 <div>
-                    <h1 className={styles.title}>Twoja Dieta</h1>
+                    <h1 className={styles.title}>Twoja dieta</h1>
                     <p className={styles.subtitle}>Śledź posiłki i osiągaj swoje cele (kcal/makro)</p>
                 </div>
                 <Button onClick={() => setIsAdding(true)}>
-                    Zaloguj Posiłek
+                    Wprowadź posiłek
                 </Button>
             </header>
 
             {summary && (
                 <section className={styles.grid}>
-                    <Card glass gradientAccent>
+                    <Card interactive glass gradientAccent>
                         <CardContent className="pt-6">
                             <p className={styles.label}>Kalorie (dzisiaj)</p>
                             <p className="text-2xl font-black">{summary.total.calories} <span className="text-sm font-normal text-color-gray-500">/ {summary.target.calories} kcal</span></p>

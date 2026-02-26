@@ -1,12 +1,12 @@
 .card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
-    color: var(--card-foreground);
+    color: hsl(var(--card-foreground));
     position: relative;
-    overflow: hidden;
-    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    /* base transitions for fast retreat when mouse leaves */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
 }
 
 .interactive {
@@ -14,14 +14,20 @@
 }
 
 .interactive:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-gray-300);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3), 0 0 25px rgba(168, 85, 247, 0.7);
+    border-color: rgba(168, 85, 247, 0.9);
+    z-index: 10;
+    /* When entering hover: transform is snappier, but the glow builds up slowly over 1.5 seconds */
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 1.5s ease-in, border-color 1.5s ease-in;
 }
 
-[data-theme='dark'] .interactive:hover {
-    border-color: var(--color-gray-600);
-    box-shadow: var(--shadow-card-hover);
+[data-theme='dark'] .interactive:hover,
+:root .interactive:hover {
+    border-color: rgba(168, 85, 247, 1);
+    box-shadow: 0 10px 40px rgba(168, 85, 247, 0.5), 0 0 35px rgba(168, 85, 247, 0.8), inset 0 0 20px rgba(168, 85, 247, 0.4);
+    z-index: 10;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 1.5s ease-in, border-color 1.5s ease-in;
 }
 
 .gradientAccent::before {
@@ -44,8 +50,10 @@
 .header {
     display: flex;
     flex-direction: column;
-    padding: var(--space-6);
-    gap: var(--space-2);
+    padding: 1.5rem;
+    /* var(--space-6) */
+    gap: 0.5rem;
+    /* var(--space-2) */
 }
 
 .title {
@@ -56,6 +64,7 @@
 }
 
 .content {
-    padding: var(--space-6);
+    padding: 1.5rem;
+    /* var(--space-6) */
     padding-top: 0;
 }
