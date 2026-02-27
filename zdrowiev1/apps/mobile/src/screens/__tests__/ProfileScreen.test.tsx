@@ -6,6 +6,13 @@ import { useProfileStore } from '../../store/useProfileStore';
 
 jest.mock('../../hooks/useAuth');
 
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({
+    navigate: mockNavigate,
+  }),
+}));
+
 describe('ProfileScreen', () => {
   const mockLogout = jest.fn();
 

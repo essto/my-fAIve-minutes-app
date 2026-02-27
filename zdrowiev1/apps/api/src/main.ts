@@ -16,22 +16,21 @@ async function bootstrap() {
 
   // CORS — whitelist only known origins
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      process.env.WEB_URL,
-    ].filter(Boolean) as string[],
+    origin: ['http://localhost:3000', process.env.WEB_URL].filter(Boolean) as string[],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
 
   // Global validation — reject any unvalidated input
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    transform: true,
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
   app.setGlobalPrefix('api');
-  await app.listen(process.env.PORT || 3001);
+  await app.listen(process.env.PORT || 3006);
 }
 bootstrap();

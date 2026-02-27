@@ -33,6 +33,7 @@ export const LoginScreen = () => {
 
       <GlassCard entering={FadeInUp.delay(100).springify()} intensity={20} className="mb-4">
         <TextInput
+          testID="email-input"
           className="text-foreground text-base py-2"
           placeholder="Email"
           placeholderTextColor="#666"
@@ -45,6 +46,7 @@ export const LoginScreen = () => {
 
       <GlassCard entering={FadeInUp.delay(200).springify()} intensity={20} className="mb-8">
         <TextInput
+          testID="password-input"
           className="text-foreground text-base py-2"
           placeholder="Hasło"
           placeholderTextColor="#666"
@@ -56,6 +58,7 @@ export const LoginScreen = () => {
 
       <Animated.View entering={FadeInUp.delay(300).springify()}>
         <TouchableOpacity
+          testID="login-button"
           className="bg-brand py-4 rounded-2xl items-center flex-row justify-center active:bg-brand-hover min-h-[56px]"
           onPress={handleLogin}
           disabled={isLoading}

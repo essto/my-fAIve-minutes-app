@@ -7,15 +7,15 @@ tags:
 
 # Tab: Health
 - tapOn: "Health"
-- assertVisible: "Twoje zdrowie"
+- assertVisible: "Twoje Zdrowie"
 
 # Tab: Diet
 - tapOn: "Diet"
-- assertVisible: "Twój jadłospis"
+- assertVisible: "Twoja Dieta"
 
 # Tab: OCR
 - tapOn: "Skaner"
-- assertVisible: "Analiza Badań i Etykiet"
+- assertVisible: "Wynik SKANU"
 
 # Tab: Scale
 - tapOn: "Waga"

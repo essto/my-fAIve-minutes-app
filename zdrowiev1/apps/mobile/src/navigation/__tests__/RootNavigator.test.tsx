@@ -61,15 +61,14 @@ describe('RootNavigator', () => {
     expect(getByTestId('screen-Login')).toBeTruthy();
   });
 
-  it('R1.3: should render TabNavigator when isAuthenticated is true', () => {
+  it('R1.3: should render MainStack when isAuthenticated is true', () => {
     mockUseAuth.mockReturnValue({
       isLoading: false,
       isAuthenticated: true,
     });
 
     const { getByTestId } = render(<RootNavigator />);
-    expect(getByTestId('tab-Home')).toBeTruthy();
-    expect(getByTestId('tab-Health')).toBeTruthy();
-    expect(getByTestId('tab-Diet')).toBeTruthy();
+    expect(getByTestId('screen-Tabs')).toBeTruthy();
+    expect(getByTestId('screen-WatchScreen')).toBeTruthy();
   });
 });

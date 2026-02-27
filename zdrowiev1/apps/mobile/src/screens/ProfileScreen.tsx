@@ -5,9 +5,11 @@ import { useProfileStore } from '../store/useProfileStore';
 import { FadeInUp, Layout } from 'react-native-reanimated';
 import { GlassCard } from '../components/GlassCard';
 import { ScreenHeader } from '../components/ScreenHeader';
+import { useNavigation } from '@react-navigation/native';
 
 export const ProfileScreen = () => {
   const { user, logout } = useAuth();
+  const navigation = useNavigation<any>();
 
   // Zustand selectors (good practice to pick only what's needed)
   const language = useProfileStore((state) => state.language);
@@ -55,8 +57,16 @@ export const ProfileScreen = () => {
           <Text className="text-brand font-medium text-base capitalize">{theme}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="py-4 flex-row justify-between items-center">
+        <TouchableOpacity className="py-4 border-b border-border/50 flex-row justify-between items-center">
           <Text className="text-foreground text-lg">Zgody i prywatność</Text>
+          <Text className="text-muted-foreground font-medium text-lg">{'>'}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          className="py-4 flex-row justify-between items-center"
+          onPress={() => navigation.navigate('WatchScreen')}
+        >
+          <Text className="text-foreground text-lg">Zegarki i Opaski (Bluetooth)</Text>
           <Text className="text-muted-foreground font-medium text-lg">{'>'}</Text>
         </TouchableOpacity>
       </GlassCard>

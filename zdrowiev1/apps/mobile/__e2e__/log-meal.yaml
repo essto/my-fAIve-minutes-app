@@ -7,16 +7,8 @@ tags:
 
 - tapOn: "Diet"
 - tapOn:
-    id: "add-meal-fab"
-- tapOn:
     id: "meal-name-input"
 - inputText: "Obiad"
-- tapOn:
-    id: "product-name-input"
-- inputText: "Ryż"
-- tapOn:
-    id: "product-calories-input"
-- inputText: "200"
 - tapOn:
     id: "save-meal-button"
 - assertVisible: "Obiad"

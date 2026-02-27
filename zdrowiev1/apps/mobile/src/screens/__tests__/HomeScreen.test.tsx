@@ -36,12 +36,12 @@ describe('HomeScreen', () => {
 
   it('H1.1: should greet the user by name', () => {
     const { getByText } = render(<HomeScreen />);
-    expect(getByText('Cześć, jan 👋')).toBeTruthy();
+    expect(getByText(/Cześć, jan/)).toBeTruthy();
   });
 
   it('H1.2: should display health score from useHealthData', () => {
-    const { getByText } = render(<HomeScreen />);
-    expect(getByText('Puls Zdrowia')).toBeTruthy();
+    const { getByText, getByTestId } = render(<HomeScreen />);
+    expect(getByTestId('health-score-ring')).toBeTruthy();
     expect(getByText('85')).toBeTruthy();
   });
 

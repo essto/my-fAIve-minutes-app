@@ -448,18 +448,18 @@ Na podstawie raportu `zegarki_reaserch.md`:
 > **Zależności:** Etap 1-6
 
 ### 9.1 Health MCP (`infrastructure/mcp-servers/health-mcp/`)
-- [ ] Tools: `get_weight_history`, `add_weight_reading`, `get_health_score`
-- [ ] Resources: `weight_trend`, `sleep_summary`
+- [x] Tools: `get_weight_history`, `add_weight_reading`, `get_health_score`
+- [x] Resources: `weight_trend`, `sleep_summary`
 
 ### 9.2 Diet MCP (`infrastructure/mcp-servers/diet-mcp/`)
-- [ ] Tools: `log_meal`, `get_daily_summary`, `search_food`
+- [x] Tools: `log_meal`, `get_daily_summary`, `search_food`
 
 ### 9.3 Diagnosis MCP (`infrastructure/mcp-servers/diagnosis-mcp/`)
-- [ ] Tools: `submit_symptoms`, `get_triage`, `generate_report`
+- [x] Tools: `submit_symptoms`, `get_triage`, `generate_report`
 
 ### 9.4 Logger MCP (`infrastructure/mcp-servers/logger-mcp/`)
-- [ ] Tools: `get_recent_errors`, `get_error_patterns`, `suggest_fix`
-- [ ] Auto-categorization: severity, module, frequency
+- [x] Tools: `get_recent_errors`, `get_error_patterns`, `suggest_fix`
+- [x] Auto-categorization: severity, module, frequency
 
 ### 9.5 Verify
 ```bash
@@ -535,12 +535,12 @@ jobs:
 > **Cel:** Ostateczne poprawki, dokumentacja, launch.
 > **Zależności:** Etap 0-11
 
-- [ ] **Performance:** Lighthouse score ≥90 (Performance, A11y, BP, SEO)
-- [ ] **i18n:** PL + EN (react-intl)
-- [ ] **Onboarding:** First-time user wizard (profil, cele, urządzenia)
-- [ ] **Documentation:** README, API docs, contributor guide
-- [ ] **Monitoring:** Sentry (errors) + simple analytics
-- [ ] **Legal:** Privacy Policy, Terms of Service
+- [x] **Performance:** Lighthouse score ≥90 (Performance, A11y, BP, SEO)
+- [x] **i18n:** PL + EN (react-intl)
+- [x] **Onboarding:** First-time user wizard (profil, cele, urządzenia)
+- [x] **Documentation:** README, API docs, contributor guide
+- [x] **Monitoring:** Sentry (errors) + simple analytics
+- [x] **Legal:** Privacy Policy, Terms of Service
 - [ ] **Launch checklist:** SSL, domain, DNS, backup strategy
 
 > **✅ DoD:** Aplikacja gotowa do pierwszych użytkowników. Dokumentacja kompletna.
@@ -559,11 +559,11 @@ jobs:
 | 5 | OCR Module | 1 | ~2800 | 2-3 | ✅ |
 | 6 | Visualization | 2,3,4 | ~3000 | 2-3 | ✅ |
 | 7 | Web Frontend | 1-6 | ~5000 | 3-4 | ✅ |
-| 8 | Mobile Frontend | 1-6 | ~4000 | 3-4 | ⬜ |
-| 9 | MCP Servers | 1-6 | ~2400 | 2 | ⬜ |
+| 8 | Mobile Frontend | 1-6 | ~4000 | 3-4 | ⏳ |
+| 9 | MCP Servers | 1-6 | ~2400 | 2 | ✅ |
 | 10 | CI/CD | 0-9 | ~500 | 1 | ✅ |
 | 11 | Security | 1-10 | ~300 | 1 | ✅ |
-| 12 | Polish | 0-11 | ~800 | 2 | ⬜ |
+| 12 | Polish | 0-11 | ~800 | 2 | ⏳ |
 | **TOTAL** | | | **~32,000** | **~25-30** | |
 
 ---

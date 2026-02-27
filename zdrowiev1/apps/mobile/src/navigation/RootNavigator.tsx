@@ -12,6 +12,7 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { HealthScreen } from '../screens/HealthScreen';
 import { DietScreen } from '../screens/DietScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
+import { WatchScreen } from '../screens/WatchScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,6 +55,17 @@ export const AuthStack = () => (
   </Stack.Navigator>
 );
 
+export const MainStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
+    <Stack.Screen
+      name="WatchScreen"
+      component={WatchScreen}
+      options={{ title: 'Zegarki i Opaski' }}
+    />
+  </Stack.Navigator>
+);
+
 export const RootNavigator = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
@@ -74,7 +86,7 @@ export const RootNavigator = () => {
 
   return (
     <NavigationContainer theme={AppDarkTheme}>
-      {isAuthenticated ? <TabNavigator /> : <AuthStack />}
+      {isAuthenticated ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

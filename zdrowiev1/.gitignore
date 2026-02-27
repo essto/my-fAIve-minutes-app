@@ -18,3 +18,17 @@ coverage/
 # Playwright output
 test-results/
 playwright-report/
+
+# Mobile (React Native / Expo)
+android/
+ios/
+*.apk
+*.aab
+*.ipa
+*.hprof
+.expo-shared/
+web-build/
+
+# Maestro E2E output
+.maestro/
+__e2e__/screenshots/
